@@ -101,11 +101,14 @@ var shuffle = function (array) {
     event.dataTransfer.clearData();
   }
   
-  function setMapSrc() {
+  function setMap() {
     const mapSrc = document.querySelector("#mapSrc").value;
+    const mapName = document.querySelector("#mapName").value;
+
     const map = document.querySelector(".map");
   
     map.src = mapSrc;
+    map.alt = mapName + '.';
   }
   
   function setPieceSize() {
@@ -174,7 +177,7 @@ var shuffle = function (array) {
 
     const moveBy = 10;
 
-    window.addEventListener('keyup', (e) => {
+    pieceInFocus.addEventListener('keyup', (e) => {
       switch(e.key) {
         case 'ArrowLeft':
           pieceInFocus.style.left = parseInt(pieceInFocus.style.left) - moveBy + "px";
@@ -194,7 +197,7 @@ var shuffle = function (array) {
   }
   
   ready(function () {
-    setMapSrc();
+    setMap();
     setPieceSize();
   
     document.addEventListener(
@@ -213,7 +216,7 @@ var shuffle = function (array) {
         }
   
         if (event.target.matches("#updateMap")) {
-          setMapSrc();
+          setMap();
         }
   
         if (event.target.matches("#updatePiece")) {

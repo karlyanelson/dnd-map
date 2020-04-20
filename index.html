@@ -9,13 +9,18 @@
     <body>
         <form class="controls">
             <fieldset>
-                <label for="mapSrc">Map</label>
+                <label for="mapSrc">Map Image</label>
                 <!-- <input type="url" autocomplete="url" value="https://i.imgur.com/4WS2crn.jpg" id="mapSrc" /> -->
                 <input type="url" autocomplete="url" value="https://i.imgur.com/eFoYttA.jpg" id="mapSrc" />
+                <!-- <input type="url" autocomplete="url" value="https://i.imgur.com/KYVBIZd.jpeg" id="mapSrc" /> -->
+
+                <label for="mapName">Map Name</label>
+                <input type="text" value="Logger's Camp" id="mapName" />
+
                 <button id="updateMap">Update Map</button>
             </fieldset>
             <fieldset>
-                <label for="pieceSize">Piece size (px)</label>
+                <label for="pieceSize">Piece size in pixels</label>
                 <input type="number" value="40" id="pieceSize" />
                 <button id="updatePiece">Update Piece Size</button>
             </fieldset>
@@ -31,7 +36,7 @@
         </div>
         
         <main class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
-            <img class="map" src="https://i.imgur.com/eFoYttA.jpg" />
+            <img role="img" alt="Logger's Camp." class="map" src="https://i.imgur.com/KYVBIZd.jpeg" />
         </main>
     </body>
 </html>
