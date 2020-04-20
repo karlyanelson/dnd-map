@@ -9,24 +9,24 @@
     <body>
         <form class="controls">
             <fieldset>
-            <label for="mapSrc">Map</label>
-            <input type="url" value="https://i.imgur.com/4WS2crn.jpg" id="mapSrc" />
-            <button id="updateMap">Update Map</button>
+                <label for="mapSrc">Map</label>
+                <input type="url" autocomplete="url" value="https://i.imgur.com/4WS2crn.jpg" id="mapSrc" />
+                <button id="updateMap">Update Map</button>
             </fieldset>
             <fieldset>
-            <label for="pieceSize">Piece size (px)</label>
-            <input type="number" value="40" id="pieceSize" />
-            <button id="updatePiece">Update Piece Size</button>
+                <label for="pieceSize">Piece size (px)</label>
+                <input type="number" value="40" id="pieceSize" />
+                <button id="updatePiece">Update Piece Size</button>
             </fieldset>
             <fieldset>
-            <button id="addPiece" class="add-player">Add Player</button>
-            <button id="addPiece" class="add-enemy">Add Enemy</button>
+                <button id="addPiece" class="add-player">Add Player</button>
+                <button id="addPiece" class="add-enemy">Add Enemy</button>
             </fieldset>
         </form>
         
         <div class="player-box" ondragover="onDragOver(event);" ondrop="onDrop(event);">
-            <div class="player piece" id="player1" draggable="true" ondragstart="onDragStart(event);"></div>
-            <div class="enemy piece" id="enemy1" draggable="true" ondragstart="onDragStart(event);"></div>
+            <button class="player piece" id="player1" draggable="true" ondragstart="onDragStart(event);"></button>
+            <button class="enemy piece" id="enemy1" draggable="true" ondragstart="onDragStart(event);"></button>
         </div>
         
         <main class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);">

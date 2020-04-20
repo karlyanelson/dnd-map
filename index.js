@@ -131,6 +131,40 @@ var shuffle = function (array) {
     const pieceGrid = document.querySelector(".player-box");
     pieceGrid.appendChild(newPiece);
   }
+
+  function offset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  }
+
+  function movePieceViaKeyboard(pieceInFocus) {
+    // let pieceOGPosition = offset(pieceInFocus);
+    // pieceInFocus.style.position = 'absolute';
+    // pieceInFocus.style.left = pieceOGPosition.left;
+    // pieceInFocus.style.top = pieceOGPosition.top;
+
+    const moveBy = 10;
+
+    window.addEventListener('keyup', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          pieceInFocus.style.left = parseInt(pieceInFocus.style.left) - moveBy + "px";
+          break;
+        case 'ArrowRight':
+          pieceInFocus.style.left = parseInt(pieceInFocus.style.left) + moveBy + "px";
+          break;
+        case 'ArrowUp':
+          pieceInFocus.style.top = parseInt(pieceInFocus.style.top) - moveBy + "px";
+          break;
+        case 'ArrowDown':
+          pieceInFocus.style.top = parseInt(pieceInFocus.style.top) + moveBy + "px";
+          break;
+      }
+    });
+
+  }
   
   ready(function () {
     setMapSrc();
@@ -158,8 +192,24 @@ var shuffle = function (array) {
         if (event.target.matches("#updatePiece")) {
           setPieceSize();
         }
+
+        if (event.target.matches(".piece")) {
+          movePieceViaKeyboard(event.target);
+        }
       },
       false
     );
+
+    // document.addEventListener(
+    //   "focus", 
+    //   function(event) {
+    //     if (!event.target.matches(".piece")) {
+    //       console.log("oops")
+    //       return;
+    //     }
+    //     movePieceViaKeyboard(event.target);
+    //   },
+    //   true
+    // );
   });
   
