@@ -121,7 +121,7 @@ var shuffle = function (array) {
     }
   
     // Add a new player
-    const newPiece = document.createElement("div");
+    const newPiece = document.createElement("button");
     newPiece.id = Date.now();
     newPiece.setAttribute("ondragstart", "onDragStart(event);");
     newPiece.draggable = "true";
