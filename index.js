@@ -43,9 +43,21 @@ var shuffle = function (array) {
     // Otherwise, wait until document is loaded
     document.addEventListener("DOMContentLoaded", fn, false);
   };
+
+  function offset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  }
+
   
   function onDragStart(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
+
+    event.target.setAttribute("aria-grabbed", "true");
+
+    document.querySelector('.container').setAttribute("aria-dropeffect", "move");
   }
   
   let positionX;
@@ -53,6 +65,8 @@ var shuffle = function (array) {
   
   function onDragOver(event) {
     event.preventDefault();
+
+    let mapPosition = offset(document.querySelector(".container"));
   
     const piece = document.querySelector(".piece");
     const pieceSizeInPx = getComputedStyle(piece).getPropertyValue(
@@ -62,7 +76,7 @@ var shuffle = function (array) {
   
     event = event || window.event;
     positionX = event.pageX - pieceSize / 2;
-    positionY = event.pageY - pieceSize / 2;
+    positionY = event.pageY - mapPosition.top - pieceSize / 2;
   }
   
   function onDrop(event) {
@@ -80,6 +94,9 @@ var shuffle = function (array) {
     draggableElement.style.position = "absolute";
     draggableElement.style.top = positionY + "px";
     draggableElement.style.left = positionX + "px";
+
+    draggableElement.setAttribute("aria-grabbed", "false");
+    dropzone.setAttribute("aria-dropeffect", "none");
   
     event.dataTransfer.clearData();
   }
@@ -112,31 +129,41 @@ var shuffle = function (array) {
     // Return the color string
     return color;
   }
+
+  let playerCount = 1;
+  let enemyCount = 1;
   
   function addPiece(eventTarget) {
-    let pieceClass = "player";
+    let pieceClass;
+    let pieceName;
+    let pieceCount;
   
     if (eventTarget.matches(".add-enemy")) {
       pieceClass = "enemy";
+      pieceName = "Enemy "
+      enemyCount++
+      pieceCount = enemyCount;
+    }
+
+    if (eventTarget.matches(".add-player")) {
+      pieceClass = "player";
+      pieceName = "Player "
+      playerCount++
+      pieceCount = playerCount;
     }
   
     // Add a new player
     const newPiece = document.createElement("button");
     newPiece.id = Date.now();
     newPiece.setAttribute("ondragstart", "onDragStart(event);");
+    newPiece.setAttribute("aria-grabbed", "false");
+    newPiece.setAttribute("aria-label", pieceName + pieceCount);
     newPiece.draggable = "true";
     newPiece.className = `piece ${pieceClass}`;
     newPiece.style.borderColor = generateColor();
   
     const pieceGrid = document.querySelector(".player-box");
     pieceGrid.appendChild(newPiece);
-  }
-
-  function offset(el) {
-    var rect = el.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
   }
 
   function movePieceViaKeyboard(pieceInFocus) {
@@ -192,24 +219,19 @@ var shuffle = function (array) {
         if (event.target.matches("#updatePiece")) {
           setPieceSize();
         }
-
-        if (event.target.matches(".piece")) {
-          movePieceViaKeyboard(event.target);
-        }
       },
       false
     );
 
-    // document.addEventListener(
-    //   "focus", 
-    //   function(event) {
-    //     if (!event.target.matches(".piece")) {
-    //       console.log("oops")
-    //       return;
-    //     }
-    //     movePieceViaKeyboard(event.target);
-    //   },
-    //   true
-    // );
+    document.addEventListener(
+      "focus", 
+      function(event) {
+        if (!event.target.matches(".piece")) {
+          return;
+        }
+        movePieceViaKeyboard(event.target);
+      },
+      true
+    );
   });
   

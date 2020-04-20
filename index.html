@@ -10,7 +10,8 @@
         <form class="controls">
             <fieldset>
                 <label for="mapSrc">Map</label>
-                <input type="url" autocomplete="url" value="https://i.imgur.com/4WS2crn.jpg" id="mapSrc" />
+                <!-- <input type="url" autocomplete="url" value="https://i.imgur.com/4WS2crn.jpg" id="mapSrc" /> -->
+                <input type="url" autocomplete="url" value="https://i.imgur.com/eFoYttA.jpg" id="mapSrc" />
                 <button id="updateMap">Update Map</button>
             </fieldset>
             <fieldset>
@@ -25,11 +26,11 @@
         </form>
         
         <div class="player-box" ondragover="onDragOver(event);" ondrop="onDrop(event);">
-            <button class="player piece" id="player1" draggable="true" ondragstart="onDragStart(event);"></button>
-            <button class="enemy piece" id="enemy1" draggable="true" ondragstart="onDragStart(event);"></button>
+            <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1"></button>
+            <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1"></button>
         </div>
         
-        <main class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);">
+        <main class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
             <img class="map" src="https://i.imgur.com/eFoYttA.jpg" />
         </main>
     </body>

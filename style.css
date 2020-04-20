@@ -95,7 +95,11 @@ fieldset {
     background-size: contain;
 }
 
-.container img {
+.container {
+    position:relative;
+}
+
+.map {
     min-width: 100%;
 }
   
