@@ -135,6 +135,13 @@ var shuffle = function (array) {
 
   let playerCount = 1;
   let enemyCount = 1;
+
+  function announceToScreenReader(msg) {
+    const announcement = document.createElement("p");
+    announcement.setAttribute("role", "alert");
+    announcement.textContent = msg;
+    document.querySelector('.announcements').appendChild(announcement);
+  }
   
   function addPiece(eventTarget) {
     let pieceClass;
@@ -161,35 +168,40 @@ var shuffle = function (array) {
     newPiece.setAttribute("ondragstart", "onDragStart(event);");
     newPiece.setAttribute("aria-grabbed", "false");
     newPiece.setAttribute("aria-label", pieceName + pieceCount);
+    newPiece.textContent = pieceName + pieceCount;
     newPiece.draggable = "true";
     newPiece.className = `piece ${pieceClass}`;
     newPiece.style.borderColor = generateColor();
+
+    announceToScreenReader(`${pieceName} ${pieceCount} added.`);
   
     const pieceGrid = document.querySelector(".player-box");
     pieceGrid.appendChild(newPiece);
   }
 
   function movePieceViaKeyboard(pieceInFocus) {
-    // let pieceOGPosition = offset(pieceInFocus);
-    // pieceInFocus.style.position = 'absolute';
-    // pieceInFocus.style.left = pieceOGPosition.left;
-    // pieceInFocus.style.top = pieceOGPosition.top;
-
     const moveBy = 10;
 
     pieceInFocus.addEventListener('keyup', (e) => {
       switch(e.key) {
         case 'ArrowLeft':
           pieceInFocus.style.left = parseInt(pieceInFocus.style.left) - moveBy + "px";
+          announceToScreenReader(`${pieceInFocus.textContent} left`);
           break;
         case 'ArrowRight':
           pieceInFocus.style.left = parseInt(pieceInFocus.style.left) + moveBy + "px";
+          announceToScreenReader(`${pieceInFocus.textContent} right`);
+
           break;
         case 'ArrowUp':
           pieceInFocus.style.top = parseInt(pieceInFocus.style.top) - moveBy + "px";
+          announceToScreenReader(`${pieceInFocus.textContent} up`);
+
           break;
         case 'ArrowDown':
           pieceInFocus.style.top = parseInt(pieceInFocus.style.top) + moveBy + "px";
+          announceToScreenReader(`${pieceInFocus.textContent} down`);
+
           break;
       }
     });
@@ -221,6 +233,15 @@ var shuffle = function (array) {
   
         if (event.target.matches("#updatePiece")) {
           setPieceSize();
+        }
+
+        if (event.target.matches(".player-box .piece")) {
+          // If you click a piece in the player box, add it to the map
+          document.querySelector(".container").appendChild(event.target);
+          event.target.style.position = "absolute";
+          event.target.style.top = 0;
+          event.target.style.left = 0;
+          event.target.focus();
         }
       },
       false

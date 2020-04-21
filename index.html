@@ -37,15 +37,16 @@
 
             <section>
                 <h2>Map & Players</h2>
-                <div class="player-box" ondragover="onDragOver(event);" ondrop="onDrop(event);">
-                    <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1"></button>
-                    <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1"></button>
+                <div class="player-box">
+                    <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1">Player 1</button>
+                    <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1">Enemy 1</button>
                 </div>
                 
                 <div class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
                     <img role="img" alt="Logger's Camp." class="map" src="https://i.imgur.com/KYVBIZd.jpeg" />
                 </div>
             </section>
+            <section class="announcements"></section>
         </main>
     </body>
 </html>

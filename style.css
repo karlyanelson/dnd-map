@@ -113,4 +113,12 @@ fieldset {
     min-width: 100%;
     opacity: .85;
 }
-  
+
+.announcements {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
