@@ -80,6 +80,8 @@ var shuffle = function (array) {
   }
   
   function onDrop(event) {
+    event.preventDefault();
+    
     const id = event.dataTransfer.getData("text");
   
     const draggableElement = document.getElementById(id);
