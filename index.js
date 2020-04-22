@@ -81,7 +81,7 @@ var shuffle = function (array) {
   
   function onDrop(event) {
     event.preventDefault();
-    
+
     const id = event.dataTransfer.getData("text");
   
     const draggableElement = document.getElementById(id);
@@ -166,11 +166,13 @@ var shuffle = function (array) {
   
     // Add a new player
     const newPiece = document.createElement("button");
+    const newPieceTextContainer = document.createElement("span");
     newPiece.id = Date.now();
     newPiece.setAttribute("ondragstart", "onDragStart(event);");
     newPiece.setAttribute("aria-grabbed", "false");
     newPiece.setAttribute("aria-label", pieceName + pieceCount);
-    newPiece.textContent = pieceName + pieceCount;
+    newPiece.appendChild(newPieceTextContainer);
+    newPieceTextContainer.textContent = pieceName + pieceCount;
     newPiece.draggable = "true";
     newPiece.className = `piece ${pieceClass}`;
     newPiece.style.borderColor = generateColor();
