@@ -52,28 +52,22 @@ input {
 
 .controls {
     padding: 1rem;
-    /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr; */
 }
 
 fieldset {
     display: inline-block;
     padding: 1rem;
     border-radius: .25rem;
-    /* display: flex;
-    flex-direction: column; */
 }
 
 .player-box {
-    /* padding: 16px; */
-    /* min-height: calc(var(--piece-size) + 32px); */
     display: flex;
     flex-wrap: wrap;
 }
 
 .player-box .piece {
     margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 .player-box button {
