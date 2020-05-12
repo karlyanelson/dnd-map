@@ -1,67 +1,80 @@
+// Variables
+let piecePositionX;
+let piecePositionY;
+
+let playerCount = 1;
+let enemyCount = 1;
+
+// Selectors
+const map = document.querySelector(".map");
+const pieceGrid = document.querySelector(".player-box");
+
+const fitImageToScreenCheckbox = document.querySelector("#fitImageToScreen");
+
+
+// Functions
+
+/*!
+* Run event after DOM is ready
+* (c) 2017 Chris Ferdinandi, MIT License, https://gomakethings.com
+* @param  {Function} fn Callback function
+*/
+function ready(fn) {
+  // Sanity check
+  if (typeof fn !== "function") return;
+
+  // If document is already loaded, run method
+  if (
+    document.readyState === "interactive" ||
+    document.readyState === "complete"
+  ) {
+    return fn();
+  }
+
+  // Otherwise, wait until document is loaded
+  document.addEventListener("DOMContentLoaded", fn, false);
+};
+
 /**
  * Randomly shuffle an array
  * https://stackoverflow.com/a/2450976/1293256
  * @param  {Array} array The array to shuffle
  * @return {String}      The first item in the shuffled array
  */
-var shuffle = function (array) {
-    var currentIndex = array.length;
-    var temporaryValue, randomIndex;
-  
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
-  };
-  
-/*!
-* Run event after DOM is ready
-* (c) 2017 Chris Ferdinandi, MIT License, https://gomakethings.com
-* @param  {Function} fn Callback function
-*/
-  const ready = function (fn) {
-    // Sanity check
-    if (typeof fn !== "function") return;
-  
-    // If document is already loaded, run method
-    if (
-      document.readyState === "interactive" ||
-      document.readyState === "complete"
-    ) {
-      return fn();
-    }
-  
-    // Otherwise, wait until document is loaded
-    document.addEventListener("DOMContentLoaded", fn, false);
-  };
+function shuffle(array) {
+  var currentIndex = array.length;
+  var temporaryValue, randomIndex;
 
-  function offset(el) {
-    var rect = el.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
 
+  return array;
+};
   
-  function onDragStart(event) {
-    event.dataTransfer.setData("text/plain", event.target.id);
+function offset(el) {
+  var rect = el.getBoundingClientRect(),
+  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+}
 
-    event.target.setAttribute("aria-grabbed", "true");
-
-    document.querySelector('.container').setAttribute("aria-dropeffect", "move");
-  }
   
-  let positionX;
-  let positionY;
+function onDragStart(event) {
+  event.dataTransfer.setData("text/plain", event.target.id);
+
+  event.target.setAttribute("aria-grabbed", "true");
+
+  document.querySelector('.container').setAttribute("aria-dropeffect", "move");
+}
   
   function onDragOver(event) {
     event.preventDefault();
@@ -75,8 +88,8 @@ var shuffle = function (array) {
     const pieceSize = parseInt(pieceSizeInPx, 10);
   
     event = event || window.event;
-    positionX = event.pageX - pieceSize / 2;
-    positionY = event.pageY - mapPosition.top - pieceSize / 2;
+    piecePositionX = event.pageX - pieceSize / 2;
+    piecePositionY = event.pageY - mapPosition.top - pieceSize / 2;
   }
   
   function onDrop(event) {
@@ -94,8 +107,8 @@ var shuffle = function (array) {
     dropzone.appendChild(draggableElement);
   
     draggableElement.style.position = "absolute";
-    draggableElement.style.top = positionY + "px";
-    draggableElement.style.left = positionX + "px";
+    draggableElement.style.top = piecePositionY + "px";
+    draggableElement.style.left = piecePositionX + "px";
 
     draggableElement.setAttribute("aria-grabbed", "false");
     dropzone.setAttribute("aria-dropeffect", "none");
@@ -103,19 +116,20 @@ var shuffle = function (array) {
     event.dataTransfer.clearData();
   }
   
-  function setMap() {
+  function setMap() {  
     const mapSrc = document.querySelector("#mapSrc").value;
     const mapName = document.querySelector("#mapName").value;
-
-    const map = document.querySelector(".map");
-  
     map.src = mapSrc;
     map.alt = mapName + '.';
   }
+
+  function toggleMapWidth() {
+    fitImageToScreenCheckbox.checked ? map.style.width = "100%" : map.style.width = "auto";
+  }
   
   function setPieceSize() {
-    const pieceSize = document.querySelector("#pieceSize").value;
-    document.documentElement.style.setProperty("--piece-size", pieceSize + "px");
+    const pieceSizeInputValue = document.querySelector("#pieceSize").value;
+    document.documentElement.style.setProperty("--piece-size", pieceSizeInputValue + "px");
   }
   
   function generateColor() {
@@ -134,9 +148,6 @@ var shuffle = function (array) {
     // Return the color string
     return color;
   }
-
-  let playerCount = 1;
-  let enemyCount = 1;
 
   function announceToScreenReader(msg) {
     const announcement = document.createElement("p");
@@ -179,7 +190,6 @@ var shuffle = function (array) {
 
     announceToScreenReader(`${pieceName} ${pieceCount} added.`);
   
-    const pieceGrid = document.querySelector(".player-box");
     pieceGrid.appendChild(newPiece);
   }
 
@@ -195,23 +205,23 @@ var shuffle = function (array) {
         case 'ArrowRight':
           pieceInFocus.style.left = parseInt(pieceInFocus.style.left) + moveBy + "px";
           announceToScreenReader(`${pieceInFocus.textContent} right`);
-
           break;
         case 'ArrowUp':
           pieceInFocus.style.top = parseInt(pieceInFocus.style.top) - moveBy + "px";
           announceToScreenReader(`${pieceInFocus.textContent} up`);
-
           break;
         case 'ArrowDown':
           pieceInFocus.style.top = parseInt(pieceInFocus.style.top) + moveBy + "px";
           announceToScreenReader(`${pieceInFocus.textContent} down`);
-
           break;
       }
     });
 
   }
   
+
+  // Events
+
   ready(function () {
     setMap();
     setPieceSize();
@@ -226,7 +236,7 @@ var shuffle = function (array) {
   
         // Don't follow the link
         event.preventDefault();
-  
+
         if (event.target.matches("#addPiece")) {
           addPiece(event.target);
         }
@@ -250,6 +260,8 @@ var shuffle = function (array) {
       },
       false
     );
+
+    fitImageToScreenCheckbox.addEventListener("change", toggleMapWidth, false);
 
     document.addEventListener(
       "focus", 
