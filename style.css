@@ -29,10 +29,10 @@ main {
     padding: 1rem;
 }
 
-button {
+button{
     background: var(--color-text);
-    box-shadow: 2px 2px 0 var(--color-bg);
-    border: 2px solid var(--color-bg);
+    box-shadow: 2px 2px 0 black;
+    border: 2px solid black;
     border-radius: .25rem;
     padding: .25rem .5rem;
     font-weight: bold;
@@ -47,7 +47,7 @@ button:active:not(.piece) {
     box-shadow: 0px 0px 0 var(--color-text);
 }
 
-input {
+input:not([type="file"]) {
     border: 2px solid var(--color-text);
     border-radius: .25rem;
     padding: .25rem;
@@ -94,9 +94,8 @@ fieldset {
     height: var(--piece-size);
     width: var(--piece-size);
     display: inline-block;
-    box-shadow: 0px 0px .25rem 0px rgba(0, 0, 0, 0.75);
     border-radius: 50%;
-    box-shadow: 1px 1px 0 var(--color-text);
+    box-shadow: 1px 1px 0 black;
     position: relative;
 }
 

@@ -11,6 +11,10 @@ const pieceGrid = document.querySelector(".player-box");
 
 const fitImageToScreenCheckbox = document.querySelector("#fitImageToScreen");
 
+const mapSrcUploader = document.querySelector("#mapSrcUploader");
+
+// const noMapMsg = document.querySelector("#noMapMsg");
+
 
 // Functions
 
@@ -95,11 +99,18 @@ function onDragStart(event) {
     event.dataTransfer.clearData();
   }
   
-  function setMap() {  
-    const mapSrc = document.querySelector("#mapSrc").value;
-    const mapName = document.querySelector("#mapName").value;
-    map.src = mapSrc;
-    map.alt = mapName + '.';
+  function setMap(event) {
+    // noMapMsg.remove(); 
+    const file = event.target.files[0];
+    map.file = file;
+
+    const reader = new FileReader();
+    reader.onload = (function (aImg) {
+      return function (e) {
+        aImg.src = e.target.result;
+      };
+    })(map);
+    reader.readAsDataURL(file);
   }
 
   function toggleMapWidth() {
@@ -231,7 +242,7 @@ function clickHandler(event) {
 
 // Events/Inits
 
-setMap();
+// setMap();
 toggleMapWidth();
 setPieceSize();
 
@@ -249,3 +260,5 @@ document.addEventListener(
   },
   true
 );
+
+mapSrcUploader.addEventListener("change", setMap, false);
