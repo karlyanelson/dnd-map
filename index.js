@@ -100,7 +100,6 @@ function onDragStart(event) {
   }
   
   function setMap(event) {
-    // noMapMsg.remove(); 
     const file = event.target.files[0];
     map.file = file;
 
