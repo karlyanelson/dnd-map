@@ -9,8 +9,11 @@
     <body>
         <main>
             <h1>Dungeons & Dragons Virtual Map</h1>
-            <section>
-                <h2>Map Controls</h2>
+            <section class="controls-wrapper">
+                <div class="player-box">
+                    <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1"><span>Player 1</span></button>
+                    <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1"><span>Enemy 1</span></button>
+                </div>
                 <form class="controls">
                     <fieldset>
                         <label for="mapSrc">Map Image</label>
@@ -24,6 +27,10 @@
                         <button id="updateMap">Update Map</button>
                     </fieldset>
                     <fieldset>
+                        <input checked type="checkbox" id="fitImageToScreen" name="imagesize" value="Fit Map to Screen">
+                        <label for="fitImageToScreen">Fit Map to Screen</label>
+                    </fieldset>
+                    <fieldset>
                         <label for="pieceSize">Piece size in pixels</label>
                         <input type="number" value="40" id="pieceSize" />
                         <button id="updatePiece">Update Piece Size</button>
@@ -32,23 +39,10 @@
                         <button id="addPiece" class="add-player">Add Player</button>
                         <button id="addPiece" class="add-enemy">Add Enemy</button>
                     </fieldset>
-                    <fieldset>
-                        <input type="checkbox" id="fitImageToScreen" name="imagesize" value="Fit Map to Screen">
-                        <label for="fitImageToScreen">Fit Map to Screen</label>
-                    </fieldset>
                 </form>
             </section>
-
-            <section>
-                <h2>Map & Players</h2>
-                <div class="player-box">
-                    <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1"><span>Player 1</span></button>
-                    <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1"><span>Enemy 1</span></button>
-                </div>
-                
-                <div class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
-                    <img role="img" alt="Logger's Camp." class="map" src="https://i.imgur.com/KYVBIZd.jpeg" />
-                </div>
+            <section class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
+                <img role="img" alt="Logger's Camp." class="map" src="https://i.imgur.com/KYVBIZd.jpeg" />
             </section>
             <section class="announcements"></section>
         </main>

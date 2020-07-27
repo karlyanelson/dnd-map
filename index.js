@@ -14,27 +14,6 @@ const fitImageToScreenCheckbox = document.querySelector("#fitImageToScreen");
 
 // Functions
 
-/*!
-* Run event after DOM is ready
-* (c) 2017 Chris Ferdinandi, MIT License, https://gomakethings.com
-* @param  {Function} fn Callback function
-*/
-function ready(fn) {
-  // Sanity check
-  if (typeof fn !== "function") return;
-
-  // If document is already loaded, run method
-  if (
-    document.readyState === "interactive" ||
-    document.readyState === "complete"
-  ) {
-    return fn();
-  }
-
-  // Otherwise, wait until document is loaded
-  document.addEventListener("DOMContentLoaded", fn, false);
-};
-
 /**
  * Randomly shuffle an array
  * https://stackoverflow.com/a/2450976/1293256
@@ -216,62 +195,57 @@ function onDragStart(event) {
           break;
       }
     });
-
   }
-  
 
-  // Events
+function clickHandler(event) {
+  // If the clicked element doesn't have the right selector, bail
+  if (!event.target.matches("button")) {
+    return;
+  }
 
-  ready(function () {
+  // Don't follow the link
+  event.preventDefault();
+
+  if (event.target.matches("#addPiece")) {
+    addPiece(event.target);
+  }
+
+  if (event.target.matches("#updateMap")) {
     setMap();
+  }
+
+  if (event.target.matches("#updatePiece")) {
     setPieceSize();
-  
-    document.addEventListener(
-      "click",
-      function (event) {
-        // If the clicked element doesn't have the right selector, bail
-        if (!event.target.matches("button")) {
-          return;
-        }
-  
-        // Don't follow the link
-        event.preventDefault();
+  }
 
-        if (event.target.matches("#addPiece")) {
-          addPiece(event.target);
-        }
+  if (event.target.matches(".player-box .piece")) {
+    // If you click a piece in the player box, add it to the map
+    document.querySelector(".container").appendChild(event.target);
+    event.target.style.position = "absolute";
+    event.target.style.top = 0;
+    event.target.style.left = 0;
+    event.target.focus();
+  }
+}
   
-        if (event.target.matches("#updateMap")) {
-          setMap();
-        }
-  
-        if (event.target.matches("#updatePiece")) {
-          setPieceSize();
-        }
 
-        if (event.target.matches(".player-box .piece")) {
-          // If you click a piece in the player box, add it to the map
-          document.querySelector(".container").appendChild(event.target);
-          event.target.style.position = "absolute";
-          event.target.style.top = 0;
-          event.target.style.left = 0;
-          event.target.focus();
-        }
-      },
-      false
-    );
+// Events/Inits
 
-    fitImageToScreenCheckbox.addEventListener("change", toggleMapWidth, false);
+setMap();
+toggleMapWidth();
+setPieceSize();
 
-    document.addEventListener(
-      "focus", 
-      function(event) {
-        if (!event.target.matches(".piece")) {
-          return;
-        }
-        movePieceViaKeyboard(event.target);
-      },
-      true
-    );
-  });
-  
+document.addEventListener("click", clickHandler, false);
+
+fitImageToScreenCheckbox.addEventListener("change", toggleMapWidth, false);
+
+document.addEventListener(
+  "focus", 
+  function(event) {
+    if (!event.target.matches(".piece")) {
+      return;
+    }
+    movePieceViaKeyboard(event.target);
+  },
+  true
+);
