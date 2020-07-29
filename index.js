@@ -6,6 +6,7 @@ var store = new Reef.Store({
 // Variables
 var mapSrcInput = document.querySelector("#mapSrc");
 var pieceSizeInput = document.querySelector("#pieceSize");
+var mapZoomInput = document.querySelector("#mapZoom");
 var storageID = "dnd-map-data";
 var draggedElemPosX;
 var draggedElemPosY;
@@ -25,6 +26,7 @@ function getDatafromStorage() {
   var emptyData = {
     map: "https://i.imgur.com/KYVBIZd.jpeg",
     pieceSize: 24,
+    zoom: 100,
     characters: []
   };
   var storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
@@ -60,6 +62,10 @@ function inputHandler(event) {
     store.data.pieceSize = event.target.value;
   }
 
+  if (event.target.matches("#mapZoom")) {
+    store.data.zoom = event.target.value;
+  }
+
   var characterContainer = event.target.closest(".character-list-item");
 
   if (characterContainer) {
@@ -88,7 +94,11 @@ function clickHandler(event) {
   }
 }
 
-function storeData() {
+function renderHandler() {
+  mapSrcInput.value = store.data.map;
+  pieceSizeInput.value = store.data.pieceSize;
+  mapZoomInput.value = store.data.zoom;
+
   localStorage.setItem(storageID, JSON.stringify(store.data));
 }
 
@@ -109,14 +119,17 @@ function dropHandler(event) {
   if (!characterIndex) {
     return
   }
+
+  var zoomRatio = store.data.zoom / 100;
   
   draggedElemPosX = event.pageX - draggedElemMouseOffsetX;
   draggedElemPosY = event.pageY - draggedElemMouseOffsetY;
 
   var character = store.data.characters[characterIndex];
+
   character.dragged = true;
-  character.x = draggedElemPosX;
-  character.y = draggedElemPosY;
+  character.x = draggedElemPosX / zoomRatio;
+  character.y = draggedElemPosY / zoomRatio;
 }
 
 function dragEndHandler(event) {
@@ -147,9 +160,18 @@ function characterListItem(character, index) {
 
 function characterPiece(character, index) {
   var draggedStyle = "";
+  var zoomPercent = store.data.zoom / 100;
+  
+  var characterSize = store.data.pieceSize * zoomPercent;
+
+  var characterPosX = character.x * zoomPercent;
+  var characterPosY = character.y * zoomPercent;
+
+
   if (character.dragged === true) {
-    draggedStyle = "position:absolute; top:" + character.y + "px; left:" + character.x + "px;";
+    draggedStyle = "position:absolute; top:" + characterPosY + "px; left:" + characterPosX + "px;";
   }
+
   return (
     "<div class='piece' draggable='true' id='" +
         character.id +
@@ -162,14 +184,14 @@ function characterPiece(character, index) {
       "'>" +
         "<div class='piece-content' style='" + 
           "height:" +
-            store.data.pieceSize +
+            characterSize +
             "px; " +
             "width:" +
-            store.data.pieceSize +
+            characterSize +
             "px; " +
         "'></div>" +
         "<span class='piece-label' style='top: " +
-          store.data.pieceSize * 1.15 +
+          characterSize * 1.15 +
         "px;" +
         "'>" +
           character.name +
@@ -188,7 +210,7 @@ var map = new Reef("#mapContainer", {
       props.characters.map(characterPiece).join("") +
       "</div>" +
       (props.map
-        ? "<img draggable='false' src='" + props.map + "' />"
+        ? "<img draggable='false' src='" + props.map + "' style='width:" + props.zoom + "%;' />"
         : "<p class='empty'>No map image.</p>")
     );
   }
@@ -206,9 +228,6 @@ getDatafromStorage();
 map.render();
 characterList.render();
 
-mapSrcInput.value = store.data.map;
-pieceSizeInput.value = store.data.pieceSize;
-
 //Events
 document.addEventListener("input", inputHandler, false);
 
@@ -223,4 +242,4 @@ document.addEventListener("drop", dropHandler, false);
 document.addEventListener("dragend", dragEndHandler, false);
 
 // Handle saving to localstorage every time the page data changes
-document.addEventListener("render", storeData, false);
+document.addEventListener("render", renderHandler, false);

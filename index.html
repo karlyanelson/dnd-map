@@ -7,17 +7,13 @@
 
     <body>
         <main>
-            <div class="controls">
+            <div class="main-controls">
                 <h1>Dungeons & Dragons Virtual Map</h1>
                 <section>
                 <h2>Edit Map</h2>
                 <div class="form-field">
                     <label for="mapSrc">Image</label>
                     <input id="mapSrc" type="url" />
-                </div>
-                <div class="form-field">
-                    <label for="pieceSize">Piece Size</label>
-                    <input id="pieceSize" min="10" type="number" />
                 </div>
                 </section>
                 <section>
@@ -27,6 +23,16 @@
                 </div>
                 <div id="characterList"></div>
                 </section>
+            </div>
+            <div class="map-controls">
+                <div class="grid-row">
+                    <label for="pieceSize">Piece Base Size (px)</label>
+                    <input id="pieceSize" min="10" type="number" />
+                </div>
+                <div class="grid-row">
+                    <label for="mapZoom">Zoom Map</label>
+                    <input id="mapZoom" step="10" type="number" />
+                </div>
             </div>
             <div id="mapContainer" class="content"></div>
             </main>
