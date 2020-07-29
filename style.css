@@ -12,7 +12,7 @@ body, button {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Rowdies", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: black;;
@@ -25,6 +25,10 @@ button, input, label {
 
 header {
   padding-bottom: 1rem;
+}
+
+h1, h2 {
+  font-weight: normal;
 }
 
 h1 {
@@ -161,11 +165,10 @@ input[type="number"] {
 }
 
 .piece-content {
-  background: brown;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
-  box-shadow: 1px 1px 0px 1px black;
+  box-shadow: 1px 1px 1px 2px black;
   background-size: cover;
 }
 
@@ -181,6 +184,8 @@ input[type="number"] {
   text-overflow: ellipsis;
   overflow: hidden;
   color: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .grid-row {

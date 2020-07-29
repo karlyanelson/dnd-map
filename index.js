@@ -41,6 +41,7 @@ function addCharacter() {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
     image: "",
+    color: "#ce0f0f",
     dragged: false,
     x: 400,
     y: 100,
@@ -185,12 +186,18 @@ function characterListItem(character, index) {
         "</div>" +
         "<div>" +
           "<label for='posY-" + character.id + "'>Y</label>" +
-          "<input type='number' step='5' character-data-type='y' value='" + character.y +
+          "<input type='number' character-data-type='y' value='" + character.y +
           "' id=posY-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
-        "<button data-remove character-data-index='" + index + "'>Remove</button>" +
+        "<div>" +
+          "<label for='color-" + character.id + "'>Color</label>" +
+          "<input type='color' character-data-type='color' value='" + character.color +
+          "' id=color-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
       "</div>" +
+      "<button data-remove character-data-index='" + index + "'>Remove</button>" +
     "</li>"
   );
 }
@@ -202,6 +209,8 @@ function characterPiece(character, index) {
 
   var characterPosX = character.x * zoomPercent;
   var characterPosY = character.y * zoomPercent;
+
+  var charColor = character.color ? character.color : 'red';
 
   return (
     "<div class='piece' draggable='true' id='" +
@@ -216,6 +225,7 @@ function characterPiece(character, index) {
         "<div class='piece-content' style='" + 
             "height:" + characterSize + "px; " +
             "width:" + characterSize + "px; " +
+            "background-color:" + charColor + ";" +
             "background-image: url(" + character.image + ");" +
         "'></div>" +
         "<span class='piece-label' style='top: " +
