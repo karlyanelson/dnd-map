@@ -40,7 +40,7 @@ function addCharacter() {
   var newCharacter = {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
-    image: "none",
+    image: "",
     dragged: false,
     x: 400,
     y: 100,
@@ -171,12 +171,12 @@ function characterListItem(character, index) {
         "</div>" +
       "</div>" +
       "<div>" +
-        "<div>" +
           "<label for='image-" + character.id + "'>Image</label>" +
           "<input type='url' character-data-type='image' value='" + character.image +
           "' id=image-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
+      "<div class='grid-row grid-row-align-end'>" +
         "<div>" +
           "<label for='posX-" + character.id + "'>X</label>" +
           "<input type='number' step='5' character-data-type='x' value='" + character.x +
@@ -189,8 +189,8 @@ function characterListItem(character, index) {
           "' id=posY-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
+        "<button data-remove character-data-index='" + index + "'>Remove</button>" +
       "</div>" +
-      "<button data-remove character-data-index='" + index + "'>Remove</button>" +
     "</li>"
   );
 }

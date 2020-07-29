@@ -184,14 +184,16 @@ input[type="number"] {
 }
 
 .grid-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  /* display: grid; */
+  /* grid-template-columns: 1fr auto; */
+  display: flex;
   align-items: center;
-  gap: 0.5rem;;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .grid-row-align-end {
-  align-items: end;
+  align-items: flex-end;
 }
 
 .arrow-down {
