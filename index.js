@@ -12,6 +12,7 @@ var draggedElemPosX;
 var draggedElemPosY;
 var draggedElemMouseOffsetX;
 var draggedElemMouseOffsetY;
+var mainControlsContent = document.querySelector("#mainControls");
 
 // Methods
 function generateRandomID() {
@@ -25,6 +26,7 @@ function getDatafromStorage() {
   var storedData = localStorage.getItem(storageID);
   var emptyData = {
     map: "https://i.imgur.com/KYVBIZd.jpeg",
+    settingsExpanded: true,
     pieceSize: 24,
     zoom: 100,
     characters: []
@@ -40,8 +42,8 @@ function addCharacter() {
     name: "Character " + numOfCharacters,
     image: "none",
     dragged: false,
-    x: 0,
-    y: 0,
+    x: 400,
+    y: 100,
     size: 1
   };
   store.data.characters.push(newCharacter);
@@ -82,6 +84,10 @@ function clickHandler(event) {
   if(!event.target.matches('button')){
     return;
   }
+  if (event.target.matches('[data-toggle-settings]')) {
+    store.data.settingsExpanded = store.data.settingsExpanded ? false : true;
+  }
+
   if (event.target.matches("#addCharacter")) {
     addCharacter();
   }
@@ -102,6 +108,8 @@ function renderHandler() {
   mapSrcInput.value = store.data.map;
   pieceSizeInput.value = store.data.pieceSize;
   mapZoomInput.value = store.data.zoom;
+
+  store.data.settingsExpanded ? mainControlsContent.classList.remove('collapsed') : mainControlsContent.classList.add('collapsed');
 
   localStorage.setItem(storageID, JSON.stringify(store.data));
 }
@@ -143,7 +151,7 @@ function dragEndHandler(event) {
 // Templates
 function characterListItem(character, index) {
   return (
-    "<div class='character-list-item' data-id='" + character.id + "'" + 
+    "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
       "<div class='grid-row'>" +
         "<div>" +
@@ -168,8 +176,7 @@ function characterListItem(character, index) {
         "</div>" +
         "<button data-remove character-data-index='" + index + "'>Remove</button>" + 
       "</div>" +
-      
-    "</div>"
+    "</li>"
   );
 }
 
@@ -183,9 +190,9 @@ function characterPiece(character, index) {
   var characterPosY = character.y * zoomPercent;
 
 
-  if (character.dragged === true) {
-    draggedStyle = "position:absolute; top:" + characterPosY + "px; left:" + characterPosX + "px;";
-  }
+  // if (character.dragged === true) {
+    draggedStyle = "position:absolute; " + "top:" + characterPosY + "px; left:" + characterPosX + "px;";
+  // }
 
   return (
     "<div class='piece' draggable='true' id='" +
@@ -218,9 +225,9 @@ var map = new Reef("#mapContainer", {
   store: store,
   template: function (props) {
     return (
-      "<div class='new-character-box'>" +
+      // "<div class='new-character-box'>" +
       props.characters.map(characterPiece).join("") +
-      "</div>" +
+      // "</div>" +
       (props.map
         ? "<img draggable='false' src='" + props.map + "' style='width:" + props.zoom + "%;' />"
         : "<p class='empty'>No map image.</p>")
@@ -231,12 +238,23 @@ var map = new Reef("#mapContainer", {
 var characterList = new Reef("#characterList", {
   store: store,
   template: function (props) {
-    return props.characters.map(characterListItem).join("");
+    return '<ul>' + props.characters.map(characterListItem).join("") + '</ul>';
   }
 });
 
+var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
+  store: store,
+  template: function (props) {
+    var btnText = props.settingsExpanded ? 'Hide' : 'Show'
+    var arrow = props.settingsExpanded ? 'arrow-up' : 'arrow-down'
+
+    return '<button data-toggle-settings aria-expanded="' + props.settingsExpanded + '" class="grid-row">' + btnText + ' Controls<span class="' + arrow + '"></span></button>'
+  }
+})
+
 // Inits
 getDatafromStorage();
+toggleSettingsBtn.render();
 map.render();
 characterList.render();
 

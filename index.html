@@ -7,33 +7,39 @@
 
     <body>
         <main>
-            <div class="main-controls">
-                <h1>Dungeons & Dragons Virtual Map</h1>
-                <section>
-                <h2>Edit Map</h2>
-                <div class="form-field">
-                    <label for="mapSrc">Image</label>
-                    <input id="mapSrc" type="url" />
+            <div id="mainControls" class="main-controls">
+                <header class="grid-row">
+                    <h1>D&D Map</h1>
+                    <span id="toggleSettingsBtn"></span>
+                </header>
+                <div class="main-controls-content">
+                    <section>
+                    <div class="form-field">
+                        <label for="mapSrc">Map Image</label>
+                        <input id="mapSrc" type="url" />
+                    </div>
+                    </section>
+                    <section>
+                        <div class="grid-row">
+                            <h2>Characters</h2>
+                            <button id="addCharacter">Add Character</button>
+                        </div>
+                        <div id="characterList"></div>
+                    </section>
                 </div>
-                </section>
-                <section>
-                <div class="grid-row">
-                    <h2>Characters</h2>
-                    <button id="addCharacter">Add Character</button>
-                </div>
-                <div id="characterList"></div>
-                </section>
             </div>
             <div class="map-controls">
-                <div>
+                <div class="grid-row">
                     <label for="pieceSize">Piece Base Size (px)</label>
                     <input id="pieceSize" min="10" type="number" />
                 </div>
-                <div>
+                <div class="grid-row">
                     <label for="mapZoom">Map Zoom</label>
-                    <button data-zoom="out" aria-label="Zoom out"> &#8211; </button>
-                    <input id="mapZoom" step="10" type="number" name="Map Zoom" />
-                    <button data-zoom="in" aria-label="Zoom in"> + </button>
+                    <div>
+                        <button data-zoom="out" aria-label="Zoom out"> &#8211; </button>
+                        <input id="mapZoom" step="10" type="number" name="Map Zoom" />
+                        <button data-zoom="in" aria-label="Zoom in"> + </button>
+                    </div>
                 </div>
             </div>
             <div id="mapContainer" class="content"></div>
