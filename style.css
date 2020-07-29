@@ -119,7 +119,7 @@ button[data-remove]{
 }
 
 .form-field {
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 label {
@@ -139,6 +139,11 @@ input {
 
 input[type="number"] {
   max-width: 4rem;
+}
+
+input[type="color"] {
+  border: none;
+  padding: 0;
 }
 
 .empty {
@@ -189,8 +194,6 @@ input[type="number"] {
 }
 
 .grid-row {
-  /* display: grid; */
-  /* grid-template-columns: 1fr auto; */
   display: flex;
   align-items: center;
   justify-content: space-between;

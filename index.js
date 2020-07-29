@@ -13,6 +13,7 @@ var draggedElemPosY;
 var draggedElemMouseOffsetX;
 var draggedElemMouseOffsetY;
 var mainControlsContent = document.querySelector("#mainControls");
+var defaultColor = '#ce0f0f';
 
 // Methods
 function generateRandomID() {
@@ -41,7 +42,7 @@ function addCharacter() {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
     image: "",
-    color: "#ce0f0f",
+    color: defaultColor,
     dragged: false,
     x: 400,
     y: 100,
@@ -154,10 +155,12 @@ function dragEndHandler(event) {
 
 // Templates
 function characterListItem(character, index) {
+  var charColor = character.color ? character.color : defaultColor;
+
   return (
     "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
-      "<div class='grid-row'>" +
+      "<div class='grid-row form-field '>" +
         "<div>" +
           "<label for='name-" + character.id + "'>Name</label>" +
           "<input type='text' character-data-type='name' value='" + character.name +
@@ -171,13 +174,13 @@ function characterListItem(character, index) {
           "' character-data-index='" + index + "'>" +
         "</div>" +
       "</div>" +
-      "<div>" +
+      "<div class='form-field' >" +
           "<label for='image-" + character.id + "'>Image</label>" +
           "<input type='url' character-data-type='image' value='" + character.image +
           "' id=image-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
-      "<div class='grid-row grid-row-align-end'>" +
+      "<div class='grid-row form-field '>" +
         "<div>" +
           "<label for='posX-" + character.id + "'>X</label>" +
           "<input type='number' step='5' character-data-type='x' value='" + character.x +
@@ -192,12 +195,14 @@ function characterListItem(character, index) {
         "</div>" +
         "<div>" +
           "<label for='color-" + character.id + "'>Color</label>" +
-          "<input type='color' character-data-type='color' value='" + character.color +
+          "<input type='color' character-data-type='color' value='" + charColor +
           "' id=color-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
       "</div>" +
-      "<button data-remove character-data-index='" + index + "'>Remove</button>" +
+      "<div class='form-field '>" + 
+        "<button data-remove character-data-index='" + index + "'>Remove</button>" +
+      "</div>" +
     "</li>"
   );
 }
@@ -210,7 +215,7 @@ function characterPiece(character, index) {
   var characterPosX = character.x * zoomPercent;
   var characterPosY = character.y * zoomPercent;
 
-  var charColor = character.color ? character.color : 'red';
+  var charColor = character.color ? character.color : defaultColor;
 
   return (
     "<div class='piece' draggable='true' id='" +
