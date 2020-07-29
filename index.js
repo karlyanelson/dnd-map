@@ -1,263 +1,237 @@
+// Data Store
+var store = new Reef.Store({
+  data: {}
+});
+
 // Variables
-let piecePositionX;
-let piecePositionY;
+var mapSrcInput = document.querySelector("#mapSrc");
+var pieceSizeInput = document.querySelector("#pieceSize");
+var storageID = "dnd-map-data";
+var draggedElemPosX;
+var draggedElemPosY;
+var draggedElemMouseOffsetX;
+var draggedElemMouseOffsetY;
 
-let playerCount = 1;
-let enemyCount = 1;
-
-// Selectors
-const map = document.querySelector(".map");
-const pieceGrid = document.querySelector(".player-box");
-
-const fitImageToScreenCheckbox = document.querySelector("#fitImageToScreen");
-
-const mapSrcUploader = document.querySelector("#mapSrcUploader");
-
-// const noMapMsg = document.querySelector("#noMapMsg");
-
-
-// Functions
-
-/**
- * Randomly shuffle an array
- * https://stackoverflow.com/a/2450976/1293256
- * @param  {Array} array The array to shuffle
- * @return {String}      The first item in the shuffled array
- */
-function shuffle(array) {
-  var currentIndex = array.length;
-  var temporaryValue, randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+// Methods
+function generateRandomID() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
   }
-
-  return array;
-};
-  
-function offset(el) {
-  var rect = el.getBoundingClientRect(),
-  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+  return (
+    s4() +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    s4() +
+    s4()
+  );
 }
 
-  
-function onDragStart(event) {
-  event.dataTransfer.setData("text/plain", event.target.id);
-
-  event.target.setAttribute("aria-grabbed", "true");
-
-  document.querySelector('.container').setAttribute("aria-dropeffect", "move");
+function getDatafromStorage() {
+  var storedData = localStorage.getItem(storageID);
+  var emptyData = {
+    map: "https://i.imgur.com/KYVBIZd.jpeg",
+    pieceSize: 24,
+    characters: []
+  };
+  var storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
+  store.data = storedDataObject;
 }
-  
-  function onDragOver(event) {
-    event.preventDefault();
 
-    let mapPosition = offset(document.querySelector(".container"));
-  
-    const piece = document.querySelector(".piece");
-    const pieceSizeInPx = getComputedStyle(piece).getPropertyValue(
-      "--piece-size"
-    );
-    const pieceSize = parseInt(pieceSizeInPx, 10);
-  
-    event = event || window.event;
-    piecePositionX = event.pageX - pieceSize / 2;
-    piecePositionY = event.pageY - mapPosition.top - pieceSize / 2;
+function addCharacter() {
+  var numOfCharacters = (store.data.characters.length + 1).toString();
+  var newCharacter = {
+    id: generateRandomID(),
+    name: "Character " + numOfCharacters,
+    image: "",
+    dragged: false,
+    x: 0,
+    y: 0
+  };
+  store.data.characters.push(newCharacter);
+}
+
+function removeCharacter(characterIndex) {
+  if (characterIndex){
+    store.data.characters.splice(characterIndex, 1);
   }
-  
-  function onDrop(event) {
-    event.preventDefault();
+}
 
-    const id = event.dataTransfer.getData("text");
-  
-    const draggableElement = document.getElementById(id);
-    let dropzone = event.target;
-  
-    if (dropzone.classList.contains("map")) {
-      dropzone = document.querySelector(".container");
+// Event Handlers
+function inputHandler(event) {
+  if (event.target.matches("#mapSrc")) {
+    store.data.map = event.target.value;
+  }
+
+  if (event.target.matches("#pieceSize")) {
+    store.data.pieceSize = event.target.value;
+  }
+
+  var characterContainer = event.target.closest(".character-list-item");
+
+  if (characterContainer) {
+    var characterIndex = characterContainer.getAttribute("data-index");
+    
+    if (characterIndex) {
+      store.data.characters[characterIndex].name = event.target.value
     }
-  
-    dropzone.appendChild(draggableElement);
-  
-    draggableElement.style.position = "absolute";
-    draggableElement.style.top = piecePositionY + "px";
-    draggableElement.style.left = piecePositionX + "px";
-
-    draggableElement.setAttribute("aria-grabbed", "false");
-    dropzone.setAttribute("aria-dropeffect", "none");
-  
-    event.dataTransfer.clearData();
   }
-  
-  function setMap(event) {
-    const file = event.target.files[0];
-    map.file = file;
-
-    const reader = new FileReader();
-    reader.onload = (function (aImg) {
-      return function (e) {
-        aImg.src = e.target.result;
-      };
-    })(map);
-    reader.readAsDataURL(file);
-  }
-
-  function toggleMapWidth() {
-    fitImageToScreenCheckbox.checked ? map.style.width = "100%" : map.style.width = "auto";
-  }
-  
-  function setPieceSize() {
-    const pieceSizeInputValue = document.querySelector("#pieceSize").value;
-    document.documentElement.style.setProperty("--piece-size", pieceSizeInputValue + "px");
-  }
-  
-  function generateColor() {
-    // The available hex options
-    var hex = [
-      "a", "b", "c", "d", "e", "f", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
-    ];
-    var color = "#";
-    // Create a six-digit hex color
-    for (var i = 0; i < 6; i++) {
-      // Shuffle the hex values
-      shuffle(hex);
-      // Append first hex value to the string
-      color += hex[0];
-    }
-    // Return the color string
-    return color;
-  }
-
-  function announceToScreenReader(msg) {
-    const announcement = document.createElement("p");
-    announcement.setAttribute("role", "alert");
-    announcement.textContent = msg;
-    document.querySelector('.announcements').appendChild(announcement);
-  }
-  
-  function addPiece(eventTarget) {
-    let pieceClass;
-    let pieceName;
-    let pieceCount;
-  
-    if (eventTarget.matches(".add-enemy")) {
-      pieceClass = "enemy";
-      pieceName = "Enemy "
-      enemyCount++
-      pieceCount = enemyCount;
-    }
-
-    if (eventTarget.matches(".add-player")) {
-      pieceClass = "player";
-      pieceName = "Player "
-      playerCount++
-      pieceCount = playerCount;
-    }
-  
-    // Add a new player
-    const newPiece = document.createElement("button");
-    const newPieceTextContainer = document.createElement("span");
-    newPiece.id = Date.now();
-    newPiece.setAttribute("ondragstart", "onDragStart(event);");
-    newPiece.setAttribute("aria-grabbed", "false");
-    newPiece.setAttribute("aria-label", pieceName + pieceCount);
-    newPiece.appendChild(newPieceTextContainer);
-    newPieceTextContainer.textContent = pieceName + pieceCount;
-    newPiece.draggable = "true";
-    newPiece.className = `piece ${pieceClass}`;
-    newPiece.style.borderColor = generateColor();
-
-    announceToScreenReader(`${pieceName} ${pieceCount} added.`);
-  
-    pieceGrid.appendChild(newPiece);
-  }
-
-  function movePieceViaKeyboard(pieceInFocus) {
-    const moveBy = 10;
-
-    pieceInFocus.addEventListener('keyup', (e) => {
-      switch(e.key) {
-        case 'ArrowLeft':
-          pieceInFocus.style.left = parseInt(pieceInFocus.style.left) - moveBy + "px";
-          announceToScreenReader(`${pieceInFocus.textContent} left`);
-          break;
-        case 'ArrowRight':
-          pieceInFocus.style.left = parseInt(pieceInFocus.style.left) + moveBy + "px";
-          announceToScreenReader(`${pieceInFocus.textContent} right`);
-          break;
-        case 'ArrowUp':
-          pieceInFocus.style.top = parseInt(pieceInFocus.style.top) - moveBy + "px";
-          announceToScreenReader(`${pieceInFocus.textContent} up`);
-          break;
-        case 'ArrowDown':
-          pieceInFocus.style.top = parseInt(pieceInFocus.style.top) + moveBy + "px";
-          announceToScreenReader(`${pieceInFocus.textContent} down`);
-          break;
-      }
-    });
-  }
+}
 
 function clickHandler(event) {
-  // If the clicked element doesn't have the right selector, bail
-  if (!event.target.matches("button")) {
+  if(!event.target.matches('button')){
     return;
   }
-
-  // Don't follow the link
-  event.preventDefault();
-
-  if (event.target.matches("#addPiece")) {
-    addPiece(event.target);
+  if (event.target.matches("#addCharacter")) {
+    addCharacter();
   }
-
-  if (event.target.matches("#updateMap")) {
-    setMap();
-  }
-
-  if (event.target.matches("#updatePiece")) {
-    setPieceSize();
-  }
-
-  if (event.target.matches(".player-box .piece")) {
-    // If you click a piece in the player box, add it to the map
-    document.querySelector(".container").appendChild(event.target);
-    event.target.style.position = "absolute";
-    event.target.style.top = 0;
-    event.target.style.left = 0;
-    event.target.focus();
+  if (event.target.matches("[data-remove]")) {
+    var characterContainer = event.target.closest(".character-list-item");
+    
+    if (characterContainer) {
+      var characterIndex = characterContainer.getAttribute("data-index");
+      removeCharacter(characterIndex);
+    }
   }
 }
+
+function storeData() {
+  localStorage.setItem(storageID, JSON.stringify(store.data));
+}
+
+function dragStartHandler(event) {
+  event.dataTransfer.setData("text/plain", event.target.id);
+  event.target.style.opacity = 0.5;
   
+  draggedElemMouseOffsetX = event.offsetX;
+  draggedElemMouseOffsetY = event.offsetY;
+}
 
-// Events/Inits
+function dropHandler(event) {
+  event.preventDefault();
+  var draggedElemId = event.dataTransfer.getData("text");
+  var draggedElem = document.getElementById(draggedElemId);
+  var characterIndex = draggedElem.getAttribute("data-index");
 
-// setMap();
-toggleMapWidth();
-setPieceSize();
+  if (!characterIndex) {
+    return
+  }
+  
+  draggedElemPosX = event.pageX - draggedElemMouseOffsetX;
+  draggedElemPosY = event.pageY - draggedElemMouseOffsetY;
+
+  var character = store.data.characters[characterIndex];
+  character.dragged = true;
+  character.x = draggedElemPosX;
+  character.y = draggedElemPosY;
+}
+
+function dragEndHandler(event) {
+  event.target.style.opacity = "";
+}
+
+// Templates
+function characterListItem(character, index) {
+  return (
+    "<div class='character-list-item' data-id='" + character.id + "'" + 
+      "data-index='" + index + "'>" +
+      "<label for='name-" +
+        character.id +
+      "'>Name</label>" +
+      "<input type='text' data-type='name' value='" +
+        character.name +
+      "' id=input-'" +
+        character.id +
+      "'>" + "<button data-remove >Remove</button>" +
+    "</div>"
+  );
+}
+
+function characterPiece(character, index) {
+  var draggedStyle = "";
+  if (character.dragged === true) {
+    draggedStyle = "position:absolute; top:" + character.y + "px; left:" + character.x + "px;";
+  }
+  return (
+    "<div class='piece' draggable='true' id='" +
+        character.id +
+      "'" +
+      "data-index='" +
+        index +
+      "'" +
+      " style='" +
+        draggedStyle +
+      "'>" +
+        "<div class='piece-content' style='" + 
+          "height:" +
+            store.data.pieceSize +
+            "px; " +
+            "width:" +
+            store.data.pieceSize +
+            "px; " +
+        "'></div>" +
+        "<span class='piece-label' style='top: " +
+          store.data.pieceSize * 1.15 +
+        "px;" +
+        "'>" +
+          character.name +
+        "</span>" +
+    "</div>"
+  );
+}
+
+// Components
+
+var map = new Reef("#mapContainer", {
+  store: store,
+  template: function (props) {
+    return (
+      "<div class='new-character-box'>" +
+      props.characters.map(characterPiece).join("") +
+      "</div>" +
+      (props.map
+        ? "<img draggable='false' src='" + props.map + "' />"
+        : "<p class='empty'>No map image.</p>")
+    );
+  }
+});
+
+var characterList = new Reef("#characterList", {
+  store: store,
+  template: function (props) {
+    return props.characters.map(characterListItem).join("");
+  }
+});
+
+// Inits
+getDatafromStorage();
+map.render();
+characterList.render();
+
+mapSrcInput.value = store.data.map;
+pieceSizeInput.value = store.data.pieceSize;
+
+//Events
+document.addEventListener("input", inputHandler, false);
 
 document.addEventListener("click", clickHandler, false);
 
-fitImageToScreenCheckbox.addEventListener("change", toggleMapWidth, false);
+document.addEventListener("dragstart", dragStartHandler,false);
 
-document.addEventListener(
-  "focus", 
-  function(event) {
-    if (!event.target.matches(".piece")) {
-      return;
-    }
-    movePieceViaKeyboard(event.target);
-  },
-  true
-);
+document.addEventListener("dragover", function (event) {event.preventDefault();},false);
 
-mapSrcUploader.addEventListener("change", setMap, false);
+document.addEventListener("drop", dropHandler, false);
+
+document.addEventListener("dragend", dragEndHandler, false);
+
+// Handle saving to localstorage every time the page data changes
+document.addEventListener("render", storeData, false);

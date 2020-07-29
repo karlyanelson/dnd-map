@@ -3,43 +3,34 @@
     <head>
         <title>DnD Map</title>
         <link rel="stylesheet" href="style.css">
-        <script defer type="text/javascript" src="index.js"></script>
     </head>
 
     <body>
         <main>
-            <h1>Dungeons & Dragons Virtual Map</h1>
-            <section class="controls-wrapper">
-                <div class="player-box">
-                    <button class="player piece" id="player1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Player 1"><span>Player 1</span></button>
-                    <button class="enemy piece" id="enemy1" aria-grabbed="false" draggable="true" ondragstart="onDragStart(event);" aria-label="Enemy 1"><span>Enemy 1</span></button>
+            <div class="controls">
+                <h1>Dungeons & Dragons Virtual Map</h1>
+                <section>
+                <h2>Edit Map</h2>
+                <div class="form-field">
+                    <label for="mapSrc">Image</label>
+                    <input id="mapSrc" type="url" />
                 </div>
-                <form class="controls">
-                    <fieldset>
-                        <label for="mapSrcUploader">Map Image</label>
-                        <input type="file" id="mapSrcUploader"/>
-                    </fieldset>
-                    <fieldset>
-                        <input checked type="checkbox" id="fitImageToScreen" name="imagesize" value="Fit Map to Screen">
-                        <label for="fitImageToScreen">Fit Map to Screen</label>
-                    </fieldset>
-                    <fieldset>
-                        <label for="pieceSize">Piece size in pixels</label>
-                        <input type="number" value="24" id="pieceSize" />
-                        <button id="updatePiece">Update Piece Size</button>
-                    </fieldset>
-                    <fieldset>
-                        <button id="addPiece" class="add-player">Add Player</button>
-                        <button id="addPiece" class="add-enemy">Add Enemy</button>
-                    </fieldset>
-                </form>
-            </section>
-            <section class="container" ondragover="onDragOver(event);" ondrop="onDrop(event);" aria-dropeffect="none">
-                <img alt="" class="map" src="https://i.imgur.com/KYVBIZd.jpeg" />
-                <!-- <img alt="" class="map" />
-                <p class="empty" id="noMapMsg">No map uploaded.</p> -->
-            </section>
-            <section class="announcements"></section>
-        </main>
+                <div class="form-field">
+                    <label for="pieceSize">Piece Size</label>
+                    <input id="pieceSize" min="10" type="number" />
+                </div>
+                </section>
+                <section>
+                <div class="header">
+                    <h2>Characters</h2>
+                    <button id="addCharacter">Add Character</button>
+                </div>
+                <div id="characterList"></div>
+                </section>
+            </div>
+            <div id="mapContainer" class="content"></div>
+            </main>
+        <script src="https://cdn.jsdelivr.net/npm/reefjs@7.3.3/dist/reef.polyfills.js"></script>
+        <script src="index.js"></script>
     </body>
 </html>
