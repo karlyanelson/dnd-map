@@ -181,18 +181,12 @@ function characterListItem(character, index) {
 }
 
 function characterPiece(character, index) {
-  var draggedStyle = "";
   var zoomPercent = store.data.zoom / 100;  
 
   var characterSize = store.data.pieceSize * zoomPercent * character.size;
 
   var characterPosX = character.x * zoomPercent;
   var characterPosY = character.y * zoomPercent;
-
-
-  // if (character.dragged === true) {
-    draggedStyle = "position:absolute; " + "top:" + characterPosY + "px; left:" + characterPosX + "px;";
-  // }
 
   return (
     "<div class='piece' draggable='true' id='" +
@@ -202,7 +196,7 @@ function characterPiece(character, index) {
         index +
       "'" +
       " style='" +
-        draggedStyle +
+        "position:absolute; " + "top:" + characterPosY + "px; left:" + characterPosX + "px;" +
       "'>" +
         "<div class='piece-content' style='" + 
             "height:" + characterSize + "px; " +
@@ -225,9 +219,7 @@ var map = new Reef("#mapContainer", {
   store: store,
   template: function (props) {
     return (
-      // "<div class='new-character-box'>" +
       props.characters.map(characterPiece).join("") +
-      // "</div>" +
       (props.map
         ? "<img draggable='false' src='" + props.map + "' style='width:" + props.zoom + "%;' />"
         : "<p class='empty'>No map image.</p>")
