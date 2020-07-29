@@ -38,10 +38,11 @@ function addCharacter() {
   var newCharacter = {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
-    image: "",
+    image: "none",
     dragged: false,
     x: 0,
-    y: 0
+    y: 0,
+    size: 1
   };
   store.data.characters.push(newCharacter);
 }
@@ -50,6 +51,10 @@ function removeCharacter(characterIndex) {
   if (characterIndex){
     store.data.characters.splice(characterIndex, 1);
   }
+}
+
+function zoomMap(value) {
+  store.data.zoom = value === 'out' ? parseInt(store.data.zoom) - 10 : parseInt(store.data.zoom) + 10;
 }
 
 // Event Handlers
@@ -66,14 +71,10 @@ function inputHandler(event) {
     store.data.zoom = event.target.value;
   }
 
-  var characterContainer = event.target.closest(".character-list-item");
-
-  if (characterContainer) {
-    var characterIndex = characterContainer.getAttribute("data-index");
-    
-    if (characterIndex) {
-      store.data.characters[characterIndex].name = event.target.value
-    }
+  if (event.target.matches('[character-data-type]') && event.target.hasAttribute('character-data-index')){
+    var characterIndex = event.target.getAttribute('character-data-index');
+    var characterDataType = event.target.getAttribute('character-data-type');
+    store.data.characters[characterIndex][characterDataType] = event.target.value;
   }
 }
 
@@ -83,6 +84,9 @@ function clickHandler(event) {
   }
   if (event.target.matches("#addCharacter")) {
     addCharacter();
+  }
+  if (event.target.matches("[data-zoom]")) {
+    zoomMap(event.target.getAttribute("data-zoom"));
   }
   if (event.target.matches("[data-remove]")) {
     var characterContainer = event.target.closest(".character-list-item");
@@ -141,28 +145,39 @@ function characterListItem(character, index) {
   return (
     "<div class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
+      "<div class='grid-row'>" +
+        "<div>" +
+          "<label for='name-" + character.id + "'>Name</label>" +
+          "<input type='text' character-data-type='name' value='" + character.name +
+          "' id=input-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
+        "<div>" +
+          "<label for='size-" + character.id + "'>Size</label>" +
+          "<input type='number' character-data-type='size' value='" + character.size +
+          "' id=input-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
+      "</div>" +
       "<div class='grid-row grid-row-align-end'>" +
         "<div>" +
-          "<label for='name-" +
-            character.id +
-          "'>Name</label>" +
-          "<input type='text' data-type='name' value='" +
-            character.name +
-          "' id=input-'" +
-            character.id +
-          "'>" + 
+          "<label for='image-" + character.id + "'>Image</label>" +
+          "<input type='url' character-data-type='image' value='" + character.image +
+          "' id=input-'" + character.id +
+          "' character-data-index='" + index + "'>" +
         "</div>" +
-        "<button data-remove >Remove</button>" + 
+        "<button data-remove character-data-index='" + index + "'>Remove</button>" + 
       "</div>" +
+      
     "</div>"
   );
 }
 
 function characterPiece(character, index) {
   var draggedStyle = "";
-  var zoomPercent = store.data.zoom / 100;
-  
-  var characterSize = store.data.pieceSize * zoomPercent;
+  var zoomPercent = store.data.zoom / 100;  
+
+  var characterSize = store.data.pieceSize * zoomPercent * character.size;
 
   var characterPosX = character.x * zoomPercent;
   var characterPosY = character.y * zoomPercent;
@@ -183,12 +198,9 @@ function characterPiece(character, index) {
         draggedStyle +
       "'>" +
         "<div class='piece-content' style='" + 
-          "height:" +
-            characterSize +
-            "px; " +
-            "width:" +
-            characterSize +
-            "px; " +
+            "height:" + characterSize + "px; " +
+            "width:" + characterSize + "px; " +
+            "background-image: url(" + character.image + ");" +
         "'></div>" +
         "<span class='piece-label' style='top: " +
           characterSize * 1.15 +

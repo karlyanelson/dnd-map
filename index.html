@@ -25,17 +25,19 @@
                 </section>
             </div>
             <div class="map-controls">
-                <div class="grid-row">
+                <div>
                     <label for="pieceSize">Piece Base Size (px)</label>
                     <input id="pieceSize" min="10" type="number" />
                 </div>
-                <div class="grid-row">
-                    <label for="mapZoom">Zoom Map</label>
-                    <input id="mapZoom" step="10" type="number" />
+                <div>
+                    <label for="mapZoom">Map Zoom</label>
+                    <button data-zoom="out" aria-label="Zoom out"> &#8211; </button>
+                    <input id="mapZoom" step="10" type="number" name="Map Zoom" />
+                    <button data-zoom="in" aria-label="Zoom in"> + </button>
                 </div>
             </div>
             <div id="mapContainer" class="content"></div>
-            </main>
+        </main>
         <script src="https://cdn.jsdelivr.net/npm/reefjs@7.3.3/dist/reef.polyfills.js"></script>
         <script src="index.js"></script>
     </body>
