@@ -81,21 +81,24 @@ function inputHandler(event) {
 }
 
 function clickHandler(event) {
-  if(!event.target.matches('button')){
+  if(!event.target.closest('button')){
     return;
   }
-  if (event.target.matches('[data-toggle-settings]')) {
+
+  let buttonTarget = event.target.closest('button');
+
+  if (buttonTarget.matches('[data-toggle-settings]')) {
     store.data.settingsExpanded = store.data.settingsExpanded ? false : true;
   }
 
-  if (event.target.matches("#addCharacter")) {
+  if (buttonTarget.matches("#addCharacter")) {
     addCharacter();
   }
-  if (event.target.matches("[data-zoom]")) {
-    zoomMap(event.target.getAttribute("data-zoom"));
+  if (buttonTarget.matches("[data-zoom]")) {
+    zoomMap(buttonTarget.getAttribute("data-zoom"));
   }
-  if (event.target.matches("[data-remove]")) {
-    var characterContainer = event.target.closest(".character-list-item");
+  if (buttonTarget.matches("[data-remove]")) {
+    var characterContainer = buttonTarget.closest(".character-list-item");
     
     if (characterContainer) {
       var characterIndex = characterContainer.getAttribute("data-index");
@@ -157,25 +160,37 @@ function characterListItem(character, index) {
         "<div>" +
           "<label for='name-" + character.id + "'>Name</label>" +
           "<input type='text' character-data-type='name' value='" + character.name +
-          "' id=input-'" + character.id +
+          "' id=name-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
         "<div>" +
           "<label for='size-" + character.id + "'>Size</label>" +
           "<input type='number' character-data-type='size' value='" + character.size +
-          "' id=input-'" + character.id +
+          "' id=size-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
       "</div>" +
-      "<div class='grid-row grid-row-align-end'>" +
+      "<div>" +
         "<div>" +
           "<label for='image-" + character.id + "'>Image</label>" +
           "<input type='url' character-data-type='image' value='" + character.image +
-          "' id=input-'" + character.id +
+          "' id=image-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
-        "<button data-remove character-data-index='" + index + "'>Remove</button>" + 
+        "<div>" +
+          "<label for='posX-" + character.id + "'>X</label>" +
+          "<input type='number' step='5' character-data-type='x' value='" + character.x +
+          "' id=posX-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
+        "<div>" +
+          "<label for='posY-" + character.id + "'>Y</label>" +
+          "<input type='number' step='5' character-data-type='y' value='" + character.y +
+          "' id=posY-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
       "</div>" +
+      "<button data-remove character-data-index='" + index + "'>Remove</button>" +
     "</li>"
   );
 }

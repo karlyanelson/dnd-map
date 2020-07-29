@@ -53,15 +53,20 @@ button[data-remove]{
   color: var(--color-error);
 }
 
-.main-controls {
+.main-controls, .map-controls {
   border: 1px solid black;
-  width: 20rem;
-  padding: 1rem;
   position: fixed;
-  left: 1rem;
   top: 1rem;
-  bottom: 1rem;
   z-index: 1000;
+  background: rgba(51, 51, 51, 0.75);
+  border-radius: .5rem;
+}
+
+.main-controls {
+  padding: 1rem;
+  width: 20rem;
+  left: 1rem;
+  bottom: 1rem;
   background: rgba(51, 51, 51, 0.75);
   overflow-y: auto;
 }
@@ -100,13 +105,8 @@ button[data-remove]{
 }
 
 .map-controls {
-  border: 1px solid black;
-  position: fixed;
-  top: 1rem;
+  padding: 0.5rem 1rem;
   right: 1rem;
-  z-index: 1000;
-  background: rgba(51, 51, 51, 0.75);
-  padding: 1rem;
   display: flex;
 }
 
