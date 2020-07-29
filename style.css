@@ -8,11 +8,11 @@
 }
 
 body, button {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 
 body {
-    font-family: "Rowdies", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: black;;
@@ -189,7 +189,7 @@ input[type="color"] {
   text-overflow: ellipsis;
   overflow: hidden;
   color: black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   letter-spacing: 0.03em;
 }
 
