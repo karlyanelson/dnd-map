@@ -15,25 +15,9 @@ var draggedElemMouseOffsetY;
 // Methods
 function generateRandomID() {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   }
-  //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
-  return (
-    s4() +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    s4() +
-    s4()
-  );
+  return (s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4());
 }
 
 function getDatafromStorage() {
@@ -143,15 +127,20 @@ function dragEndHandler(event) {
 function characterListItem(character, index) {
   return (
     "<div class='character-list-item' data-id='" + character.id + "'" + 
-      "data-index='" + index + "'>" +
-      "<label for='name-" +
-        character.id +
-      "'>Name</label>" +
-      "<input type='text' data-type='name' value='" +
-        character.name +
-      "' id=input-'" +
-        character.id +
-      "'>" + "<button data-remove >Remove</button>" +
+      "data-index='" + index + "'>" + 
+      "<div class='grid-row grid-row-align-end'>" +
+        "<div>" +
+          "<label for='name-" +
+            character.id +
+          "'>Name</label>" +
+          "<input type='text' data-type='name' value='" +
+            character.name +
+          "' id=input-'" +
+            character.id +
+          "'>" + 
+        "</div>" +
+        "<button data-remove >Remove</button>" + 
+      "</div>" +
     "</div>"
   );
 }
