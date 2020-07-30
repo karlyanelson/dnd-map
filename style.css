@@ -146,6 +146,10 @@ input[type="color"] {
   padding: 0;
 }
 
+input[type="file"] {
+  color: white;
+}
+
 .empty {
   text-align: center;
   padding: 1rem;
