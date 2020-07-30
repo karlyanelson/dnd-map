@@ -69,25 +69,27 @@ function zoomMap(value) {
   store.data.zoom = value === 'out' ? parseInt(store.data.zoom) - 10 : parseInt(store.data.zoom) + 10;
 }
 
-function handleFiles(event) {
-  if (event.target.files && event.target.files[0]) {
-    return  URL.createObjectURL(event.target.files[0]); // blob url
-  }
-}
-
+//// upload as blob - doesn't persist after you open site in new tab
 // function handleFiles(event) {
-//   const file = event.target.files[0];
-
-//   const reader = new FileReader();
-
-//   reader.onload = (function () {
-//     return function (e) {
-//       store.data.map = e.target.result;
-//     };
-//   })();
-  
-//   reader.readAsDataURL(file);
+//   if (event.target.files && event.target.files[0]) {
+//     return  URL.createObjectURL(event.target.files[0]); // blob url
+//   }
 // }
+
+//// encoded as base64 string - persists across sessions, but is very big
+function handleFiles(event) {
+  const file = event.target.files[0];
+
+  const reader = new FileReader();
+
+  reader.onload = (function () {
+    return function (e) {
+      store.data.map = e.target.result;
+    };
+  })();
+  
+  reader.readAsDataURL(file);
+}
 
 // Event Handlers
 function inputHandler(event) {
