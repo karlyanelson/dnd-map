@@ -9,7 +9,6 @@
 
 body, button {
     font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
 }
 
 body {
@@ -21,6 +20,13 @@ body {
 
 button, input, label {
   font-size: .875rem;
+}
+
+.metadata {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0.125;
+  font-size: .75rem;
+  font-style: italic;
 }
 
 header {
@@ -119,11 +125,11 @@ button[data-remove]{
 }
 
 .form-field {
-  padding: 0.25rem 0;
+  padding: 0.55rem 0;
 }
 
 label {
-  margin: 0.5rem;
+  margin-bottom: 0.5rem;
   margin-left: 0;
 }
 
@@ -138,7 +144,7 @@ input {
 }
 
 input[type="number"] {
-  max-width: 4rem;
+  max-width: 5rem;
 }
 
 input[type="color"] {
@@ -148,6 +154,7 @@ input[type="color"] {
 
 input[type="file"] {
   color: white;
+  padding: 0;
 }
 
 .empty {

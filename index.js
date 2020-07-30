@@ -11,9 +11,9 @@ var store = new Reef.Store({
 });
 
 // Variables
-var mapSrcInput = document.querySelector("#mapSrc");
 var pieceSizeInput = document.querySelector("#pieceSize");
 var mapZoomInput = document.querySelector("#mapZoom");
+var imgUploadError = document.querySelector("#imgUploadError");
 var storageID = "dnd-map-data";
 var draggedElemPosX;
 var draggedElemPosY;
@@ -69,32 +69,33 @@ function zoomMap(value) {
   store.data.zoom = value === 'out' ? parseInt(store.data.zoom) - 10 : parseInt(store.data.zoom) + 10;
 }
 
-//// upload as blob - doesn't persist after you open site in new tab
-// function handleFiles(event) {
-//   if (event.target.files && event.target.files[0]) {
-//     return  URL.createObjectURL(event.target.files[0]); // blob url
-//   }
-// }
-
-//// encoded as base64 string - persists across sessions, but is very big
 function handleFiles(event) {
   const file = event.target.files[0];
+  const maxMB = 3 * 1000 * 1000; // 1 MB = 1000 KB = 1000 B
 
-  const reader = new FileReader();
+  console.log(file);
 
-  reader.onload = (function () {
-    return function (e) {
-      store.data.map = e.target.result;
-    };
-  })();
-  
-  reader.readAsDataURL(file);
+  if(file.size <= maxMB) {
+    const reader = new FileReader();
+    reader.onload = (function () {
+      return function (e) {
+        store.data.map = e.target.result;
+      };
+    })();
+    reader.readAsDataURL(file);
+    
+    if(!imgUploadError.hasAttribute('hidden')){
+      imgUploadError.addAttribute('hidden');
+    }
+  } else {
+    imgUploadError.removeAttribute('hidden');
+  }
 }
 
 // Event Handlers
 function inputHandler(event) {
   if (event.target.matches("#mapSrc")) {
-    store.data.map = handleFiles(event);
+    handleFiles(event);
   }
 
   if (event.target.matches("#pieceSize")) {

@@ -22,6 +22,8 @@
                         <div class="form-field">
                             <label for="mapSrc">Map Image</label>
                             <input type="file" id="mapSrc" accept=".jpg, .jpeg, .png, .gif, .webp" />
+                            <p class="metadata">Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.</p>
+                            <p id="imgUploadError" hidden class="img-error error">Image is too big. It must be less than 3MB.</p>
                         </div>
                         <div class="form-field">
                             <label for="pieceSize">Piece Base Size (px)</label>
@@ -45,6 +47,7 @@
             </div>
             <div id="mapContainer" class="content"></div>
         </main>
+        <footer>Colophon: </footer>
         <script defer src="polyfills.js"></script>
         <script defer src="index.js"></script>
     </body>
