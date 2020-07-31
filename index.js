@@ -48,12 +48,11 @@ function addCharacter() {
   var numOfCharacters = (store.data.characters.length + 1).toString();
 
   var zoomRatio = store.data.zoom / 100;
-
-  var posX = (window.innerWidth/2 + window.pageXOffset) / zoomRatio;
-  var posY = (window.innerHeight/2 + window.pageYOffset) / zoomRatio;
-
-  // var posX = window.pageXOffset;
-  // var posY = window.pageYOffset;
+  var positiveOrNegative = Math.random() < 0.5 ? -1 : 1;;
+  var randomNumberX = Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
+  var randomNumberY = Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
+  var posX = (window.innerWidth/2 + window.pageXOffset) / zoomRatio - (store.data.pieceSize/2) + randomNumberX;
+  var posY = (window.innerHeight/2 + window.pageYOffset) / zoomRatio - (store.data.pieceSize/2) + randomNumberY;
 
   var newCharacter = {
     id: generateRandomID(),
