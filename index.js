@@ -190,27 +190,33 @@ function characterListItem(character, index) {
   return (
     "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
-      "<div class='grid-row form-field '>" +
-        "<div>" +
+      "<div class='grid-col'>" +
           "<label for='name-" + character.id + "'>Name</label>" +
           "<input type='text' character-data-type='name' value='" + character.name +
           "' id=name-'" + character.id +
           "' character-data-index='" + index + "'>" +
+      "</div>" +
+      "<div class='grid-row form-field' >" +
+        "<div class='grid-col'>" +
+          "<label for='image-" + character.id + "'>Image (URL)</label>" +
+          "<input type='url' character-data-type='image' value='" + character.image +
+          "' id=image-'" + character.id +
+          "' character-data-index='" + index + "'>" +
         "</div>" +
+        "<div class='grid-col-auto'>" +
+          "<label for='color-" + character.id + "'>Color</label>" +
+          "<input type='color' character-data-type='color' value='" + charColor +
+          "' id=color-'" + character.id +
+          "' character-data-index='" + index + "'>" +
+        "</div>" +
+      "</div>" +
+      "<div class='grid-row grid-row-align-end form-field'>" +
         "<div>" +
           "<label for='size-" + character.id + "'>Size</label>" +
           "<input type='number' character-data-type='size' value='" + character.size +
           "' id=size-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
-      "</div>" +
-      "<div class='form-field' >" +
-          "<label for='image-" + character.id + "'>Image</label>" +
-          "<input type='url' character-data-type='image' value='" + character.image +
-          "' id=image-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-      "<div class='grid-row form-field '>" +
         "<div>" +
           "<label for='posX-" + character.id + "'>X</label>" +
           "<input type='number' step='5' character-data-type='x' value='" + character.x +
@@ -223,14 +229,6 @@ function characterListItem(character, index) {
           "' id=posY-'" + character.id +
           "' character-data-index='" + index + "'>" +
         "</div>" +
-        "<div>" +
-          "<label for='color-" + character.id + "'>Color</label>" +
-          "<input type='color' character-data-type='color' value='" + charColor +
-          "' id=color-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-      "</div>" +
-      "<div class='form-field '>" + 
         "<button data-remove character-data-index='" + index + "'>Remove</button>" +
       "</div>" +
     "</li>"
