@@ -202,26 +202,30 @@ function characterListItem(character, index) {
 
   var charExpanded = character.expanded ? true : false; // handle undefined
 
-  var contentClass = character.expanded ? '' : ' closed'
-  var arrow = character.expanded ? 'arrow arrow-up' : 'arrow arrow-down';
+  var contentClass = character.expanded ? '' : ' closed '
+  var arrow = character.expanded ? ' arrow arrow-up ' : ' arrow arrow-down ';
+
+  var btnCharName = character.name ? character.name : '<em>Untitled</em>';
 
   return (
     "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
-        "<button data-toggle-character aria-expanded=" + charExpanded + " class='character-list-item__trigger'>" +
-          character.name + "<span class='" + arrow + "'><span>" +
+        "<button data-toggle-character aria-expanded=" + charExpanded + " class='character-list-item__trigger grid-row'>" + 
+          "<span class='character-list-item__thumbnail grid-col-auto' style='background-color:" + charColor + "; background-image: url(" + character.image + ");'></span>" + 
+          "<span class='grid-col'>" + btnCharName +  "</span>" + 
+          "<span class='grid-col-auto " + arrow + "'></span>" +
         "</button>" +
         "<div class='character-list-item__content " + contentClass + "'>" +
           "<div class='grid-col'>" +
               "<label for='name-" + character.id + "'>Name</label>" +
-              "<input type='text' character-data-type='name' value='" + character.name +
+              "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
               "' id=name-'" + character.id +
               "' character-data-index='" + index + "'>" +
           "</div>" +
           "<div class='grid-row form-field' >" +
             "<div class='grid-col'>" +
               "<label for='image-" + character.id + "'>Image (URL)</label>" +
-              "<input type='url' character-data-type='image' value='" + character.image +
+              "<input placeholder='None selected' type='url' character-data-type='image' value='" + character.image +
               "' id=image-'" + character.id +
               "' character-data-index='" + index + "'>" +
             "</div>" +
@@ -268,6 +272,8 @@ function characterPiece(character, index) {
 
   var charColor = character.color ? character.color : defaultColor;
 
+  var charName = character.name ? character.name : '<em>Untitled</em>';
+
   return (
     "<div class='piece' draggable='true' id='" +
         character.id +
@@ -288,7 +294,7 @@ function characterPiece(character, index) {
           characterSize * 1.15 +
         "px;" +
         "'>" +
-          character.name +
+          charName +
         "</span>" +
     "</div>"
   );
@@ -321,7 +327,7 @@ var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
     var btnText = props.settingsExpanded ? 'Hide' : 'Show'
     var arrow = props.settingsExpanded ? 'arrow arrow-up' : 'arrow arrow-down'
 
-    return '<button data-toggle-settings aria-expanded="' + props.settingsExpanded + '" class="grid-row">' + btnText + ' Controls<span class="' + arrow + '"></span></button>'
+    return '<button data-toggle-settings class="btn-toggle grid-row" aria-expanded="' + props.settingsExpanded + '">' + btnText + ' Controls<span class="' + arrow + '"></span></button>'
   }
 })
 
