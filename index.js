@@ -46,6 +46,10 @@ function getDatafromStorage() {
 
 function addCharacter() {
   var numOfCharacters = (store.data.characters.length + 1).toString();
+
+  var posX = screen.width/2;
+  var posY = screen.height/2;
+
   var newCharacter = {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
@@ -53,8 +57,8 @@ function addCharacter() {
     color: defaultColor,
     dragged: false,
     expanded: true,
-    x: 400,
-    y: 100,
+    x: posX,
+    y: posY,
     size: 1
   };
   store.data.characters.push(newCharacter);
@@ -327,7 +331,7 @@ var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
     var btnText = props.settingsExpanded ? 'Hide' : 'Show'
     var arrow = props.settingsExpanded ? 'arrow arrow-up' : 'arrow arrow-down'
 
-    return '<button data-toggle-settings class="btn-toggle grid-row" aria-expanded="' + props.settingsExpanded + '">' + btnText + ' Controls<span class="' + arrow + '"></span></button>'
+    return '<button data-toggle-settings class="btn-toggle grid-row" aria-expanded="' + props.settingsExpanded + '">' + btnText + ' Settings<span class="' + arrow + '"></span></button>'
   }
 })
 
