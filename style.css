@@ -1,9 +1,7 @@
 :root {
-    --color-bg: #333333;
-    /* --color-error: #a22424; */
-    --color-error: rgb(255, 141, 141);
-  --arrow-size: .5rem;
-
+  --color-bg: #333333;
+  --color-error: rgb(255, 141, 141);
+  --arrow-size: .4rem;
 }
 
 * {
@@ -134,6 +132,7 @@ button[data-remove]{
   box-shadow: none;
   font-size: 1rem;
   word-break: break-word;
+  letter-spacing: 0em;
 }
 
 .character-list-item__thumbnail {
@@ -141,6 +140,10 @@ button[data-remove]{
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
+  border: 1px solid black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .character-list-item__content {
