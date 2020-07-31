@@ -47,8 +47,13 @@ function getDatafromStorage() {
 function addCharacter() {
   var numOfCharacters = (store.data.characters.length + 1).toString();
 
-  var posX = screen.width/2;
-  var posY = screen.height/2;
+  var zoomRatio = store.data.zoom / 100;
+
+  var posX = (window.innerWidth/2 + window.pageXOffset) / zoomRatio;
+  var posY = (window.innerHeight/2 + window.pageYOffset) / zoomRatio;
+
+  // var posX = window.pageXOffset;
+  // var posY = window.pageYOffset;
 
   var newCharacter = {
     id: generateRandomID(),
