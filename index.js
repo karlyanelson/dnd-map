@@ -52,6 +52,7 @@ function addCharacter() {
     image: "",
     color: defaultColor,
     dragged: false,
+    expanded: true,
     x: 400,
     y: 100,
     size: 1
@@ -124,12 +125,24 @@ function clickHandler(event) {
     store.data.settingsExpanded = store.data.settingsExpanded ? false : true;
   }
 
+  if (buttonTarget.matches('[data-toggle-character]')) {
+    var characterContainer = buttonTarget.closest(".character-list-item");
+    
+    if (characterContainer) {
+      var characterIndex = characterContainer.getAttribute("data-index");
+      var character = store.data.characters[characterIndex];
+      character.expanded = character.expanded ? false : true;
+    }
+  }
+
   if (buttonTarget.matches("#addCharacter")) {
     addCharacter();
   }
+
   if (buttonTarget.matches("[data-zoom]")) {
     zoomMap(buttonTarget.getAttribute("data-zoom"));
   }
+
   if (buttonTarget.matches("[data-remove]")) {
     var characterContainer = buttonTarget.closest(".character-list-item");
     
@@ -187,50 +200,60 @@ function dragEndHandler(event) {
 function characterListItem(character, index) {
   var charColor = character.color ? character.color : defaultColor;
 
+  var charExpanded = character.expanded ? true : false; // handle undefined
+
+  var contentClass = character.expanded ? '' : ' closed'
+  var arrow = character.expanded ? 'arrow arrow-up' : 'arrow arrow-down';
+
   return (
     "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
-      "<div class='grid-col'>" +
-          "<label for='name-" + character.id + "'>Name</label>" +
-          "<input type='text' character-data-type='name' value='" + character.name +
-          "' id=name-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-      "</div>" +
-      "<div class='grid-row form-field' >" +
-        "<div class='grid-col'>" +
-          "<label for='image-" + character.id + "'>Image (URL)</label>" +
-          "<input type='url' character-data-type='image' value='" + character.image +
-          "' id=image-'" + character.id +
-          "' character-data-index='" + index + "'>" +
+        "<button data-toggle-character aria-expanded=" + charExpanded + " class='character-list-item__trigger'>" +
+          character.name + "<span class='" + arrow + "'><span>" +
+        "</button>" +
+        "<div class='character-list-item__content " + contentClass + "'>" +
+          "<div class='grid-col'>" +
+              "<label for='name-" + character.id + "'>Name</label>" +
+              "<input type='text' character-data-type='name' value='" + character.name +
+              "' id=name-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+          "</div>" +
+          "<div class='grid-row form-field' >" +
+            "<div class='grid-col'>" +
+              "<label for='image-" + character.id + "'>Image (URL)</label>" +
+              "<input type='url' character-data-type='image' value='" + character.image +
+              "' id=image-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+            "</div>" +
+            "<div class='grid-col-auto'>" +
+              "<label for='color-" + character.id + "'>Color</label>" +
+              "<input type='color' character-data-type='color' value='" + charColor +
+              "' id=color-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+            "</div>" +
+          "</div>" +
+          "<div class='grid-row grid-row-align-end form-field'>" +
+            "<div>" +
+              "<label for='size-" + character.id + "'>Size</label>" +
+              "<input type='number' character-data-type='size' value='" + character.size +
+              "' id=size-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+            "</div>" +
+            "<div>" +
+              "<label for='posX-" + character.id + "'>X</label>" +
+              "<input type='number' step='5' character-data-type='x' value='" + character.x +
+              "' id=posX-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+            "</div>" +
+            "<div>" +
+              "<label for='posY-" + character.id + "'>Y</label>" +
+              "<input type='number' character-data-type='y' value='" + character.y +
+              "' id=posY-'" + character.id +
+              "' character-data-index='" + index + "'>" +
+            "</div>" +
+            "<button data-remove character-data-index='" + index + "'>Remove</button>" +
+          "</div>" +
         "</div>" +
-        "<div class='grid-col-auto'>" +
-          "<label for='color-" + character.id + "'>Color</label>" +
-          "<input type='color' character-data-type='color' value='" + charColor +
-          "' id=color-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-      "</div>" +
-      "<div class='grid-row grid-row-align-end form-field'>" +
-        "<div>" +
-          "<label for='size-" + character.id + "'>Size</label>" +
-          "<input type='number' character-data-type='size' value='" + character.size +
-          "' id=size-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-        "<div>" +
-          "<label for='posX-" + character.id + "'>X</label>" +
-          "<input type='number' step='5' character-data-type='x' value='" + character.x +
-          "' id=posX-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-        "<div>" +
-          "<label for='posY-" + character.id + "'>Y</label>" +
-          "<input type='number' character-data-type='y' value='" + character.y +
-          "' id=posY-'" + character.id +
-          "' character-data-index='" + index + "'>" +
-        "</div>" +
-        "<button data-remove character-data-index='" + index + "'>Remove</button>" +
-      "</div>" +
     "</li>"
   );
 }
@@ -296,7 +319,7 @@ var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
   store: store,
   template: function (props) {
     var btnText = props.settingsExpanded ? 'Hide' : 'Show'
-    var arrow = props.settingsExpanded ? 'arrow-up' : 'arrow-down'
+    var arrow = props.settingsExpanded ? 'arrow arrow-up' : 'arrow arrow-down'
 
     return '<button data-toggle-settings aria-expanded="' + props.settingsExpanded + '" class="grid-row">' + btnText + ' Controls<span class="' + arrow + '"></span></button>'
   }
