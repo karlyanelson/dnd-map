@@ -60,7 +60,7 @@ function addCharacter() {
     color: defaultColor,
     image: "",
     icon: "",
-    background: false, // options are: false, image, icon
+    background: false, // options are: false, 'image', 'icon'
     dragged: false,
     expanded: true,
     x: posX,
