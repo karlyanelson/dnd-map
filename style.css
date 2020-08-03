@@ -96,6 +96,8 @@ button[data-remove]{
 
 .main-controls.collapsed {
   bottom: inherit;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .main-controls.collapsed header {
@@ -213,6 +215,8 @@ input[type="file"] {
 
 .content {
   position: relative;
+  padding-top: 5rem; 
+  /* leave room up top for controls when zoomed out */
 }
 
 .new-character-box {

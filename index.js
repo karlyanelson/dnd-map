@@ -57,8 +57,10 @@ function addCharacter() {
   var newCharacter = {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
-    image: "",
     color: defaultColor,
+    image: "",
+    icon: "",
+    background: false, // options are: false, image, icon
     dragged: false,
     expanded: true,
     x: posX,
@@ -281,6 +283,12 @@ function characterPiece(character, index) {
   var charColor = character.color ? character.color : defaultColor;
 
   var charName = character.name ? character.name : '<em>Untitled</em>';
+
+  // if icon is selected, then add 'background-blend-mode: lighten' to piece-content
+  // if image is selected, color is border/dropshadow color
+  // if neither icon or image has content - then background is color
+  // need background: icon || image property on character
+
 
   return (
     "<div class='piece' draggable='true' id='" +
