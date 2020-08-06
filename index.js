@@ -226,23 +226,33 @@ function characterListItem(character, index) {
           "<span class='grid-col-auto " + arrow + "'></span>" +
         "</button>" +
         "<div class='character-list-item__content " + contentClass + "'>" +
-          "<div class='grid-col'>" +
-              "<label for='name-" + character.id + "'>Name</label>" +
-              "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
-              "' id=name-'" + character.id +
-              "' character-data-index='" + index + "'>" +
+          "<div class='grid-row form-field' >" +
+            "<div class='grid-col'>" +
+                "<label for='name-" + character.id + "'>Name</label>" +
+                "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
+                "' id=name-'" + character.id +
+                "' character-data-index='" + index + "'>" +
+            "</div>" +
+            "<div class='grid-col-auto'>" +
+                "<label for='color-" + character.id + "'>Color</label>" +
+                "<input type='color' character-data-type='color' value='" + charColor +
+                "' id=color-'" + character.id +
+                "' character-data-index='" + index + "'>" +
+            "</div>" +
           "</div>" +
           "<div class='grid-row form-field' >" +
             "<div class='grid-col'>" +
-              "<label for='image-" + character.id + "'>Image (URL)</label>" +
+              "<label for='image-" + character.id + "'>Background</label>" +
+              // "<div class='radio-group' >" +
+              //   "<input type='radio' name='radio-group-$$$$$' id='radio-icon-$$$$$'>" +
+              //   "<label for='radio-icon-$$$$$'>Icon</label>" +
+              //   "<input type='radio' name='radio-group-$$$$$' id='radio-image-$$$$$'>" +
+              //   "<label for='radio-image-$$$$$'>Image</label>" +
+              //   "<input type='radio' name='radio-group-$$$$$' id='radio-none-$$$$$'>" +
+              //   "<label for='radio-none-$$$$$'>None</label>" +
+              // "</div>" +
               "<input placeholder='None selected' type='url' character-data-type='image' value='" + character.image +
               "' id=image-'" + character.id +
-              "' character-data-index='" + index + "'>" +
-            "</div>" +
-            "<div class='grid-col-auto'>" +
-              "<label for='color-" + character.id + "'>Color</label>" +
-              "<input type='color' character-data-type='color' value='" + charColor +
-              "' id=color-'" + character.id +
               "' character-data-index='" + index + "'>" +
             "</div>" +
           "</div>" +

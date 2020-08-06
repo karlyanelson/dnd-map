@@ -31,7 +31,16 @@ button, input, label {
 }
 
 header {
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.footer {
+  margin: 0;
+  font-size: .75rem;
+}
+
+.footer a {
+  color: white;
 }
 
 h1, h2 {
@@ -70,16 +79,15 @@ button[data-remove]{
   position: fixed;
   top: 1rem;
   z-index: 1000;
-  background: rgba(51, 51, 51, 0.75);
+  background: rgba(51, 51, 51, 0.8);
   border-radius: .5rem;
 }
 
 .main-controls {
-  padding: 1rem;
+  padding: .5rem 1rem;
   width: 20rem;
   left: 1rem;
   bottom: 1rem;
-  background: rgba(51, 51, 51, 0.75);
   overflow-y: auto;
 }
 
@@ -295,4 +303,10 @@ input[type="file"] {
 .error {
   color: var(--color-error);
   font-style: normal;
+}
+
+.radio-group input,
+.radio-group label {
+  display: inline-block;
+  width: auto;
 }
