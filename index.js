@@ -21,8 +21,16 @@ var draggedElemMouseOffsetX;
 var draggedElemMouseOffsetY;
 var mainControlsContent = document.querySelector("#mainControls");
 var defaultColor = '#ce0f0f';
+var iconListClasses = [ 'artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard' ];
+var iconListRaces = ['aarakocra', 'aasimar', 'bugbear', 'dragonborn', 'dwarf', 'elf', 'firbolg', 'genasi', 'gnome', 'goblin', 'goliath', 'halfling', 'human', 'kenku', 'kobold', 'lizardfolk', 'orc', 'tabaxi', 'tiefling', 'triton', 'yuan-ti' ];
+var iconListMonsters = ['aberration', 'beast', 'celestial', 'construct', 'dragon', 'elemental', 'fey', 'fiend', 'giant', 'humanoid', 'monstrosity', 'ooze', 'plant', 'undead'];
+
 
 // Methods
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function generateRandomID() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -60,7 +68,7 @@ function addCharacter() {
     color: defaultColor,
     image: "",
     icon: "",
-    background: false, // options are: false, 'image', 'icon'
+    background: 'color', // options are: 'color', 'image', 'icon'
     dragged: false,
     expanded: true,
     x: posX,
@@ -84,8 +92,6 @@ function handleFiles(event) {
   const file = event.target.files[0];
   const maxMB = 3 * 1000 * 1000; // 1 MB = 1000 KB = 1000 B
 
-  console.log(file);
-
   if(file.size <= maxMB) {
     const reader = new FileReader();
     reader.onload = (function () {
@@ -100,6 +106,24 @@ function handleFiles(event) {
     }
   } else {
     imgUploadError.removeAttribute('hidden');
+  }
+}
+
+function characterBGimg(character) {
+  var charBGimg = "";
+  var bgBlendMode = "";
+
+  if (character.image ) {
+    charBGimg = " background-image: url(" + character.image + "); ";
+
+    return charBGimg;
+  } 
+
+  if (character.icon) {
+    charBGimg = " background-image: url(" + './img/' + character.icon + '/image.png' + "); ";
+    bgBlendMode = ' background-blend-mode: lighten; ';
+
+    return charBGimg + bgBlendMode;
   }
 }
 
@@ -217,11 +241,18 @@ function characterListItem(character, index) {
 
   var btnCharName = character.name ? character.name : '<em>Untitled</em>';
 
+  function iconList(icon) {
+    let selection = icon === character.icon ? 'selected' : '';
+    return '<option ' + selection + ' value="' + icon + '">' + capitalize(icon) + '</option>';
+  }
+  
+  var iconSelectorContent = "<option></option>" + "<optgroup label='Classes'>" + iconListClasses.map(iconList).join('') + "</optgroup>" + "<optgroup label='Races'>" + iconListRaces.map(iconList).join('') + "</optgroup>" + "<optgroup label='Monsters'>" + iconListMonsters.map(iconList).join('') + "</optgroup>";
+
   return (
     "<li class='character-list-item' data-id='" + character.id + "'" + 
       "data-index='" + index + "'>" + 
         "<button data-toggle-character aria-expanded=" + charExpanded + " class='character-list-item__trigger grid-row'>" + 
-          "<span class='character-list-item__thumbnail grid-col-auto' style='background-color:" + charColor + "; background-image: url(" + character.image + ");'></span>" + 
+          "<span class='character-list-item__thumbnail grid-col-auto' style='background-color:" + charColor + "; " + characterBGimg(character) + "'></span>" + 
           "<span class='grid-col'>" + btnCharName +  "</span>" + 
           "<span class='grid-col-auto " + arrow + "'></span>" +
         "</button>" +
@@ -240,21 +271,29 @@ function characterListItem(character, index) {
                 "' character-data-index='" + index + "'>" +
             "</div>" +
           "</div>" +
-          "<div class='grid-row form-field' >" +
-            "<div class='grid-col'>" +
-              "<label for='image-" + character.id + "'>Background</label>" +
-              // "<div class='radio-group' >" +
-              //   "<input type='radio' name='radio-group-$$$$$' id='radio-icon-$$$$$'>" +
-              //   "<label for='radio-icon-$$$$$'>Icon</label>" +
-              //   "<input type='radio' name='radio-group-$$$$$' id='radio-image-$$$$$'>" +
-              //   "<label for='radio-image-$$$$$'>Image</label>" +
-              //   "<input type='radio' name='radio-group-$$$$$' id='radio-none-$$$$$'>" +
-              //   "<label for='radio-none-$$$$$'>None</label>" +
-              // "</div>" +
-              "<input placeholder='None selected' type='url' character-data-type='image' value='" + character.image +
-              "' id=image-'" + character.id +
+          "<div class='form-field'>" +
+              // "<fieldset class='radio-group' >" +
+              //   "<legend>Background</legend>" + 
+              //   "<input checked type='radio' name='radio-group-" + character.id + "' id='radio-color-" + character.id + "'>" +
+              //   "<label for='radio-color-" + character.id + "'>Color</label>" +
+              //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-icon-" + character.id + "'>" +
+              //   "<label for='radio-icon-" + character.id + "'>Icon</label>" +
+              //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-image-" + character.id + "'>" +
+              //   "<label for='radio-image-" + character.id + "'>Image</label>" +
+              // "</fieldset>" +
+
+              "<label for='char-icon-" + character.id + "'>Icon</label>" +
+              "<select name='Icon' character-data-type='icon' value='" + character.icon +
+              "' id=char-icon-'" + character.id +
+              "' character-data-index='" + index + "'>"  +
+                  iconSelectorContent + 
+              "</select>" +
+              
+              "<label for='char-image-" + character.id + "'>Image URL</label>" +
+              "<input placeholder='None' type='url' character-data-type='image' value='" + character.image +
+              "' id=char-image-'" + character.id +
               "' character-data-index='" + index + "'>" +
-            "</div>" +
+
           "</div>" +
           "<div class='grid-row grid-row-align-end form-field'>" +
             "<div>" +
@@ -294,12 +333,6 @@ function characterPiece(character, index) {
 
   var charName = character.name ? character.name : '<em>Untitled</em>';
 
-  // if icon is selected, then add 'background-blend-mode: lighten' to piece-content
-  // if image is selected, color is border/dropshadow color
-  // if neither icon or image has content - then background is color
-  // need background: icon || image property on character
-
-
   return (
     "<div class='piece' draggable='true' id='" +
         character.id +
@@ -314,7 +347,7 @@ function characterPiece(character, index) {
             "height:" + characterSize + "px; " +
             "width:" + characterSize + "px; " +
             "background-color:" + charColor + ";" +
-            "background-image: url(" + character.image + ");" +
+            characterBGimg(character) +
         "'></div>" +
         "<span class='piece-label' style='top: " +
           characterSize * 1.15 +

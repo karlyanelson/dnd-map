@@ -120,12 +120,13 @@ button[data-remove]{
 .btn-toggle {
   background-color: rgba(51, 51, 51, 0.75);
   color: white;
+  border-color: gray;
 }
 
 
 .character-list-item {
   background-color: rgba(51, 51, 51, 0.75);
-  border: 1px solid black;
+  border: 1px solid gray;
   box-shadow: 2px 2px 0 black;;
   border-radius: .25rem;
   margin: 0.75rem 0;
@@ -157,7 +158,7 @@ button[data-remove]{
 }
 
 .character-list-item__content {
-  border-top: 1px solid black;
+  border-top: 1px solid gray;
   padding: .5rem;
 }
 
@@ -183,7 +184,7 @@ button[data-remove]{
   padding: 0.25rem 0;
 }
 
-label, input{
+label, input, select{
   display: block;
 }
 
@@ -193,7 +194,7 @@ label {
   margin-left: 0;
 }
 
-input {
+input, select {
   color: var(--color-bg);
   padding: .25rem;
   width: 100%;
