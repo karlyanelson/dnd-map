@@ -5,12 +5,12 @@ var Reef=function(){"use strict";var t;(t="undefined"!=typeof process&&"[object 
 
 
 ;(function(){
-// Data Store
+//// Data Store
 var store = new Reef.Store({
   data: {}
 });
 
-// Variables
+//// Variables
 var pieceSizeInput = document.querySelector("#pieceSize");
 var mapZoomInput = document.querySelector("#mapZoom");
 var imgUploadError = document.querySelector("#imgUploadError");
@@ -26,7 +26,7 @@ var iconListRaces = ['aarakocra', 'aasimar', 'bugbear', 'dragonborn', 'dwarf', '
 var iconListMonsters = ['aberration', 'beast', 'celestial', 'construct', 'dragon', 'elemental', 'fey', 'fiend', 'giant', 'humanoid', 'monstrosity', 'ooze', 'plant', 'undead'];
 
 
-// Methods
+//// Methods
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -127,7 +127,7 @@ function characterBGimg(character) {
   }
 }
 
-// Event Handlers
+//// Event Handlers
 function inputHandler(event) {
   if (event.target.matches("#mapSrc")) {
     handleFiles(event);
@@ -230,40 +230,50 @@ function dragEndHandler(event) {
   event.target.style.opacity = "";
 }
 
-// Templates
+//// Templates
+
+
 function characterListItem(character, index) {
+  // Sub Template
+  function iconList(icon) {
+    let selection = icon === character.icon ? 'selected' : '';
+    return '<option ' + selection + ' value="' + icon + '">' + capitalize(icon) + '</option>';
+  }
+
+  // Variables
   var charColor = character.color ? character.color : defaultColor;
 
   var charExpanded = character.expanded ? true : false; // handle undefined
 
   var contentClass = character.expanded ? '' : ' closed '
+
   var arrow = character.expanded ? ' arrow arrow-up ' : ' arrow arrow-down ';
 
   var btnCharName = character.name ? character.name : '<em>Untitled</em>';
-
-  function iconList(icon) {
-    let selection = icon === character.icon ? 'selected' : '';
-    return '<option ' + selection + ' value="' + icon + '">' + capitalize(icon) + '</option>';
-  }
   
   var iconSelectorContent = "<option></option>" + "<optgroup label='Classes'>" + iconListClasses.map(iconList).join('') + "</optgroup>" + "<optgroup label='Races'>" + iconListRaces.map(iconList).join('') + "</optgroup>" + "<optgroup label='Monsters'>" + iconListMonsters.map(iconList).join('') + "</optgroup>";
 
+  // Template Content
   return (
-    "<li class='character-list-item' data-id='" + character.id + "'" + 
-      "data-index='" + index + "'>" + 
+    "<li class='character-list-item' data-id='" + character.id + "'" + "data-index='" + index + "'>" + 
+        // Character expand/collapse button
         "<button data-toggle-character aria-expanded=" + charExpanded + " class='character-list-item__trigger grid-row'>" + 
           "<span class='character-list-item__thumbnail grid-col-auto' style='background-color:" + charColor + "; " + characterBGimg(character) + "'></span>" + 
           "<span class='grid-col'>" + btnCharName +  "</span>" + 
           "<span class='grid-col-auto " + arrow + "'></span>" +
         "</button>" +
+
         "<div class='character-list-item__content " + contentClass + "'>" +
           "<div class='grid-row form-field' >" +
+            // Character Name
             "<div class='grid-col'>" +
                 "<label for='name-" + character.id + "'>Name</label>" +
                 "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
                 "' id=name-'" + character.id +
                 "' character-data-index='" + index + "'>" +
             "</div>" +
+          
+            // Character Color
             "<div class='grid-col-auto'>" +
                 "<label for='color-" + character.id + "'>Color</label>" +
                 "<input type='color' character-data-type='color' value='" + charColor +
@@ -271,7 +281,9 @@ function characterListItem(character, index) {
                 "' character-data-index='" + index + "'>" +
             "</div>" +
           "</div>" +
+
           "<div class='form-field'>" +
+              // Character Background selector
               // "<fieldset class='radio-group' >" +
               //   "<legend>Background</legend>" + 
               //   "<input checked type='radio' name='radio-group-" + character.id + "' id='radio-color-" + character.id + "'>" +
@@ -282,38 +294,43 @@ function characterListItem(character, index) {
               //   "<label for='radio-image-" + character.id + "'>Image</label>" +
               // "</fieldset>" +
 
+              // Character Icon
               "<label for='char-icon-" + character.id + "'>Icon</label>" +
               "<select name='Icon' character-data-type='icon' value='" + character.icon +
               "' id=char-icon-'" + character.id +
               "' character-data-index='" + index + "'>"  +
                   iconSelectorContent + 
               "</select>" +
-              
+              // Character Image
               "<label for='char-image-" + character.id + "'>Image URL</label>" +
               "<input placeholder='None' type='url' character-data-type='image' value='" + character.image +
               "' id=char-image-'" + character.id +
               "' character-data-index='" + index + "'>" +
-
           "</div>" +
+
           "<div class='grid-row grid-row-align-end form-field'>" +
+            // Character Size
             "<div>" +
               "<label for='size-" + character.id + "'>Size</label>" +
               "<input type='number' character-data-type='size' value='" + character.size +
               "' id=size-'" + character.id +
               "' character-data-index='" + index + "'>" +
             "</div>" +
+            // Character X Postion
             "<div>" +
               "<label for='posX-" + character.id + "'>X</label>" +
               "<input type='number' step='5' character-data-type='x' value='" + character.x +
               "' id=posX-'" + character.id +
               "' character-data-index='" + index + "'>" +
             "</div>" +
+            // Character Y Postion
             "<div>" +
               "<label for='posY-" + character.id + "'>Y</label>" +
               "<input type='number' character-data-type='y' value='" + character.y +
               "' id=posY-'" + character.id +
               "' character-data-index='" + index + "'>" +
             "</div>" +
+            // Remove Character Button
             "<button data-remove character-data-index='" + index + "'>Remove</button>" +
           "</div>" +
         "</div>" +
@@ -359,9 +376,9 @@ function characterPiece(character, index) {
   );
 }
 
-// Components
+//// Components
 
-var map = new Reef("#mapContainer", {
+var Map = new Reef("#mapContainer", {
   store: store,
   template: function (props) {
     return (
@@ -373,14 +390,14 @@ var map = new Reef("#mapContainer", {
   }
 });
 
-var characterList = new Reef("#characterList", {
+var CharacterList = new Reef("#characterList", {
   store: store,
   template: function (props) {
     return '<ul>' + props.characters.map(characterListItem).join("") + '</ul>';
   }
 });
 
-var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
+var ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
   store: store,
   template: function (props) {
     var btnText = props.settingsExpanded ? 'Hide' : 'Show'
@@ -390,13 +407,15 @@ var toggleSettingsBtn = new Reef("#toggleSettingsBtn", {
   }
 })
 
-// Inits
+//// Inits
 getDatafromStorage();
-toggleSettingsBtn.render();
-map.render();
-characterList.render();
+ToggleSettingsBtn.render();
+Map.render();
+CharacterList.render();
 
-//Events
+//// Events
+document.addEventListener("render", renderHandler, false);
+
 document.addEventListener("input", inputHandler, false);
 
 document.addEventListener("click", clickHandler, false);
@@ -408,8 +427,5 @@ document.addEventListener("dragover", function (event) {event.preventDefault();}
 document.addEventListener("drop", dropHandler, false);
 
 document.addEventListener("dragend", dragEndHandler, false);
-
-// Handle saving to localstorage every time the page data changes
-document.addEventListener("render", renderHandler, false);
 
 })();
