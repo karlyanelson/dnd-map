@@ -192,6 +192,8 @@ function renderHandler() {
   mapZoomInput.value = store.data.zoom;
 
   store.data.settingsExpanded ? mainControlsContent.classList.remove('collapsed') : mainControlsContent.classList.add('collapsed');
+  
+  store.data.map ? document.body.classList.remove('no-map') : document.body.classList.add('no-map');
 
   localStorage.setItem(storageID, JSON.stringify(store.data));
 }
@@ -381,11 +383,21 @@ function characterPiece(character, index) {
 var Map = new Reef("#mapContainer", {
   store: store,
   template: function (props) {
+    var noMap = "<div class='no-map-message'>" + 
+      "<h2 class='no-map-message__header'>Welcome to your virtual Dungeons & Dragons tabletop</h2>" + 
+      "<p class='no-map-message__text'>Upload a map to get started!</p>" + 
+      // '<div class="no-map-message__upload">' +
+      //   '<label for="mapSrcFRE">Map Image</label>' +
+      //   '<input type="file" id="mapSrcFRE" accept=".jpg, .jpeg, .png, .gif, .webp" />' +
+      //   '<p class="metadata">Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.</p>' +
+      //   '<p id="imgUploadErrorFRE" hidden ><span class="metadata error">Image is too big. It must be less than 3MB.</span></p>'+
+      // '</div>' +
+    "</div>";
     return (
       props.characters.map(characterPiece).join("") +
       (props.map
         ? "<img alt='' draggable='false' src='" + props.map + "' style='width:" + props.zoom + "%;' />"
-        : "<p class='empty'>No map image.</p>")
+        : noMap)
     );
   }
 });

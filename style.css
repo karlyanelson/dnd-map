@@ -222,10 +222,9 @@ input[type="file"] {
   padding: 0;
 }
 
-.empty {
-  text-align: center;
-  padding: 1rem;
-  font-style: italic;
+.no-map {
+  min-height: 100vh;
+  background-image: url(img/grid.png);
 }
 
 .content {
@@ -316,4 +315,25 @@ input[type="file"] {
 .radio-group label {
   display: inline-block;
   width: auto;
+}
+
+.no-map-message__header{
+  font-size: 3rem;
+}
+
+.no-map-message__text{
+  font-size: 1.5rem;
+}
+
+.no-map-message__upload input{
+  width: auto;
+  margin: 0 auto;
+}
+
+.no-map-message {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  min-height: 80vh;
 }
