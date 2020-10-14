@@ -22,8 +22,8 @@
                     <section>
                         <h2>Map</h2>
                         <div class="form-field">
-                            <label for="mapSrc">Upload Map</label>
-                            <input type="file" id="mapSrc" accept=".jpg, .jpeg, .png, .gif, .webp" />
+                            <input class="screenreader-only" type="file" id="mapSrc" accept=".jpg, .jpeg, .png, .gif, .webp" />
+                            <label class="upload-btn" id="mapSrcLabel" for="mapSrc">Upload Map</label>
                             <p class="metadata">Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.</p>
                             <p id="imgUploadError" hidden ><span class="metadata error">Image is too big. It must be less than 3MB.</span></p>
                         </div>

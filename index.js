@@ -11,16 +11,17 @@ var store = new Reef.Store({
 });
 
 //// Variables
-var pieceSizeInput = document.querySelector("#pieceSize");
-var mapZoomInput = document.querySelector("#mapZoom");
-var imgUploadError = document.querySelector("#imgUploadError");
-var characterCount = document.querySelector("#charCount");
+var pieceSizeInput = document.getElementById("pieceSize");
+var mapZoomInput = document.getElementById("mapZoom");
+var mapSrcLabel = document.getElementById("mapSrcLabel");
+var imgUploadError = document.getElementById("imgUploadError");
+var characterCount = document.getElementById("charCount");
 var storageID = "dnd-map-data";
 var draggedElemPosX;
 var draggedElemPosY;
 var draggedElemMouseOffsetX;
 var draggedElemMouseOffsetY;
-var mainControlsContent = document.querySelector("#mainControls");
+var mainControlsContent = document.getElementById("mainControls");
 var defaultColor = '#ce0f0f';
 var iconListClasses = [ 'artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard' ];
 var iconListRaces = ['aarakocra', 'aasimar', 'bugbear', 'dragonborn', 'dwarf', 'elf', 'firbolg', 'genasi', 'gnome', 'goblin', 'goliath', 'halfling', 'human', 'kenku', 'kobold', 'lizardfolk', 'orc', 'tabaxi', 'tiefling', 'triton', 'yuan-ti' ];
@@ -192,6 +193,7 @@ function renderHandler() {
   pieceSizeInput.value = store.data.pieceSize;
   mapZoomInput.value = store.data.zoom;
   characterCount.textContent = store.data.characters.length;
+  mapSrcLabel.textContent = store.data.map ? "Change Map" : "Upload Map";
 
   store.data.settingsExpanded ? mainControlsContent.classList.remove('collapsed') : mainControlsContent.classList.add('collapsed');
   

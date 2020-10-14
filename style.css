@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+*:focus {
+  outline: blue auto 1px;
+}
+
 body, button {
     font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -31,7 +35,8 @@ button, input, label {
 
 .metadata {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 0.125;
+  margin-top: 0;
+  margin-bottom: 0.125;
   font-size: .75rem;
   font-style: italic;
 }
@@ -66,10 +71,12 @@ h1 {
 
 h2 {
   font-size: 1.25rem;
+  margin: .5rem 0;
 }
 
 
-button{
+button,
+.upload-btn{
   background: white;
   box-shadow: 2px 2px 0 black;
   border: 2px solid black;
@@ -78,6 +85,11 @@ button{
   font-weight: 600;
   letter-spacing: .03em;
   color: var(--color-bg);
+  display: inline-block;
+}
+
+button:active {
+  box-shadow: none;
 }
 
 button[data-remove]{
@@ -85,6 +97,15 @@ button[data-remove]{
   background: transparent;
   color: var(--color-error);
 }
+
+[type="file"]:focus + .upload-btn {
+  outline: blue auto 1px;
+}
+
+[type="file"]:active + .upload-btn {
+  box-shadow: none;
+}
+
 
 .main-controls, .map-controls {
   border: 1px solid black;
