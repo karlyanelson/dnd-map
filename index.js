@@ -14,6 +14,7 @@ var store = new Reef.Store({
 var pieceSizeInput = document.querySelector("#pieceSize");
 var mapZoomInput = document.querySelector("#mapZoom");
 var imgUploadError = document.querySelector("#imgUploadError");
+var characterCount = document.querySelector("#charCount");
 var storageID = "dnd-map-data";
 var draggedElemPosX;
 var draggedElemPosY;
@@ -190,6 +191,7 @@ function clickHandler(event) {
 function renderHandler() {
   pieceSizeInput.value = store.data.pieceSize;
   mapZoomInput.value = store.data.zoom;
+  characterCount.textContent = store.data.characters.length;
 
   store.data.settingsExpanded ? mainControlsContent.classList.remove('collapsed') : mainControlsContent.classList.add('collapsed');
   
@@ -266,75 +268,78 @@ function characterListItem(character, index) {
         "</button>" +
 
         "<div class='character-list-item__content " + contentClass + "'>" +
-          "<div class='grid-row form-field' >" +
-            // Character Name
-            "<div class='grid-col'>" +
-                "<label for='name-" + character.id + "'>Name</label>" +
-                "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
-                "' id=name-'" + character.id +
+          "<fieldset>" +
+            "<legend class='screenreader-only'>" + btnCharName + "'s Settings</legend>" +
+            "<div class='grid-row form-field' >" +
+              // Character Name
+              "<div class='grid-col'>" +
+                  "<label for='name-" + character.id + "'>Name</label>" +
+                  "<input placeholder='Enter name...' type='text' character-data-type='name' value='" + character.name +
+                  "' id=name-'" + character.id +
+                  "' character-data-index='" + index + "'>" +
+              "</div>" +
+            
+              // Character Color
+              "<div class='grid-col-auto'>" +
+                  "<label for='color-" + character.id + "'>Color</label>" +
+                  "<input type='color' character-data-type='color' value='" + charColor +
+                  "' id=color-'" + character.id +
+                  "' character-data-index='" + index + "'>" +
+              "</div>" +
+            "</div>" +
+
+            "<div class='form-field'>" +
+                // Character Background selector
+                // "<fieldset class='radio-group' >" +
+                //   "<legend>Background</legend>" + 
+                //   "<input checked type='radio' name='radio-group-" + character.id + "' id='radio-color-" + character.id + "'>" +
+                //   "<label for='radio-color-" + character.id + "'>Color</label>" +
+                //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-icon-" + character.id + "'>" +
+                //   "<label for='radio-icon-" + character.id + "'>Icon</label>" +
+                //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-image-" + character.id + "'>" +
+                //   "<label for='radio-image-" + character.id + "'>Image</label>" +
+                // "</fieldset>" +
+
+                // Character Icon
+                "<label for='char-icon-" + character.id + "'>Icon</label>" +
+                "<select name='Icon' character-data-type='icon' value='" + character.icon +
+                "' id=char-icon-'" + character.id +
+                "' character-data-index='" + index + "'>"  +
+                    iconSelectorContent + 
+                "</select>" +
+                // Character Image
+                "<label for='char-image-" + character.id + "'>Image URL</label>" +
+                "<input placeholder='None' type='url' character-data-type='image' value='" + character.image +
+                "' id=char-image-'" + character.id +
                 "' character-data-index='" + index + "'>" +
             "</div>" +
-          
-            // Character Color
-            "<div class='grid-col-auto'>" +
-                "<label for='color-" + character.id + "'>Color</label>" +
-                "<input type='color' character-data-type='color' value='" + charColor +
-                "' id=color-'" + character.id +
+
+            "<div class='grid-row grid-row-align-end form-field'>" +
+              // Character Size
+              "<div>" +
+                "<label for='size-" + character.id + "'>Size</label>" +
+                "<input type='number' character-data-type='size' value='" + character.size +
+                "' id=size-'" + character.id +
                 "' character-data-index='" + index + "'>" +
+              "</div>" +
+              // Character X Postion
+              "<div>" +
+                "<label for='posX-" + character.id + "'>X</label>" +
+                "<input type='number' step='5' character-data-type='x' value='" + character.x +
+                "' id=posX-'" + character.id +
+                "' character-data-index='" + index + "'>" +
+              "</div>" +
+              // Character Y Postion
+              "<div>" +
+                "<label for='posY-" + character.id + "'>Y</label>" +
+                "<input type='number' character-data-type='y' value='" + character.y +
+                "' id=posY-'" + character.id +
+                "' character-data-index='" + index + "'>" +
+              "</div>" +
+              // Remove Character Button
+              "<button data-remove character-data-index='" + index + "'>Remove</button>" +
             "</div>" +
-          "</div>" +
-
-          "<div class='form-field'>" +
-              // Character Background selector
-              // "<fieldset class='radio-group' >" +
-              //   "<legend>Background</legend>" + 
-              //   "<input checked type='radio' name='radio-group-" + character.id + "' id='radio-color-" + character.id + "'>" +
-              //   "<label for='radio-color-" + character.id + "'>Color</label>" +
-              //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-icon-" + character.id + "'>" +
-              //   "<label for='radio-icon-" + character.id + "'>Icon</label>" +
-              //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-image-" + character.id + "'>" +
-              //   "<label for='radio-image-" + character.id + "'>Image</label>" +
-              // "</fieldset>" +
-
-              // Character Icon
-              "<label for='char-icon-" + character.id + "'>Icon</label>" +
-              "<select name='Icon' character-data-type='icon' value='" + character.icon +
-              "' id=char-icon-'" + character.id +
-              "' character-data-index='" + index + "'>"  +
-                  iconSelectorContent + 
-              "</select>" +
-              // Character Image
-              "<label for='char-image-" + character.id + "'>Image URL</label>" +
-              "<input placeholder='None' type='url' character-data-type='image' value='" + character.image +
-              "' id=char-image-'" + character.id +
-              "' character-data-index='" + index + "'>" +
-          "</div>" +
-
-          "<div class='grid-row grid-row-align-end form-field'>" +
-            // Character Size
-            "<div>" +
-              "<label for='size-" + character.id + "'>Size</label>" +
-              "<input type='number' character-data-type='size' value='" + character.size +
-              "' id=size-'" + character.id +
-              "' character-data-index='" + index + "'>" +
-            "</div>" +
-            // Character X Postion
-            "<div>" +
-              "<label for='posX-" + character.id + "'>X</label>" +
-              "<input type='number' step='5' character-data-type='x' value='" + character.x +
-              "' id=posX-'" + character.id +
-              "' character-data-index='" + index + "'>" +
-            "</div>" +
-            // Character Y Postion
-            "<div>" +
-              "<label for='posY-" + character.id + "'>Y</label>" +
-              "<input type='number' character-data-type='y' value='" + character.y +
-              "' id=posY-'" + character.id +
-              "' character-data-index='" + index + "'>" +
-            "</div>" +
-            // Remove Character Button
-            "<button data-remove character-data-index='" + index + "'>Remove</button>" +
-          "</div>" +
+          "</fieldset>" +
         "</div>" +
     "</li>"
   );

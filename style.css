@@ -19,6 +19,12 @@ body {
     color: #ffffff;
 }
 
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 button, input, label {
   font-size: .875rem;
 }
@@ -336,4 +342,14 @@ input[type="file"] {
   text-align: center;
   padding: 1rem;
   min-height: 80vh;
+}
+
+/* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
+.screenreader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }

@@ -13,7 +13,6 @@
 
     <body>
         <main>
-            <div id="mapContainer" class="content"></div>
             <div id="mainControls" class="main-controls">
                 <header class="grid-row">
                     <h1>D&D Map</h1>
@@ -35,7 +34,7 @@
                     </section>
                     <section>
                         <div class="grid-row">
-                            <h2>Characters</h2>
+                            <h2 aria-live="polite"><span id="charCount" class="screenreader-only">0</span>Characters</h2>
                             <button id="addCharacter">Add Character</button>
                         </div>
                         <div id="characterList"></div>
@@ -48,6 +47,7 @@
                 <input id="mapZoom" step="10" type="number" name="Map Zoom" />
                 <button data-zoom="in" aria-label="Zoom in"> + </button>
             </div>
+            <div id="mapContainer" class="content"></div>
         </main>
         <footer class="footer">
             <span>Made by <a href="https://karlynelson.com/">Karly Nelson</a> using <a href="https://reefjs.com/">ReefJS</a></span> 
