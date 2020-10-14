@@ -12,7 +12,7 @@
   outline: blue auto 1px;
 }
 
-body, button {
+body, button, textarea, input {
     font-family: "Gill Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -21,6 +21,15 @@ body {
     padding: 0;
     background-color: black;;
     color: #ffffff;
+}
+
+.center-content {
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
 }
 
 fieldset {
@@ -46,13 +55,12 @@ header {
 }
 
 .footer {
-  padding: .5rem 1rem;
   font-size: .75rem;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.footer a {
+a {
   color: white;
 }
 
@@ -249,6 +257,13 @@ input[type="file"] {
   padding: 0;
 }
 
+textarea {
+  width: 100%;
+  min-width: 100%;
+  min-height: 10rem;
+  padding: .5rem;
+}
+
 .no-map {
   min-height: 100vh;
   background-image: url(img/grid.png);
@@ -365,6 +380,10 @@ input[type="file"] {
   min-height: 80vh;
 }
 
+.w-full {
+  width: 100%;
+}
+
 /* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
 .screenreader-only {
   position: absolute;
@@ -373,4 +392,14 @@ input[type="file"] {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.contact a {
+  text-align: center;
+  display: inline-block;
+  margin: 2rem;
+}
+
+.contact button {
+  margin-top: 1rem;
 }
