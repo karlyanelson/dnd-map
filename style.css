@@ -1,6 +1,7 @@
 :root {
   --color-bg: #333333;
   --color-error: rgb(255, 141, 141);
+  --color-focus: rgb(9, 97, 228);
   --arrow-size: .4rem;
 }
 
@@ -9,7 +10,7 @@
 }
 
 *:focus {
-  outline: blue auto 1px;
+  outline: var(--color-focus) auto 1px;
 }
 
 body, button, textarea, input {
@@ -107,7 +108,7 @@ button[data-remove]{
 }
 
 [type="file"]:focus + .upload-btn {
-  outline: blue auto 1px;
+  outline: var(--color-focus) auto 1px;
 }
 
 [type="file"]:active + .upload-btn {
@@ -365,6 +366,7 @@ textarea {
 
 .no-map-message__text{
   font-size: 1.5rem;
+  line-height: 1.4;
 }
 
 .no-map-message__upload input{

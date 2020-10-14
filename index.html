@@ -55,7 +55,13 @@
                 <input id="mapZoom" step="10" type="number" name="Map Zoom" />
                 <button data-zoom="in" aria-label="Zoom in"> + </button>
             </div>
-            <div id="mapContainer" class="content"></div>
+            <div id="mapContainer" class="content">
+                <div class='no-map-message'> 
+                    <h2 class='no-map-message__header'>Welcome to your virtual Dungeons & Dragons tabletop!</h2> 
+                    <p class='no-map-message__text'>To get started, upload a map and add your customizable characters using the settings panel on the left.</p> 
+                    <p class='no-map-message__text'>Everything is saved automatically to your browser's storage.</p> 
+                </div>
+            </div>
         </main>
         
         <script defer src="polyfills.js"></script>
