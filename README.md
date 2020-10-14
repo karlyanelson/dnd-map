@@ -13,6 +13,7 @@ Built using [ReefJS](https://reefjs.com/).
 Character icons are from [game-icons.net](https://game-icons.net/).
 
 ## Feedback
- ↗️ [Give Feedback](https://dnd-map.netlify.app/contact/)
+ ↗️ [Give Feedback](https://dnd-map.netlify.app/contact/) or
+ ↗️ [Open Github Issue](https://github.com/karlyanelson/dnd-map/issues/new)
  
  Let me know if you find a bug or have any feature requests!
