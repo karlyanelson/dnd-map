@@ -21,6 +21,8 @@ var draggedElemPosX;
 var draggedElemPosY;
 var draggedElemMouseOffsetX;
 var draggedElemMouseOffsetY;
+var currentTouchPosX;
+var currentTouchPosY;
 var mainControlsContent = document.getElementById("mainControls");
 var defaultColor = '#ce0f0f';
 var iconListClasses = [ 'artificer', 'barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard' ];
@@ -203,16 +205,43 @@ function renderHandler() {
 }
 
 function dragStartHandler(event) {
-  event.dataTransfer.setData("text/plain", event.target.id);
   event.target.style.opacity = 0.5;
-  
-  draggedElemMouseOffsetX = event.offsetX;
-  draggedElemMouseOffsetY = event.offsetY;
+
+  if (event.type === "touchstart"){
+    if (!event.target.closest('.piece')){
+      return
+    }
+
+    draggedElemMouseOffsetX = event.touches[0].target.offsetLeft;
+    draggedElemMouseOffsetY = event.touches[0].target.offsetTop;
+  } else {
+    event.dataTransfer.setData("text/plain", event.target.id);
+    draggedElemMouseOffsetX = event.offsetX;
+    draggedElemMouseOffsetY = event.offsetY;
+  }
+}
+
+function touchMoveHandler(event) {
+  if (!event.target.closest('.piece')){
+    return
+  }
+  currentTouchPosX = event.touches[0].pageX;
+  currentTouchPosY = event.touches[0].pageY;
 }
 
 function dropHandler(event) {
-  event.preventDefault();
-  var draggedElemId = event.dataTransfer.getData("text");
+  var draggedElemId;
+
+  if (event.type === "touchend"){
+    if (event.target.closest('.piece')){
+      draggedElemId = event.target.closest('.piece').id;
+    } else {
+      return;
+    }
+  }else{
+    event.preventDefault();
+    draggedElemId = event.dataTransfer.getData("text");
+  }
   var draggedElem = document.getElementById(draggedElemId);
   var characterIndex = draggedElem.getAttribute("data-index");
 
@@ -221,13 +250,19 @@ function dropHandler(event) {
   }
 
   var zoomRatio = store.data.zoom / 100;
-  
-  draggedElemPosX = event.pageX - draggedElemMouseOffsetX;
-  draggedElemPosY = event.pageY - draggedElemMouseOffsetY;
 
   var character = store.data.characters[characterIndex];
 
   character.dragged = true;
+
+  if (event.type === "touchend") {
+    draggedElemPosX = currentTouchPosX - draggedElemMouseOffsetX;
+    draggedElemPosY = currentTouchPosY - draggedElemMouseOffsetY;
+  } else {
+    draggedElemPosX = event.pageX - draggedElemMouseOffsetX;
+    draggedElemPosY = event.pageY - draggedElemMouseOffsetY;
+  }
+
   character.x = draggedElemPosX / zoomRatio;
   character.y = draggedElemPosY / zoomRatio;
 }
@@ -435,10 +470,17 @@ document.addEventListener("click", clickHandler, false);
 
 document.addEventListener("dragstart", dragStartHandler,false);
 
-document.addEventListener("dragover", function (event) {event.preventDefault();},false);
+document.addEventListener("touchstart", dragStartHandler,false);
+
+document.addEventListener("touchmove", touchMoveHandler,false);
+
+document.addEventListener("dragover", function (event) {event.preventDefault();}, false);
 
 document.addEventListener("drop", dropHandler, false);
 
+document.addEventListener("touchend", dropHandler, false);
+
 document.addEventListener("dragend", dragEndHandler, false);
+
 
 })();

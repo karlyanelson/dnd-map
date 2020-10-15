@@ -273,7 +273,10 @@ textarea {
 .content {
   position: relative;
   padding-top: 5rem; 
-  /* leave room up top for controls when zoomed out */
+  /* ^leave room up top for controls when zoomed out */
+  touch-action: none; 
+  /* ^for drag and drop to work on mobile */
+
 }
 
 .new-character-box {
