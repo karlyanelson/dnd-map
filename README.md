@@ -8,7 +8,7 @@ Everything is saved locally to your browser.
 
 
 ## Colophon
-Built using [ReefJS](https://reefjs.com/).
+Built just using Vanilla JS and [Reef](https://reefjs.com/).
 
 Character icons are from [game-icons.net](https://game-icons.net/).
 

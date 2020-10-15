@@ -407,3 +407,16 @@ textarea {
 .contact button {
   margin-top: 1rem;
 }
+
+@media (max-width: 640px) {
+  .map-controls {
+    top: initial;
+    right: initial;
+    bottom: 1rem;
+    left: 1rem;
+  }
+  
+  .main-controls {
+    bottom: 5rem;
+  }
+}
