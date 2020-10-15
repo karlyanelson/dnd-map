@@ -205,16 +205,15 @@ function renderHandler() {
 }
 
 function dragStartHandler(event) {
-  event.target.style.opacity = 0.5;
-
   if (event.type === "touchstart"){
     if (!event.target.closest('.piece')){
       return
     }
-
+    event.target.style.opacity = 0.5;
     draggedElemMouseOffsetX = event.touches[0].target.offsetLeft;
     draggedElemMouseOffsetY = event.touches[0].target.offsetTop;
   } else {
+    event.target.style.opacity = 0.5;
     event.dataTransfer.setData("text/plain", event.target.id);
     draggedElemMouseOffsetX = event.offsetX;
     draggedElemMouseOffsetY = event.offsetY;

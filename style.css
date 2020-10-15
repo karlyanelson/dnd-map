@@ -276,7 +276,6 @@ textarea {
   /* ^leave room up top for controls when zoomed out */
   touch-action: none; 
   /* ^for drag and drop to work on mobile */
-
 }
 
 .new-character-box {
