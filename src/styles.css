@@ -280,7 +280,7 @@ textarea {
 
 .no-map {
   min-height: 100vh;
-  background-image: url(./img/grid.png);
+  background-image: url(./assets/img/grid.png);
 }
 
 .content {
