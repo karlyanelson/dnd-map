@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DND Map</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A simple Dungeons and Dragons virtual tabletop."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  </head>
+
+  <body>
+    <noscript
+      >You don't have Javascript enabled and this website requires Javascript to
+      run.</noscript
+    >
+    <main>
+      <div id="mainControls" class="main-controls">
+        <header class="grid-row">
+          <h1>D&D Map</h1>
+          <span id="toggleSettingsBtn"></span>
+        </header>
+        <div class="main-controls-content">
+          <section>
+            <h2>Map</h2>
+            <div class="form-field">
+              <input
+                class="screenreader-only"
+                type="file"
+                id="mapSrc"
+                accept=".jpg, .jpeg, .png, .gif, .webp"
+              />
+              <label class="upload-btn" id="mapSrcLabel" for="mapSrc"
+                >Upload Map</label
+              >
+              <p class="metadata">
+                Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
+              </p>
+              <p id="imgUploadError" hidden>
+                <span class="metadata error"
+                  >Image is too big. It must be less than 3MB.</span
+                >
+              </p>
+            </div>
+            <div class="form-field">
+              <label for="pieceSize">Characters Base Size (px)</label>
+              <input id="pieceSize" min="10" type="number" />
+            </div>
+          </section>
+          <section>
+            <div class="grid-row">
+              <h2 aria-live="polite">
+                <span id="charCount" class="screenreader-only">0</span
+                >Characters
+              </h2>
+              <button id="addCharacter">Add Character</button>
+            </div>
+            <div id="characterList"></div>
+          </section>
+          <footer class="footer">
+            <p>
+              Made by <a href="https://karlynelson.com/">Karly Nelson</a> using
+              <a href="https://reefjs.com/">ReefJS</a>
+            </p>
+            <p>
+              <span
+                >Icons from
+                <a href="https://game-icons.net/">game-icons.net</a></span
+              >
+              <span>•</span>
+              <!-- <span><a href="./contact.html">Give Feedback</a></span> -->
+            </p>
+          </footer>
+        </div>
+      </div>
+      <div class="map-controls grid-row">
+        <label for="mapZoom">Map Zoom</label>
+        <button data-zoom="out" aria-label="Zoom out">&#8211;</button>
+        <input id="mapZoom" step="10" type="number" name="Map Zoom" />
+        <button data-zoom="in" aria-label="Zoom in">+</button>
+      </div>
+      <div id="mapContainer" class="content">
+        <div class="no-map-message">
+          <h2 class="no-map-message__header">
+            Welcome to your virtual Dungeons & Dragons tabletop!
+          </h2>
+          <p class="no-map-message__text">
+            To get started, upload a map and add your customizable characters
+            using the settings panel on the left.
+          </p>
+          <p class="no-map-message__text">
+            Everything is saved automatically to your browser's storage.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- <script defer src="polyfills.js"></script>
+    <script defer src="index.js"></script> -->
+  </body>
+</html>
