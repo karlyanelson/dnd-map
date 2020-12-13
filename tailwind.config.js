@@ -6,10 +6,39 @@ module.exports = {
   purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
   theme: {
     extend: {
+      boxShadow: {
+        button: "2px 2px 0 black",
+      },
       colors: {
-        action: "var(--action)",
-        ink: "var(--ink)",
-        bg: "var(--bg)",
+        error: "#FF8D8D",
+        ink: "#333333",
+        gray: "#808080",
+      },
+      fontFamily: {
+        dnd: [
+          "Gill Sans",
+          "Helvetica Neue",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+      },
+      inset: {
+        4: "1rem",
+      },
+      margin: {
+        "05": ".125rem",
+      },
+      opacity: {
+        10: ".1",
+        15: ".15",
+        90: ".9",
+      },
+      outline: {
+        custom: "1px auto #0961E4",
+      },
+      width: {
+        80: "20rem",
       },
     },
   },

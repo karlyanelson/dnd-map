@@ -20,13 +20,16 @@
       run.</noscript
     >
     <main>
-      <div id="mainControls" class="main-controls">
-        <header class="grid-row">
+      <div
+        id="mainControls"
+        class="main-controls fixed bottom-4 left-4 top-4 py-2 px-4 border-1 border-black bg-ink bg-opacity-90 rounded-lg z-50 overflow-y-auto w-80"
+      >
+        <header class="pb-2 content-row">
           <h1>D&D Map</h1>
           <span id="toggleSettingsBtn"></span>
         </header>
         <div class="main-controls-content">
-          <section>
+          <section class="pt-4 pb-8 px-0 border border-black">
             <h2>Map</h2>
             <div class="form-field">
               <input
@@ -35,14 +38,14 @@
                 id="mapSrc"
                 accept=".jpg, .jpeg, .png, .gif, .webp"
               />
-              <label class="upload-btn" id="mapSrcLabel" for="mapSrc"
+              <label class="button" id="mapSrcLabel" for="mapSrc"
                 >Upload Map</label
               >
-              <p class="metadata">
+              <p class="font-sans mt-0 mb-05 text-xs italic">
                 Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
               </p>
               <p id="imgUploadError" hidden>
-                <span class="metadata error"
+                <span class="font-sans mt-0 mb-05 text-xs text-error"
                   >Image is too big. It must be less than 3MB.</span
                 >
               </p>
@@ -52,8 +55,8 @@
               <input id="pieceSize" min="10" type="number" />
             </div>
           </section>
-          <section>
-            <div class="grid-row">
+          <section class="pt-4 pb-8 px-0">
+            <div class="content-row">
               <h2 aria-live="polite">
                 <span id="charCount" class="screenreader-only">0</span
                 >Characters
@@ -62,27 +65,33 @@
             </div>
             <div id="characterList"></div>
           </section>
-          <footer class="footer">
+          <footer class="text-xs text-center mb-4">
             <p>
               Made by <a href="https://karlynelson.com/">Karly Nelson</a> using
               <a href="https://reefjs.com/">ReefJS</a>
             </p>
             <p>
-              <span
+              <span class="mr-1"
                 >Icons from
                 <a href="https://game-icons.net/">game-icons.net</a></span
               >
-              <span>•</span>
-              <!-- <span><a href="./contact.html">Give Feedback</a></span> -->
+              <span class="mx-1">•</span>
+              <span class="ml-1"
+                ><a href="./contact.html">Give Feedback</a></span
+              >
             </p>
           </footer>
         </div>
       </div>
-      <div class="map-controls grid-row">
+      <div
+        class="map-controls border-1 border-black fixed top-4 bg-ink bg-opacity-90 rounded-lg z-50 content-row"
+      >
         <label for="mapZoom">Map Zoom</label>
-        <button data-zoom="out" aria-label="Zoom out">&#8211;</button>
+        <button class="button" data-zoom="out" aria-label="Zoom out">
+          &#8211;
+        </button>
         <input id="mapZoom" step="10" type="number" name="Map Zoom" />
-        <button data-zoom="in" aria-label="Zoom in">+</button>
+        <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
       </div>
       <div id="mapContainer" class="content">
         <div class="no-map-message">

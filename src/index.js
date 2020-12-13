@@ -409,16 +409,16 @@ import Reef from "reefjs";
       // Character expand/collapse button
       "<button data-toggle-character aria-expanded=" +
       charExpanded +
-      " class='character-list-item__trigger grid-row'>" +
-      "<span class='character-list-item__thumbnail grid-col-auto' style='background-color:" +
+      " class='character-list-item__trigger content-row'>" +
+      "<span class='character-list-item__thumbnail flex-none' style='background-color:" +
       charColor +
       "; " +
       characterBGimg(character) +
       "'></span>" +
-      "<span class='grid-col'>" +
+      "<span class='flex-auto'>" +
       btnCharName +
       "</span>" +
-      "<span class='grid-col-auto " +
+      "<span class='flex-none" +
       arrow +
       "'></span>" +
       "</button>" +
@@ -429,9 +429,9 @@ import Reef from "reefjs";
       "<legend class='screenreader-only'>" +
       btnCharName +
       "'s Settings</legend>" +
-      "<div class='grid-row form-field' >" +
+      "<div class='content-row form-field' >" +
       // Character Name
-      "<div class='grid-col'>" +
+      "<div class='flex-auto'>" +
       "<label for='name-" +
       character.id +
       "'>Name</label>" +
@@ -444,7 +444,7 @@ import Reef from "reefjs";
       "'>" +
       "</div>" +
       // Character Color
-      "<div class='grid-col-auto'>" +
+      "<div class='flex-none'>" +
       "<label for='color-" +
       character.id +
       "'>Color</label>" +
@@ -494,7 +494,7 @@ import Reef from "reefjs";
       index +
       "'>" +
       "</div>" +
-      "<div class='grid-row grid-row-align-end form-field'>" +
+      "<div class='flex justify-between items-end form-field'>" +
       // Character Size
       "<div>" +
       "<label for='size-" +
@@ -535,7 +535,7 @@ import Reef from "reefjs";
       "'>" +
       "</div>" +
       // Remove Character Button
-      "<button data-remove character-data-index='" +
+      "<button data-remove class='button-error' character-data-index='" +
       index +
       "'>Remove</button>" +
       "</div>" +
@@ -635,11 +635,12 @@ import Reef from "reefjs";
         : "arrow arrow-down";
 
       return (
-        '<button data-toggle-settings class="btn-toggle grid-row" aria-expanded="' +
+        '<button data-toggle-settings class="button-outline content-row" aria-expanded="' +
         props.settingsExpanded +
         '">' +
+        "<span>" +
         btnText +
-        ' Settings<span class="' +
+        ' Settings</span><span class="' +
         arrow +
         '"></span></button>'
       );
