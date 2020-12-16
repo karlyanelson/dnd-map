@@ -5,7 +5,6 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #333333;
   --arrow-size: 0.4rem;
 }
 
@@ -73,6 +72,44 @@ h2 {
   @apply text-error bg-transparent inline-block border border-error py-1 px-2 rounded font-semibold tracking-wide;
 }
 
+label,
+input,
+select {
+  @apply block;
+}
+
+label {
+  @apply mt-1 mb-2 ml-0;
+}
+
+input,
+select {
+  @apply text-ink p-1 w-full;
+}
+
+input[type="number"] {
+  @apply max-w-14;
+}
+
+input[type="color"] {
+  border: none;
+  padding: 0;
+  height: 1.75rem;
+  width: 3rem;
+}
+
+input[type="file"] {
+  color: white;
+  padding: 0;
+}
+
+textarea {
+  width: 100%;
+  min-width: 100%;
+  min-height: 10rem;
+  padding: 0.5rem;
+}
+
 [type="file"]:focus + label {
   @apply outline-custom;
 }
@@ -90,7 +127,7 @@ h2 {
   padding: 0;
 }
 
-#mainControls.collapsed #main-controls-content {
+#mainControls.collapsed #mainControlsContent {
   display: none;
 }
 
@@ -152,46 +189,6 @@ h2 {
 
 .form-field {
   padding: 0.25rem 0;
-}
-
-label,
-input,
-select {
-  display: block;
-}
-
-label {
-  margin-top: 0.25rem;
-  margin-bottom: 0.5rem;
-  margin-left: 0;
-}
-
-input,
-select {
-  @apply text-ink p-1 w-full;
-}
-
-input[type="number"] {
-  max-width: 3.5rem;
-}
-
-input[type="color"] {
-  border: none;
-  padding: 0;
-  height: 1.75rem;
-  width: 3rem;
-}
-
-input[type="file"] {
-  color: white;
-  padding: 0;
-}
-
-textarea {
-  width: 100%;
-  min-width: 100%;
-  min-height: 10rem;
-  padding: 0.5rem;
 }
 
 .no-map {

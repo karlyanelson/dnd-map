@@ -29,6 +29,9 @@ module.exports = {
       margin: {
         "05": ".125rem",
       },
+      maxWidth: {
+        14: "3.5rem",
+      },
       opacity: {
         10: ".1",
         15: ".15",
