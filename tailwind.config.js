@@ -29,6 +29,9 @@ module.exports = {
       margin: {
         "05": ".125rem",
       },
+      minHeight: {
+        40: "10rem",
+      },
       maxWidth: {
         14: "3.5rem",
       },

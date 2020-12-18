@@ -104,10 +104,7 @@ input[type="file"] {
 }
 
 textarea {
-  width: 100%;
-  min-width: 100%;
-  min-height: 10rem;
-  padding: 0.5rem;
+  @apply w-full min-w-full min-h-40 p-2;
 }
 
 [type="file"]:focus + label {
