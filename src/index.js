@@ -1,28 +1,29 @@
 //// Reef
 import Reef from "reefjs";
 
+import { capitalize } from "./utils/utils";
+
+import addCharacter from "./utils/addCharacter";
+
+import { defaultColor } from "./globals/variables";
+
 (function () {
   //// Data Store
-  var store = new Reef.Store({
+  const store = new Reef.Store({
     data: {},
   });
 
   //// Variables
-  var pieceSizeInput = document.getElementById("pieceSize");
-  var mapZoomInput = document.getElementById("mapZoom");
-  var mapSrcLabel = document.getElementById("mapSrcLabel");
-  var imgUploadError = document.getElementById("imgUploadError");
-  var characterCount = document.getElementById("charCount");
-  var storageID = "dnd-map-data";
-  var draggedElemPosX;
-  var draggedElemPosY;
-  var draggedElemMouseOffsetX;
-  var draggedElemMouseOffsetY;
-  var currentTouchPosX;
-  var currentTouchPosY;
-  var mainControlsContent = document.getElementById("mainControls");
-  var defaultColor = "#ce0f0f";
-  var iconListClasses = [
+  const pieceSizeInput = document.getElementById("pieceSize");
+  const mapZoomInput = document.getElementById("mapZoom");
+  const mapSrcLabel = document.getElementById("mapSrcLabel");
+  const imgUploadError = document.getElementById("imgUploadError");
+  const characterCount = document.getElementById("charCount");
+  const mainControlsContent = document.getElementById("mainControls");
+
+  const storageID = "dnd-map-data";
+
+  const iconListClasses = [
     "artificer",
     "barbarian",
     "bard",
@@ -37,7 +38,7 @@ import Reef from "reefjs";
     "warlock",
     "wizard",
   ];
-  var iconListRaces = [
+  const iconListRaces = [
     "aarakocra",
     "aasimar",
     "bugbear",
@@ -60,7 +61,7 @@ import Reef from "reefjs";
     "triton",
     "yuan-ti",
   ];
-  var iconListMonsters = [
+  const iconListMonsters = [
     "aberration",
     "beast",
     "celestial",
@@ -77,36 +78,17 @@ import Reef from "reefjs";
     "undead",
   ];
 
+  let draggedElemPosX;
+  let draggedElemPosY;
+  let draggedElemMouseOffsetX;
+  let draggedElemMouseOffsetY;
+  let currentTouchPosX;
+  let currentTouchPosY;
+
   //// Methods
-  function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  function generateRandomID() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return (
-      s4() +
-      s4() +
-      "-" +
-      s4() +
-      "-" +
-      s4() +
-      "-" +
-      s4() +
-      "-" +
-      s4() +
-      s4() +
-      s4()
-    );
-  }
-
   function getDatafromStorage() {
-    var storedData = localStorage.getItem(storageID);
-    var emptyData = {
+    const storedData = localStorage.getItem(storageID);
+    const emptyData = {
       // map: "https://i.imgur.com/KYVBIZd.jpeg",
       map: null,
       settingsExpanded: true,
@@ -114,44 +96,8 @@ import Reef from "reefjs";
       zoom: 100,
       characters: [],
     };
-    var storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
+    const storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
     store.data = storedDataObject;
-  }
-
-  function addCharacter() {
-    var numOfCharacters = (store.data.characters.length + 1).toString();
-
-    var zoomRatio = store.data.zoom / 100;
-    var positiveOrNegative = Math.random() < 0.5 ? -1 : 1;
-    var randomNumberX =
-      Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
-    var randomNumberY =
-      Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
-    var posX =
-      (window.innerWidth / 2 + window.pageXOffset) / zoomRatio -
-      store.data.pieceSize / 2 +
-      randomNumberX;
-    var posY =
-      (window.innerHeight / 2 + window.pageYOffset) / zoomRatio -
-      store.data.pieceSize / 2 +
-      randomNumberY;
-
-    var newCharacter = {
-      id: generateRandomID(),
-      name: "Character " + numOfCharacters,
-      color: defaultColor,
-      image: "",
-      icon: "",
-      background: "color", // options are: 'color', 'image', 'icon'
-      dragged: false,
-      expanded: true,
-      areaOfEffect: false,
-      areaOfEffectRadius: 1,
-      x: posX,
-      y: posY,
-      size: 1,
-    };
-    store.data.characters.push(newCharacter);
   }
 
   function removeCharacter(characterIndex) {
@@ -258,7 +204,7 @@ import Reef from "reefjs";
     }
 
     if (buttonTarget.matches("#addCharacter")) {
-      addCharacter();
+      addCharacter(store);
     }
 
     if (buttonTarget.matches("[data-zoom]")) {
@@ -572,7 +518,7 @@ import Reef from "reefjs";
       characterPosX +
       "px;" +
       "'>" +
-      "<div class='piece-content' style='" +
+      "<div class='bg-no-repeat bg-center rounded-full shadow-piece bg-80%' style='" +
       "height:" +
       characterSize +
       "px; " +
