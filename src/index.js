@@ -1,15 +1,15 @@
 //// Reef
 import Reef from "reefjs";
 
-import { capitalize } from "./utils/utils";
+import { capitalize, getDatafromStorage } from "./utils/utils";
 
 import addCharacter from "./utils/addCharacter";
 
-import { defaultColor } from "./globals/variables";
+import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
 
 (function () {
   //// Data Store
-  const store = new Reef.Store({
+  const DATA_STORE = new Reef.Store({
     data: {},
   });
 
@@ -20,8 +20,6 @@ import { defaultColor } from "./globals/variables";
   const imgUploadError = document.getElementById("imgUploadError");
   const characterCount = document.getElementById("charCount");
   const mainControlsContent = document.getElementById("mainControls");
-
-  const storageID = "dnd-map-data";
 
   const iconListClasses = [
     "artificer",
@@ -86,31 +84,18 @@ import { defaultColor } from "./globals/variables";
   let currentTouchPosY;
 
   //// Methods
-  function getDatafromStorage() {
-    const storedData = localStorage.getItem(storageID);
-    const emptyData = {
-      // map: "https://i.imgur.com/KYVBIZd.jpeg",
-      map: null,
-      settingsExpanded: true,
-      pieceSize: 24,
-      zoom: 100,
-      characters: [],
-    };
-    const storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
-    store.data = storedDataObject;
-  }
 
   function removeCharacter(characterIndex) {
     if (characterIndex) {
-      store.data.characters.splice(characterIndex, 1);
+      DATA_STORE.data.characters.splice(characterIndex, 1);
     }
   }
 
   function zoomMap(value) {
-    store.data.zoom =
+    DATA_STORE.data.zoom =
       value === "out"
-        ? parseInt(store.data.zoom) - 10
-        : parseInt(store.data.zoom) + 10;
+        ? parseInt(DATA_STORE.data.zoom) - 10
+        : parseInt(DATA_STORE.data.zoom) + 10;
   }
 
   function handleFiles(event) {
@@ -121,7 +106,7 @@ import { defaultColor } from "./globals/variables";
       const reader = new FileReader();
       reader.onload = (function () {
         return function (e) {
-          store.data.map = e.target.result;
+          DATA_STORE.data.map = e.target.result;
         };
       })();
       reader.readAsDataURL(file);
@@ -164,11 +149,11 @@ import { defaultColor } from "./globals/variables";
     }
 
     if (event.target.matches("#pieceSize")) {
-      store.data.pieceSize = event.target.value;
+      DATA_STORE.data.pieceSize = event.target.value;
     }
 
     if (event.target.matches("#mapZoom")) {
-      store.data.zoom = event.target.value;
+      DATA_STORE.data.zoom = event.target.value;
     }
 
     if (
@@ -177,7 +162,7 @@ import { defaultColor } from "./globals/variables";
     ) {
       var characterIndex = event.target.getAttribute("character-data-index");
       var characterDataType = event.target.getAttribute("character-data-type");
-      store.data.characters[characterIndex][characterDataType] =
+      DATA_STORE.data.characters[characterIndex][characterDataType] =
         event.target.value;
     }
   }
@@ -190,7 +175,9 @@ import { defaultColor } from "./globals/variables";
     let buttonTarget = event.target.closest("button");
 
     if (buttonTarget.matches("[data-toggle-settings]")) {
-      store.data.settingsExpanded = store.data.settingsExpanded ? false : true;
+      DATA_STORE.data.settingsExpanded = DATA_STORE.data.settingsExpanded
+        ? false
+        : true;
     }
 
     if (buttonTarget.matches("[data-toggle-character]")) {
@@ -198,13 +185,13 @@ import { defaultColor } from "./globals/variables";
 
       if (characterContainer) {
         var characterIndex = characterContainer.getAttribute("data-index");
-        var character = store.data.characters[characterIndex];
+        var character = DATA_STORE.data.characters[characterIndex];
         character.expanded = character.expanded ? false : true;
       }
     }
 
     if (buttonTarget.matches("#addCharacter")) {
-      addCharacter(store);
+      addCharacter(DATA_STORE);
     }
 
     if (buttonTarget.matches("[data-zoom]")) {
@@ -222,20 +209,20 @@ import { defaultColor } from "./globals/variables";
   }
 
   function renderHandler() {
-    pieceSizeInput.value = store.data.pieceSize;
-    mapZoomInput.value = store.data.zoom;
-    characterCount.textContent = store.data.characters.length;
-    mapSrcLabel.textContent = store.data.map ? "Change Map" : "Upload Map";
+    pieceSizeInput.value = DATA_STORE.data.pieceSize;
+    mapZoomInput.value = DATA_STORE.data.zoom;
+    characterCount.textContent = DATA_STORE.data.characters.length;
+    mapSrcLabel.textContent = DATA_STORE.data.map ? "Change Map" : "Upload Map";
 
-    store.data.settingsExpanded
+    DATA_STORE.data.settingsExpanded
       ? mainControlsContent.classList.remove("collapsed")
       : mainControlsContent.classList.add("collapsed");
 
-    store.data.map
+    DATA_STORE.data.map
       ? document.body.classList.remove("no-map")
       : document.body.classList.add("no-map");
 
-    localStorage.setItem(storageID, JSON.stringify(store.data));
+    localStorage.setItem(STORAGE_ID, JSON.stringify(DATA_STORE.data));
   }
 
   function dragStartHandler(event) {
@@ -282,9 +269,9 @@ import { defaultColor } from "./globals/variables";
       return;
     }
 
-    var zoomRatio = store.data.zoom / 100;
+    var zoomRatio = DATA_STORE.data.zoom / 100;
 
-    var character = store.data.characters[characterIndex];
+    var character = DATA_STORE.data.characters[characterIndex];
 
     character.dragged = true;
 
@@ -322,7 +309,7 @@ import { defaultColor } from "./globals/variables";
     }
 
     // Variables
-    var charColor = character.color ? character.color : defaultColor;
+    var charColor = character.color ? character.color : DEFAULT_COLOR;
 
     var charExpanded = character.expanded ? true : false; // handle undefined
 
@@ -375,7 +362,7 @@ import { defaultColor } from "./globals/variables";
       "<legend class='screenreader-only'>" +
       btnCharName +
       "'s Settings</legend>" +
-      "<div class='content-row form-field' >" +
+      "<div class='content-row py-1' >" +
       // Character Name
       "<div class='flex-auto'>" +
       "<label for='name-" +
@@ -403,7 +390,7 @@ import { defaultColor } from "./globals/variables";
       "'>" +
       "</div>" +
       "</div>" +
-      "<div class='form-field'>" +
+      "<div class='py-1'>" +
       // Character Background selector
       // "<fieldset class='radio-group' >" +
       //   "<legend>Background</legend>" +
@@ -440,7 +427,7 @@ import { defaultColor } from "./globals/variables";
       index +
       "'>" +
       "</div>" +
-      "<div class='flex justify-between items-end form-field'>" +
+      "<div class='flex justify-between items-end py-1'>" +
       // Character Size
       "<div>" +
       "<label for='size-" +
@@ -492,14 +479,15 @@ import { defaultColor } from "./globals/variables";
   }
 
   function characterPiece(character, index) {
-    var zoomPercent = store.data.zoom / 100;
+    var zoomPercent = DATA_STORE.data.zoom / 100;
 
-    var characterSize = store.data.pieceSize * zoomPercent * character.size;
+    var characterSize =
+      DATA_STORE.data.pieceSize * zoomPercent * character.size;
 
     var characterPosX = character.x * zoomPercent;
     var characterPosY = character.y * zoomPercent;
 
-    var charColor = character.color ? character.color : defaultColor;
+    var charColor = character.color ? character.color : DEFAULT_COLOR;
 
     var charName = character.name ? character.name : "<em>Untitled</em>";
 
@@ -543,7 +531,7 @@ import { defaultColor } from "./globals/variables";
   //// Components
 
   var Map = new Reef("#mapContainer", {
-    store: store,
+    store: DATA_STORE,
     template: function (props) {
       var noMap =
         "<div class='no-map-message'>" +
@@ -564,7 +552,7 @@ import { defaultColor } from "./globals/variables";
   });
 
   var CharacterList = new Reef("#characterList", {
-    store: store,
+    store: DATA_STORE,
     template: function (props) {
       return (
         "<ul>" + props.characters.map(characterListItem).join("") + "</ul>"
@@ -573,7 +561,7 @@ import { defaultColor } from "./globals/variables";
   });
 
   var ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
-    store: store,
+    store: DATA_STORE,
     template: function (props) {
       var btnText = props.settingsExpanded ? "Hide" : "Show";
       var arrow = props.settingsExpanded
@@ -594,7 +582,7 @@ import { defaultColor } from "./globals/variables";
   });
 
   //// Inits
-  getDatafromStorage();
+  getDatafromStorage(STORAGE_ID, DATA_STORE);
   ToggleSettingsBtn.render();
   Map.render();
   CharacterList.render();

@@ -35,6 +35,7 @@ button,
 input,
 label {
   @apply text-sm;
+  line-height: normal;
 }
 
 a {
@@ -182,10 +183,6 @@ textarea {
 
 .map-controls div + div {
   margin-left: 2rem;
-}
-
-.form-field {
-  padding: 0.25rem 0;
 }
 
 .no-map {

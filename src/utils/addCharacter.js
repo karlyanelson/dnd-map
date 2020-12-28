@@ -1,5 +1,5 @@
 import { generateRandomID } from "./utils";
-import { defaultColor } from "../globals/variables";
+import { DEFAULT_COLOR } from "../globals/variables";
 
 export default function addCharacter(store) {
   const numOfCharacters = (store.data.characters.length + 1).toString();
@@ -22,7 +22,7 @@ export default function addCharacter(store) {
   var newCharacter = {
     id: generateRandomID(),
     name: "Character " + numOfCharacters,
-    color: defaultColor,
+    color: DEFAULT_COLOR,
     image: "",
     icon: "",
     background: "color", // options are: 'color', 'image', 'icon'
