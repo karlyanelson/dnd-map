@@ -1,81 +1,19 @@
 //// Reef
 import Reef from "reefjs";
 
-import { capitalize, getDatafromStorage } from "./utils/utils";
+// Globals
+import DATA_STORE from "./globals/store";
+import * as _ from "./globals/variables";
 
+// Utils
+import { getDatafromStorage } from "./utils/utils";
 import addCharacter from "./utils/addCharacter";
 
-import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
+// Components
+import CharacterList from "./components/CharacterList";
 
 (function () {
-  //// Data Store
-  const DATA_STORE = new Reef.Store({
-    data: {},
-  });
-
   //// Variables
-  const pieceSizeInput = document.getElementById("pieceSize");
-  const mapZoomInput = document.getElementById("mapZoom");
-  const mapSrcLabel = document.getElementById("mapSrcLabel");
-  const imgUploadError = document.getElementById("imgUploadError");
-  const characterCount = document.getElementById("charCount");
-  const mainControlsContent = document.getElementById("mainControls");
-
-  const iconListClasses = [
-    "artificer",
-    "barbarian",
-    "bard",
-    "cleric",
-    "druid",
-    "fighter",
-    "monk",
-    "paladin",
-    "ranger",
-    "rogue",
-    "sorcerer",
-    "warlock",
-    "wizard",
-  ];
-  const iconListRaces = [
-    "aarakocra",
-    "aasimar",
-    "bugbear",
-    "dragonborn",
-    "dwarf",
-    "elf",
-    "firbolg",
-    "genasi",
-    "gnome",
-    "goblin",
-    "goliath",
-    "halfling",
-    "human",
-    "kenku",
-    "kobold",
-    "lizardfolk",
-    "orc",
-    "tabaxi",
-    "tiefling",
-    "triton",
-    "yuan-ti",
-  ];
-  const iconListMonsters = [
-    "aberration",
-    "beast",
-    "celestial",
-    "construct",
-    "dragon",
-    "elemental",
-    "fey",
-    "fiend",
-    "giant",
-    "humanoid",
-    "monstrosity",
-    "ooze",
-    "plant",
-    "undead",
-  ];
-
   let draggedElemPosX;
   let draggedElemPosY;
   let draggedElemMouseOffsetX;
@@ -111,11 +49,11 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
       })();
       reader.readAsDataURL(file);
 
-      if (!imgUploadError.hasAttribute("hidden")) {
-        imgUploadError.addAttribute("hidden");
+      if (!_.imgUploadError.hasAttribute("hidden")) {
+        _.imgUploadError.addAttribute("hidden");
       }
     } else {
-      imgUploadError.removeAttribute("hidden");
+      _.imgUploadError.removeAttribute("hidden");
     }
   }
 
@@ -209,20 +147,22 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
   }
 
   function renderHandler() {
-    pieceSizeInput.value = DATA_STORE.data.pieceSize;
-    mapZoomInput.value = DATA_STORE.data.zoom;
-    characterCount.textContent = DATA_STORE.data.characters.length;
-    mapSrcLabel.textContent = DATA_STORE.data.map ? "Change Map" : "Upload Map";
+    _.pieceSizeInput.value = DATA_STORE.data.pieceSize;
+    _.mapZoomInput.value = DATA_STORE.data.zoom;
+    _.characterCount.textContent = DATA_STORE.data.characters.length;
+    _.mapSrcLabel.textContent = DATA_STORE.data.map
+      ? "Change Map"
+      : "Upload Map";
 
     DATA_STORE.data.settingsExpanded
-      ? mainControlsContent.classList.remove("collapsed")
-      : mainControlsContent.classList.add("collapsed");
+      ? _.mainControlsContent.classList.remove("collapsed")
+      : _.mainControlsContent.classList.add("collapsed");
 
     DATA_STORE.data.map
       ? document.body.classList.remove("no-map")
       : document.body.classList.add("no-map");
 
-    localStorage.setItem(STORAGE_ID, JSON.stringify(DATA_STORE.data));
+    localStorage.setItem(_.STORAGE_ID, JSON.stringify(DATA_STORE.data));
   }
 
   function dragStartHandler(event) {
@@ -293,191 +233,6 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
 
   //// Templates
 
-  function characterListItem(character, index) {
-    // Sub Template
-    function iconList(icon) {
-      let selection = icon === character.icon ? "selected" : "";
-      return (
-        "<option " +
-        selection +
-        ' value="' +
-        icon +
-        '">' +
-        capitalize(icon) +
-        "</option>"
-      );
-    }
-
-    // Variables
-    var charColor = character.color ? character.color : DEFAULT_COLOR;
-
-    var charExpanded = character.expanded ? true : false; // handle undefined
-
-    var contentClass = character.expanded ? "" : " closed ";
-
-    var arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
-
-    var btnCharName = character.name ? character.name : "<em>Untitled</em>";
-
-    var iconSelectorContent =
-      "<option></option>" +
-      "<optgroup label='Classes'>" +
-      iconListClasses.map(iconList).join("") +
-      "</optgroup>" +
-      "<optgroup label='Races'>" +
-      iconListRaces.map(iconList).join("") +
-      "</optgroup>" +
-      "<optgroup label='Monsters'>" +
-      iconListMonsters.map(iconList).join("") +
-      "</optgroup>";
-
-    // Template Content
-    return (
-      "<li class='character-list-item' data-id='" +
-      character.id +
-      "'" +
-      "data-index='" +
-      index +
-      "'>" +
-      // Character expand/collapse button
-      "<button data-toggle-character aria-expanded=" +
-      charExpanded +
-      " class='character-list-item__trigger content-row'>" +
-      "<span class='character-list-item__thumbnail flex-none' style='background-color:" +
-      charColor +
-      "; " +
-      characterBGimg(character) +
-      "'></span>" +
-      "<span class='flex-auto'>" +
-      btnCharName +
-      "</span>" +
-      "<span class='flex-none" +
-      arrow +
-      "'></span>" +
-      "</button>" +
-      "<div class='character-list-item__content " +
-      contentClass +
-      "'>" +
-      "<fieldset>" +
-      "<legend class='screenreader-only'>" +
-      btnCharName +
-      "'s Settings</legend>" +
-      "<div class='content-row py-1' >" +
-      // Character Name
-      "<div class='flex-auto'>" +
-      "<label for='name-" +
-      character.id +
-      "'>Name</label>" +
-      "<input placeholder='Enter name...' type='text' character-data-type='name' value='" +
-      character.name +
-      "' id=name-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      // Character Color
-      "<div class='flex-none'>" +
-      "<label for='color-" +
-      character.id +
-      "'>Color</label>" +
-      "<input type='color' character-data-type='color' value='" +
-      charColor +
-      "' id=color-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      "</div>" +
-      "<div class='py-1'>" +
-      // Character Background selector
-      // "<fieldset class='radio-group' >" +
-      //   "<legend>Background</legend>" +
-      //   "<input checked type='radio' name='radio-group-" + character.id + "' id='radio-color-" + character.id + "'>" +
-      //   "<label for='radio-color-" + character.id + "'>Color</label>" +
-      //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-icon-" + character.id + "'>" +
-      //   "<label for='radio-icon-" + character.id + "'>Icon</label>" +
-      //   "<input type='radio' name='radio-group-" + character.id + "' id='radio-image-" + character.id + "'>" +
-      //   "<label for='radio-image-" + character.id + "'>Image</label>" +
-      // "</fieldset>" +
-
-      // Character Icon
-      "<label for='char-icon-" +
-      character.id +
-      "'>Icon</label>" +
-      "<select name='Icon' character-data-type='icon' value='" +
-      character.icon +
-      "' id=char-icon-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      iconSelectorContent +
-      "</select>" +
-      // Character Image
-      "<label for='char-image-" +
-      character.id +
-      "'>Image URL</label>" +
-      "<input placeholder='None' type='url' character-data-type='image' value='" +
-      character.image +
-      "' id=char-image-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      "<div class='flex justify-between items-end py-1'>" +
-      // Character Size
-      "<div>" +
-      "<label for='size-" +
-      character.id +
-      "'>Size</label>" +
-      "<input type='number' character-data-type='size' value='" +
-      character.size +
-      "' id=size-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      // Character X Postion
-      "<div>" +
-      "<label for='posX-" +
-      character.id +
-      "'>X</label>" +
-      "<input type='number' step='5' character-data-type='x' value='" +
-      character.x +
-      "' id=posX-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      // Character Y Postion
-      "<div>" +
-      "<label for='posY-" +
-      character.id +
-      "'>Y</label>" +
-      "<input type='number' character-data-type='y' value='" +
-      character.y +
-      "' id=posY-'" +
-      character.id +
-      "' character-data-index='" +
-      index +
-      "'>" +
-      "</div>" +
-      // Remove Character Button
-      "<button data-remove class='button-error' character-data-index='" +
-      index +
-      "'>Remove</button>" +
-      "</div>" +
-      "</fieldset>" +
-      "</div>" +
-      "</li>"
-    );
-  }
-
   function characterPiece(character, index) {
     var zoomPercent = DATA_STORE.data.zoom / 100;
 
@@ -487,7 +242,7 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
     var characterPosX = character.x * zoomPercent;
     var characterPosY = character.y * zoomPercent;
 
-    var charColor = character.color ? character.color : DEFAULT_COLOR;
+    var charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
     var charName = character.name ? character.name : "<em>Untitled</em>";
 
@@ -551,15 +306,6 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
     },
   });
 
-  var CharacterList = new Reef("#characterList", {
-    store: DATA_STORE,
-    template: function (props) {
-      return (
-        "<ul>" + props.characters.map(characterListItem).join("") + "</ul>"
-      );
-    },
-  });
-
   var ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
     store: DATA_STORE,
     template: function (props) {
@@ -582,7 +328,7 @@ import { DEFAULT_COLOR, STORAGE_ID } from "./globals/variables";
   });
 
   //// Inits
-  getDatafromStorage(STORAGE_ID, DATA_STORE);
+  getDatafromStorage(_.STORAGE_ID, DATA_STORE);
   ToggleSettingsBtn.render();
   Map.render();
   CharacterList.render();

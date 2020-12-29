@@ -38,4 +38,27 @@ function getDatafromStorage(id, store) {
   store.data = storedDataObject;
 }
 
-export { capitalize, generateRandomID, getDatafromStorage };
+function characterBGimg(character) {
+  var charBGimg = "";
+  var bgBlendMode = "";
+
+  if (character.image) {
+    charBGimg = " background-image: url(" + character.image + "); ";
+
+    return charBGimg;
+  }
+
+  if (character.icon) {
+    charBGimg =
+      " background-image: url(" +
+      "./img/" +
+      character.icon +
+      "/image.png" +
+      "); ";
+    bgBlendMode = " background-blend-mode: lighten; ";
+
+    return charBGimg + bgBlendMode;
+  }
+}
+
+export { capitalize, generateRandomID, getDatafromStorage, characterBGimg };
