@@ -16,6 +16,10 @@
   @apply outline-custom;
 }
 
+a {
+  text-decoration: underline;
+}
+
 body,
 button,
 textarea,
