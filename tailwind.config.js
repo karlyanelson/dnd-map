@@ -6,9 +6,6 @@ module.exports = {
   purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
   theme: {
     extend: {
-      backgroundSize: {
-        "80%": "80%",
-      },
       boxShadow: {
         button: "2px 2px 0 black",
         piece: "1px 1px 1px 2px black",

@@ -238,7 +238,7 @@ import CharacterList from "./components/CharacterList";
       characterPosX +
       "px;" +
       "'>" +
-      "<div class='bg-no-repeat bg-center rounded-full shadow-piece bg-80%' style='" +
+      "<div class='bg-no-repeat bg-center rounded-full shadow-piece' style='" +
       "height:" +
       characterSize +
       "px; " +
