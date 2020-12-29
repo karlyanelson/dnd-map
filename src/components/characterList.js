@@ -7,15 +7,11 @@ function characterListItem(character, index) {
   // Sub Template
   function iconList(icon) {
     let selection = icon === character.icon ? "selected" : "";
-    return (
-      "<option " +
-      selection +
-      ' value="' +
-      icon +
-      '">' +
-      capitalize(icon) +
-      "</option>"
-    );
+    return `
+      <option ${selection} value='${icon}'> 
+        ${capitalize(icon)} 
+      </option>
+    `;
   }
 
   // Variables
@@ -29,17 +25,21 @@ function characterListItem(character, index) {
 
   var btnCharName = character.name ? character.name : "<em>Untitled</em>";
 
-  var iconSelectorContent =
-    "<option></option>" +
-    "<optgroup label='Classes'>" +
-    _.iconListClasses.map(iconList).join("") +
-    "</optgroup>" +
-    "<optgroup label='Races'>" +
-    _.iconListRaces.map(iconList).join("") +
-    "</optgroup>" +
-    "<optgroup label='Monsters'>" +
-    _.iconListMonsters.map(iconList).join("") +
-    "</optgroup>";
+  var iconSelectorContent = `
+    <option></option>
+
+    <optgroup label='Classes'>
+      ${_.iconListClasses.map(iconList).join("")}
+    </optgroup>
+
+    <optgroup label='Races'>
+      ${_.iconListRaces.map(iconList).join("")}
+    </optgroup>
+    
+    <optgroup label='Monsters'>
+      ${_.iconListMonsters.map(iconList).join("")}
+    </optgroup>
+    `;
 
   // Template Content
   return (
