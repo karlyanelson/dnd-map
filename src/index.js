@@ -6,7 +6,7 @@ import DATA_STORE from "./globals/store";
 import * as _ from "./globals/variables";
 
 // Utils
-import { getDatafromStorage } from "./utils/utils";
+import { getDatafromStorage, characterBGimg } from "./utils/utils";
 import addCharacter from "./utils/addCharacter";
 
 // Components
@@ -54,29 +54,6 @@ import CharacterList from "./components/CharacterList";
       }
     } else {
       _.imgUploadError.removeAttribute("hidden");
-    }
-  }
-
-  function characterBGimg(character) {
-    var charBGimg = "";
-    var bgBlendMode = "";
-
-    if (character.image) {
-      charBGimg = " background-image: url(" + character.image + "); ";
-
-      return charBGimg;
-    }
-
-    if (character.icon) {
-      charBGimg =
-        " background-image: url(" +
-        "./img/" +
-        character.icon +
-        "/image.png" +
-        "); ";
-      bgBlendMode = " background-blend-mode: lighten; ";
-
-      return charBGimg + bgBlendMode;
     }
   }
 

@@ -43,18 +43,13 @@ function characterBGimg(character) {
   var bgBlendMode = "";
 
   if (character.image) {
-    charBGimg = " background-image: url(" + character.image + "); ";
+    charBGimg = ` background-image: url("${character.image}"); `;
 
     return charBGimg;
   }
 
   if (character.icon) {
-    charBGimg =
-      " background-image: url(" +
-      "./img/" +
-      character.icon +
-      "/image.png" +
-      "); ";
+    charBGimg = ` background-image: url("./img/${character.icon}/image.png"); `;
     bgBlendMode = " background-blend-mode: lighten; ";
 
     return charBGimg + bgBlendMode;
