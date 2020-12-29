@@ -1,7 +1,8 @@
 import Reef from "reefjs";
 import DATA_STORE from "../globals/store";
 import * as _ from "../globals/variables";
-import { capitalize, characterBGimg } from "../utils/utils";
+import { capitalize } from "../utils/utils";
+import characterBGimg from "../utils/characterBGimg";
 
 function characterListItem(character, index) {
   // Sub Template
