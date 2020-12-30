@@ -21,9 +21,9 @@
   "homepage": "https://github.com/karlyanelson/dnd-map#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-asset-copier": "^1.1.0",
     "reefjs": "^7.6.2",
-    "tailwindcss": "1.9.5",
-    "parcel-plugin-asset-copier": "^1.1.0"
+    "tailwindcss": "1.9.5"
   },
   "dependencies": {},
   "assetsPath": "src/assets"
