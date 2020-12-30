@@ -45,10 +45,10 @@ function characterListItem(character, index) {
   // Template Content
   return `
     <li 
-      class='characterListItem border border-gray rounded my-3 transition-all duration-300 ease-in-out ${
+      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-ink ${
         charExpanded
-          ? "shadow-high relative z-10 bg-ink-dark"
-          : "shadow-button bg-opacity-75 bg-ink"
+          ? "shadow-high relative z-10 border-gray"
+          : "shadow-button border-black"
       }' 
       data-id='${character.id}' 
       data-index='${index}'
@@ -56,7 +56,7 @@ function characterListItem(character, index) {
       <button data-toggle-character 
         aria-expanded=${charExpanded} 
         class='${
-          charExpanded ? "" : "hover:shadow-high"
+          charExpanded ? "" : "hover:shadow-high hover:bg-ink"
         } p-2 w-full text-white text-left text-base break-all flex items-center justify-between'> 
         <span 
           class='inline-block rounded-circle h-6 w-6 border border-black bg-no-repeat bg-center bg-cover flex-none' 
@@ -67,7 +67,7 @@ function characterListItem(character, index) {
         <span class='ml-2 flex-none ${arrow}'></span> 
       </button> 
 
-      <div class='border-t border-gray p-2 ${hidden} '> 
+      <div class='border-t border-gray px-4 pt-2 pb-4 ${hidden} '> 
         <fieldset> 
           <legend class='screenreader-only'>${btnCharName}'s Settings</legend> 
           <div class='flex items-center justify-between py-1' > 
