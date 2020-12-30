@@ -117,7 +117,7 @@ function characterListItem(character, index) {
                 type='number' 
                 character-data-type='size' 
                 value='${character.size}' 
-                id=size-'${character.id}' 
+                id='size-${character.id}' 
                 character-data-index='${index}'
               > 
             </div> 
@@ -130,7 +130,7 @@ function characterListItem(character, index) {
                   step='5' 
                   character-data-type='x' 
                   value='${character.x}' 
-                  id=posX-'${character.id}' 
+                  id='posX-${character.id}' 
                   character-data-index='${index}'
                 > 
             </div> 
@@ -141,7 +141,7 @@ function characterListItem(character, index) {
                 type='number' 
                 character-data-type='y' 
                 value='${character.y}' 
-                id=posY-'${character.id}' 
+                id='posY-${character.id}' 
                 character-data-index='${index}'
               > 
             </div> 

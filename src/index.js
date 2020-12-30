@@ -1,5 +1,4 @@
 // Globals
-import DATA_STORE from "./js/globals/store";
 import * as _ from "./js/globals/variables";
 
 // Utils
