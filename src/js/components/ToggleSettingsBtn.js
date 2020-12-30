@@ -8,12 +8,12 @@ const ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
     var arrow = props.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
 
     return (
-      '<button data-toggle-settings class="button-outline content-row" aria-expanded="' +
+      '<button data-toggle-settings class="button-outline flex items-center justify-between" aria-expanded="' +
       props.settingsExpanded +
       '">' +
       "<span>" +
       btnText +
-      ' Settings</span><span class="' +
+      ' Settings</span><span class="ml-2 ' +
       arrow +
       '"></span></button>'
     );

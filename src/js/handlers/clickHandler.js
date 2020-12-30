@@ -18,7 +18,7 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-toggle-character]")) {
-    var characterContainer = buttonTarget.closest(".character-list-item");
+    var characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
       var characterIndex = characterContainer.getAttribute("data-index");
@@ -36,7 +36,7 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-remove]")) {
-    var characterContainer = buttonTarget.closest(".character-list-item");
+    var characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
       var characterIndex = characterContainer.getAttribute("data-index");

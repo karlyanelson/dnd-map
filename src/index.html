@@ -24,15 +24,15 @@
         id="mainControls"
         class="main-controls fixed bottom-4 left-4 top-4 py-2 px-4 border-1 border-black bg-ink bg-opacity-90 rounded-lg z-50 overflow-y-auto w-80"
       >
-        <header class="pb-2 content-row">
+        <header class="pb-2 flex items-center justify-between">
           <h1>D&D Map</h1>
-          <span id="toggleSettingsBtn"></span>
+          <span class="ml-2" id="toggleSettingsBtn"></span>
         </header>
         <div id="mainControlsContent" class="main-controls-content">
           <section class="pt-4 pb-8 px-0 border-t border-b border-black">
-            <h2 class="content-row">
+            <h2 class="flex items-center justify-between">
               <span>Map</span>
-              <div>
+              <div class="ml-2">
                 <input
                   class="screenreader-only"
                   type="file"
@@ -88,16 +88,17 @@
         </div>
       </div>
       <div
-        class="map-controls border-1 border-black fixed top-4 bg-ink bg-opacity-90 rounded-lg z-50 content-row"
+        class="map-controls py-2 px-4 right-4 border-1 border-black fixed top-4 bg-ink bg-opacity-90 rounded-lg z-50 content-row"
       >
-        <label for="mapZoom">Map Zoom</label>
+        <label class="m-0" for="mapZoom">Map Zoom</label>
         <button class="button" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
         <input id="mapZoom" step="10" type="number" name="Map Zoom" />
         <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
       </div>
-      <div id="mapContainer" class="content">
+      <div id="mapContainer" class="relative pt-2 touch-action-none">
+        <!--  ^leave room up top for controls when zoomed out; need touch action for drag and drop to work on mobile -->
         <div class="no-map-message">
           <h2 class="no-map-message__header">
             Welcome to your virtual Dungeons & Dragons tabletop!

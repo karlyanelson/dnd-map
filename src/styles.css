@@ -63,18 +63,26 @@ h2 {
   @apply text-xl my-2;
 }
 
-/* button, */
+.touch-action-none {
+  touch-action: none;
+}
+
 .button {
   @apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded font-semibold tracking-wide;
 }
 
-/* button:active, */
 .button:active {
   @apply shadow-none;
 }
 
+button:focus,
+.button:focus {
+  @apply outline-custom;
+  outline-offset: -2px;
+}
+
 .button-outline {
-  @apply text-white bg-gray bg-opacity-15 inline-block shadow-button border-2 border-gray py-1 px-2 rounded font-semibold tracking-wide;
+  @apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded font-semibold tracking-wide;
 }
 
 .button-error {
@@ -137,103 +145,9 @@ textarea {
   display: none;
 }
 
-.character-list-item {
-  background-color: rgba(51, 51, 51, 0.75);
-  border: 1px solid gray;
-  @apply shadow-button;
-  border-radius: 0.25rem;
-  margin: 0.75rem 0;
-}
-
-.character-list-item__trigger {
-  @apply shadow-none;
-  padding: 0.5rem;
-  display: block;
-  width: 100%;
-  background: transparent;
-  border: none;
-  color: white;
-  text-align: left;
-  font-size: 1rem;
-  word-break: break-word;
-  letter-spacing: 0em;
-}
-
-.character-list-item__thumbnail {
-  display: inline-block;
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 50%;
-  border: 1px solid black;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.character-list-item__content {
-  border-top: 1px solid gray;
-  padding: 0.5rem;
-}
-
-.character-list-item__content.closed {
-  display: none;
-}
-
-.map-controls {
-  padding: 0.5rem 1rem;
-  right: 1rem;
-  display: flex;
-}
-
-.map-controls label {
-  margin: 0;
-}
-
-.map-controls div + div {
-  margin-left: 2rem;
-}
-
 .no-map {
   min-height: 100vh;
   background-image: url(./assets/img/grid.png);
-}
-
-.content {
-  position: relative;
-  padding-top: 5rem;
-  /* ^leave room up top for controls when zoomed out */
-  touch-action: none;
-  /* ^for drag and drop to work on mobile */
-}
-
-.piece {
-  text-align: center;
-  display: inline-block;
-  padding: 1rem;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: grab;
-}
-
-.piece:hover {
-  cursor: grab;
-}
-
-.piece-label {
-  padding: 0.125rem;
-  margin-top: 0.25rem;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 0.75rem;
-  border-radius: 0.25rem;
-  font-weight: normal;
-  white-space: nowrap;
-  max-width: 5rem;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: black;
-
-  @apply tracking-wide;
 }
 
 .content-row {
@@ -262,12 +176,6 @@ textarea {
   border-left: var(--arrow-size) solid transparent;
   border-right: var(--arrow-size) solid transparent;
   border-bottom: var(--arrow-size) solid white;
-}
-
-.radio-group input,
-.radio-group label {
-  display: inline-block;
-  width: auto;
 }
 
 .no-map-message__header {

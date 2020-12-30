@@ -20,7 +20,7 @@ function characterListItem(character, index) {
 
   var charExpanded = character.expanded ? true : false; // handle undefined
 
-  var contentClass = character.expanded ? "" : " closed ";
+  var hidden = character.expanded ? "" : " hidden ";
 
   var arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 
@@ -45,24 +45,32 @@ function characterListItem(character, index) {
   // Template Content
   return `
     <li 
-      class='character-list-item' 
+      class='characterListItem border border-gray rounded my-3 transition-all duration-300 ease-in-out ${
+        charExpanded
+          ? "shadow-high relative z-10 bg-ink-dark"
+          : "shadow-button bg-opacity-75 bg-ink"
+      }' 
       data-id='${character.id}' 
       data-index='${index}'
     > 
-
-      <button data-toggle-character aria-expanded=${charExpanded} class='character-list-item__trigger content-row'> 
+      <button data-toggle-character 
+        aria-expanded=${charExpanded} 
+        class='${
+          charExpanded ? "" : "hover:shadow-high"
+        } p-2 w-full text-white text-left text-base break-all flex items-center justify-between'> 
         <span 
-          class='character-list-item__thumbnail flex-none' 
-          style='background-color: ${charColor}; ${characterBGimg(character)}'>
+          class='inline-block rounded-circle h-6 w-6 border border-black bg-no-repeat bg-center bg-cover flex-none' 
+          style='background-color: ${charColor}; ${characterBGimg(character)}'
+        >
         </span> 
-        <span class='flex-auto'> ${btnCharName} </span> 
-        <span class='flex-none ${arrow}'></span> 
+        <span class='ml-2 flex-auto'> ${btnCharName} </span> 
+        <span class='ml-2 flex-none ${arrow}'></span> 
       </button> 
 
-      <div class='character-list-item__content ${contentClass} '> 
+      <div class='border-t border-gray p-2 ${hidden} '> 
         <fieldset> 
           <legend class='screenreader-only'>${btnCharName}'s Settings</legend> 
-          <div class='content-row py-1' > 
+          <div class='flex items-center justify-between py-1' > 
             <div class='flex-auto'> 
               <label for='name-${character.id}'>Name</label> 
               <input 
@@ -73,7 +81,7 @@ function characterListItem(character, index) {
                 character-data-index='${index}'
               > 
             </div> 
-            <div class='flex-none'> 
+            <div class='flex-none ml-2'> 
               <label for='color-${character.id}'>Color</label> 
               <input 
                 type='color' 

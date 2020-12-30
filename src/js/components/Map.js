@@ -15,7 +15,7 @@ function characterPiece(character, index) {
   var charName = character.name ? character.name : "<em>Untitled</em>";
 
   return (
-    "<div class='piece' draggable='true' id='" +
+    "<div class='piece text-center inline-flex p-4 flex-col items-center cursor-grab hover:cursor-grab' draggable='true' id='" +
     character.id +
     "'" +
     "data-index='" +
@@ -41,7 +41,7 @@ function characterPiece(character, index) {
     ";" +
     characterBGimg(character) +
     "'></div>" +
-    "<span class='piece-label' style='top: " +
+    "<span class='piece-label p-05 mt-1 bg-white bg-opacity-90 text-xs rounded tracking-wide text-black truncate max-w-20' style='top: " +
     characterSize * 1.15 +
     "px;" +
     "'>" +
