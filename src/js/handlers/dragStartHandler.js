@@ -14,5 +14,7 @@ export default function dragStartHandler(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
     DATA_STORE.data.draggedElemMouseOffsetX = event.offsetX;
     DATA_STORE.data.draggedElemMouseOffsetY = event.offsetY;
+
+    event.target.style.cursor = "grabbing";
   }
 }

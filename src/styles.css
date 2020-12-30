@@ -213,6 +213,11 @@ textarea {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
+  cursor: grab;
+}
+
+.piece:hover {
+  cursor: grab;
 }
 
 .piece-label {
