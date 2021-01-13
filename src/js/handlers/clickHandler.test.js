@@ -1,0 +1,52 @@
+import { JSDOM } from "jsdom";
+import {
+  fireEvent,
+  getByText,
+  within,
+  getQueriesForElement,
+} from "@testing-library/dom";
+import "@testing-library/jest-dom/extend-expect";
+import userEvent from "@testing-library/user-event";
+import fs from "fs";
+import path from "path";
+
+import clickHandler from "./clickHandler";
+import addCharacter from "../utils/addCharacter";
+
+// https://dev.to/thawkin3/how-to-unit-test-html-and-vanilla-javascript-without-a-ui-framework-4io
+describe("clickHandler", () => {
+  const html = fs.readFileSync(
+    path.resolve(__dirname, "../../index.html"),
+    "utf8"
+  );
+
+  let dom;
+  let body;
+
+  beforeEach(() => {
+    dom = new JSDOM(html, {
+      runScripts: "dangerously",
+      resources: "usable",
+    });
+    // https://github.com/jsdom/jsdom#loading-subresources
+    body = dom.window.document.body;
+  });
+
+  it("click add character", () => {
+    const addCharacterButton = getByText(body, "Add Character");
+    userEvent.click(addCharacterButton);
+    // expect(getByText(container, "Character 1")).toBeInTheDocument();
+  });
+});
+
+// https://github.com/kentcdodds/dom-testing-library-with-anything/blob/master/vanilla.test.js
+// test("add character", () => {
+//   const button = document.createElement("button");
+//   button.textContent = "Add Character";
+//   button.id = "addCharacter";
+//   const { getByText } = getQueriesForElement(button);
+//   const addCharacterButton = getByText("Add Character");
+//   userEvent.click(addCharacterButton);
+//   expect(clickHandler).toHaveBeenCalled();
+//   // expect(addCharacter).toHaveBeenCalled();
+// });
