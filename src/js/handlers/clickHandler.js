@@ -5,6 +5,8 @@ import removeCharacter from "../utils/removeCharacter";
 import zoomMap from "../utils/zoomMap";
 
 export default function clickHandler(event) {
+  console.log(event.target);
+  console.log(typeof event.target);
   if (!event.target.closest("button")) {
     return;
   }

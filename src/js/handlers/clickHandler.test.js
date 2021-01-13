@@ -5,6 +5,7 @@ import {
   within,
   getQueriesForElement,
   screen,
+  getByRole,
   createEvent,
 } from "@testing-library/dom";
 import "@testing-library/jest-dom/extend-expect";
@@ -17,17 +18,13 @@ import addCharacter from "../utils/addCharacter";
 import { get } from "https";
 
 test("Add Character button adds character", () => {
-  document.body.innerHTML = `
-    <button class="button" id="addCharacter">Add Character</button>
-    <div id="characterList"></div>
-  `;
+  // const container = document.querySelector("#mainControlsContent");
 
   const addCharacterButton = screen.getByText("Add Character");
-  const event = userEvent.click(addCharacterButton, {
-    target: { closest: jest.fn() },
-  });
 
-  const myEvent = createEvent.click(addCharacterButton);
+  const event = userEvent.click(addCharacterButton);
+
+  // const myEvent = createEvent.click(addCharacterButton);
 
   console.log(event);
 
@@ -35,6 +32,26 @@ test("Add Character button adds character", () => {
 
   // expect(screen.getByText("Character 1")).toBeVisible();
 });
+
+// test("Add Character button adds character", () => {
+//   document.body.innerHTML = `
+//     <button class="button" id="addCharacter">Add Character</button>
+//     <div id="characterList"></div>
+//   `;
+
+//   const addCharacterButton = screen.getByRole("button", {
+//     name: /Add Character/i,
+//   });
+//   const event = userEvent.click(addCharacterButton);
+
+//   // const myEvent = createEvent.click(addCharacterButton);
+
+//   console.log(event);
+
+//   clickHandler(event);
+
+//   // expect(screen.getByText("Character 1")).toBeVisible();
+// });
 
 // test("Add Character button adds character", () => {
 //   document.body.innerHTML = `
