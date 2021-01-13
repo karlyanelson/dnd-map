@@ -1,10 +1,11 @@
 import { generateRandomID } from "./utils";
 import { DEFAULT_COLOR } from "../globals/variables";
+import DATA_STORE from "../globals/store";
 
-export default function addCharacter(store) {
-  const numOfCharacters = (store.data.characters.length + 1).toString();
+export default function addCharacter() {
+  const numOfCharacters = (DATA_STORE.data.characters.length + 1).toString();
 
-  const zoomRatio = store.data.zoom / 100;
+  const zoomRatio = DATA_STORE.data.zoom / 100;
   const positiveOrNegative = Math.random() < 0.5 ? -1 : 1;
   const randomNumberX =
     Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
@@ -12,11 +13,11 @@ export default function addCharacter(store) {
     Math.floor(Math.random() * Math.floor(40)) * positiveOrNegative;
   const posX =
     (window.innerWidth / 2 + window.pageXOffset) / zoomRatio -
-    store.data.pieceSize / 2 +
+    DATA_STORE.data.pieceSize / 2 +
     randomNumberX;
   const posY =
     (window.innerHeight / 2 + window.pageYOffset) / zoomRatio -
-    store.data.pieceSize / 2 +
+    DATA_STORE.data.pieceSize / 2 +
     randomNumberY;
 
   var newCharacter = {
@@ -34,5 +35,5 @@ export default function addCharacter(store) {
     y: posY,
     size: 1,
   };
-  store.data.characters.push(newCharacter);
+  DATA_STORE.data.characters.push(newCharacter);
 }

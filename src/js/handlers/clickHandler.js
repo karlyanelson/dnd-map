@@ -28,7 +28,7 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("#addCharacter")) {
-    addCharacter(DATA_STORE);
+    addCharacter();
   }
 
   if (buttonTarget.matches("[data-zoom]")) {
