@@ -3,11 +3,13 @@ import DATA_STORE from "../globals/store";
 import addCharacter from "../utils/addCharacter";
 import removeCharacter from "../utils/removeCharacter";
 import zoomMap from "../utils/zoomMap";
+import doSomething from "../utils/doSomething";
 
 export default function clickHandler(event) {
   console.log("clickHandler ran");
 
   console.log("clickHandler event", event);
+
   // console.log(event.target);
   // console.log(typeof event.target);
   if (!event.target.closest("button")) {
@@ -33,7 +35,8 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("#addCharacter")) {
-    addCharacter();
+    // addCharacter();
+    doSomething();
   }
 
   if (buttonTarget.matches("[data-zoom]")) {

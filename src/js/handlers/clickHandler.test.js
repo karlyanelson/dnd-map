@@ -1,7 +1,8 @@
 import { JSDOM } from "jsdom";
 import {
   fireEvent,
-  getByText,
+  // getByText,
+  // findByText,
   within,
   getQueriesForElement,
   screen,
@@ -78,22 +79,22 @@ import CharacterList from "../components/CharacterList";
 //   expect(screen.getByText("Visible Example")).toBeVisible();
 // });
 
-xtest("click add character", () => {
-  document.body.innerHTML = `
-  <section id="sectionCharacters">
-      <button id="addCharacter"> Add Character</button>
-      <div id="characterList"></div>
-    </section>
-  `;
+// xtest("click add character", () => {
+//   document.body.innerHTML = `
+//   <section id="sectionCharacters">
+//       <button id="addCharacter"> Add Character</button>
+//       <div id="characterList"></div>
+//     </section>
+//   `;
 
-  const container = document.querySelector("#sectionCharacters");
+//   const container = document.querySelector("#sectionCharacters");
 
-  const characterList = CharacterList.render();
-});
+//   const characterList = CharacterList.render();
+// });
 
 // https://dev.to/thawkin3/how-to-unit-test-html-and-vanilla-javascript-without-a-ui-framework-4io
 // https://github.com/thawkin3/dom-testing-demo/tree/master/src
-xtest("test index.html click add character", () => {
+test("test index.html click add character", async () => {
   const html = fs.readFileSync(
     path.resolve(__dirname, "../../../dist/index.html"),
     "utf8"
@@ -102,18 +103,19 @@ xtest("test index.html click add character", () => {
   const dom = new JSDOM(html, {
     url: "http://localhost:1234/",
     runScripts: "dangerously",
-    resources: "usable",
+    // https://github.com/jsdom/jsdom#loading-subresources
+    // resources: "usable",
     beforeParse(window) {
       window.requestAnimationFrame = () => {};
     },
   });
-  // https://github.com/jsdom/jsdom#loading-subresources
-  // const container = dom.window.document.body;
-  const container = dom.window.document.querySelector("#sectionCharacters");
+  const container = dom.window.document.body;
+  // const container = dom.window.document.querySelector("#sectionCharacters");
 
-  const addCharacterButton = getByText(container, "Add Character");
-  fireEvent.click(addCharacterButton);
-  expect(getByText(container, "Character 1")).toBeInTheDocument();
+  const { getByText, findByText } = getQueriesForElement(container);
+  const addCharacterButton = getByText("Add Character");
+  userEvent.click(addCharacterButton);
+  expect(await findByText("I did it!")).toBeInTheDocument();
 });
 
 // https://github.com/kentcdodds/dom-testing-library-with-anything/blob/master/vanilla.test.js

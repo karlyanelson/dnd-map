@@ -4,7 +4,7 @@ import DATA_STORE from "../globals/store";
 const ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
   store: DATA_STORE,
   template: function (props) {
-    console.log("DATA_STORE.data", DATA_STORE.data);
+    // console.log("DATA_STORE.data", DATA_STORE.data);
     var btnText = props.settingsExpanded ? "Hide" : "Show";
     var arrow = props.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
 
