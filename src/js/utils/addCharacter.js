@@ -3,6 +3,7 @@ import { DEFAULT_COLOR } from "../globals/variables";
 import DATA_STORE from "../globals/store";
 
 export default function addCharacter() {
+  console.log("addCharacter ran");
   const numOfCharacters = (DATA_STORE.data.characters.length + 1).toString();
 
   const zoomRatio = DATA_STORE.data.zoom / 100;

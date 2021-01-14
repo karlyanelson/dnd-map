@@ -5,6 +5,7 @@ import { capitalize } from "../utils/utils";
 import characterBGimg from "../utils/characterBGimg";
 
 function characterListItem(character, index) {
+  console.log("characterListItem ran");
   // Sub Template
   function iconList(icon) {
     let selection = icon === character.icon ? "selected" : "";
@@ -165,6 +166,7 @@ function characterListItem(character, index) {
 const CharacterList = new Reef("#characterList", {
   store: DATA_STORE,
   template: function (props) {
+    console.log("CharacterList template ran");
     return "<ul>" + props.characters.map(characterListItem).join("") + "</ul>";
   },
 });

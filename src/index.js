@@ -19,8 +19,7 @@ import renderHandler from "./js/handlers/renderHandler";
 import touchMoveHandler from "./js/handlers/touchMoveHandler";
 
 (function () {
-  console.log("ToggleSettingsBtn", ToggleSettingsBtn);
-  console.log("ToggleSettingsBtn.render()", ToggleSettingsBtn.render());
+  console.log("index.js ran");
   //// Inits
   getDataFromStorage(_.STORAGE_ID);
   ToggleSettingsBtn.render();

@@ -17,6 +17,8 @@ import clickHandler from "./clickHandler";
 import addCharacter from "../utils/addCharacter";
 import { get } from "https";
 
+import CharacterList from "../components/CharacterList";
+
 // test("Add Character button adds character", () => {
 //   // const container = document.querySelector("#mainControlsContent");
 
@@ -33,25 +35,25 @@ import { get } from "https";
 //   // expect(screen.getByText("Character 1")).toBeVisible();
 // });
 
-test("Add Character button adds character", () => {
-  document.body.innerHTML = `
-    <button class="button" id="addCharacter">Add Character</button>
-    <div id="characterList"></div>
-  `;
+// test("Add Character button adds character", () => {
+//   document.body.innerHTML = `
+//     <button class="button" id="addCharacter">Add Character</button>
+//     <div id="characterList"></div>
+//   `;
 
-  const addCharacterButton = screen.getByRole("button", {
-    name: /Add Character/i,
-  });
-  const event = userEvent.click(addCharacterButton);
+//   const addCharacterButton = screen.getByRole("button", {
+//     name: /Add Character/i,
+//   });
+//   const event = userEvent.click(addCharacterButton);
 
-  // const myEvent = createEvent.click(addCharacterButton);
+//   // const myEvent = createEvent.click(addCharacterButton);
 
-  // console.log("event", event);
+//   // console.log("event", event);
 
-  // clickHandler(event);
+//   // clickHandler(event);
 
-  // expect(screen.getByText("Character 1")).toBeVisible();
-});
+//   // expect(screen.getByText("Character 1")).toBeVisible();
+// });
 
 // test("Add Character button adds character", () => {
 //   document.body.innerHTML = `
@@ -76,36 +78,43 @@ test("Add Character button adds character", () => {
 //   expect(screen.getByText("Visible Example")).toBeVisible();
 // });
 
+xtest("click add character", () => {
+  document.body.innerHTML = `
+  <section id="sectionCharacters">
+      <button id="addCharacter"> Add Character</button>
+      <div id="characterList"></div>
+    </section>
+  `;
+
+  const container = document.querySelector("#sectionCharacters");
+
+  const characterList = CharacterList.render();
+});
+
 // https://dev.to/thawkin3/how-to-unit-test-html-and-vanilla-javascript-without-a-ui-framework-4io
 // https://github.com/thawkin3/dom-testing-demo/tree/master/src
-// describe("clickHandler", () => {
-//   const html = fs.readFileSync(
-//     path.resolve(__dirname, "../../../dist/index.html"),
-//     "utf8"
-//   );
+xtest("test index.html click add character", () => {
+  const html = fs.readFileSync(
+    path.resolve(__dirname, "../../../dist/index.html"),
+    "utf8"
+  );
 
-//   let dom;
-//   let body;
+  const dom = new JSDOM(html, {
+    url: "http://localhost:1234/",
+    runScripts: "dangerously",
+    resources: "usable",
+    beforeParse(window) {
+      window.requestAnimationFrame = () => {};
+    },
+  });
+  // https://github.com/jsdom/jsdom#loading-subresources
+  // const container = dom.window.document.body;
+  const container = dom.window.document.querySelector("#sectionCharacters");
 
-//   beforeEach(() => {
-//     dom = new JSDOM(html, {
-//       url: "http://localhost:1234/",
-//       runScripts: "dangerously",
-//       resources: "usable",
-//       beforeParse(window) {
-//         window.requestAnimationFrame = () => {};
-//       },
-//     });
-//     // https://github.com/jsdom/jsdom#loading-subresources
-//     body = dom.window.document.body;
-//   });
-
-//   it("click add character", () => {
-//     const addCharacterButton = getByText(body, "Add Character");
-//     fireEvent.click(addCharacterButton);
-//     expect(getByText(body, "Character 1")).toBeInTheDocument();
-//   });
-// });
+  const addCharacterButton = getByText(container, "Add Character");
+  fireEvent.click(addCharacterButton);
+  expect(getByText(container, "Character 1")).toBeInTheDocument();
+});
 
 // https://github.com/kentcdodds/dom-testing-library-with-anything/blob/master/vanilla.test.js
 // test("add character", () => {

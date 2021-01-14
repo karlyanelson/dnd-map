@@ -1,7 +1,9 @@
-import { screen, getByText, getByRole } from "@testing-library/dom";
+import { getByText, getByRole } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
 import Reef from "reefjs";
+
+import DATA_STORE from "../globals/store";
 
 import ToggleSettingsBtn from "./ToggleSettingsBtn";
 
@@ -41,7 +43,11 @@ test("toggle button says hide when clicked", () => {
 
   const button = getByRole(container, "button");
 
+  console.log("before", store);
+
   userEvent.click(button);
+
+  console.log("after", store);
 
   expect(button).toHaveTextContent("Hide Settings");
 });
