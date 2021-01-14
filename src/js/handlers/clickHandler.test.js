@@ -20,9 +20,11 @@ import { get } from "https";
 
 import CharacterList from "../components/CharacterList";
 
+import fetch from "node-fetch";
+
 test("dist/index.html - build - scripts inline - no Reef :(", async () => {
   // only works with bundled js
-  // bundled js needs to be inline in a script tag in the index.html
+  // only works with inline js
   // works with doSomething() function, but not Reef things
 
   const html = fs.readFileSync(
@@ -47,14 +49,18 @@ test("dist/index.html - build - scripts inline - no Reef :(", async () => {
   expect(await findByText("I did it!")).toBeInTheDocument();
 });
 
-xtest("JSDOM.fromFile('./dist/index.html' - build - inline? - Reef?", async () => {
+xtest("JSDOM.fromFile('./dist/index.html' - build - inline - Reef?", async () => {
   // only works with bundled js
+  // only works with inline js
+  // only works with inline css
   // ideally would work with scripts not inline but doesn't quite yet
 
   const options = {
     runScripts: "dangerously",
-    resources: "usable",
+    // resources: "usable",
   };
+
+  // Error: Uncaught [SecurityError: localStorage is not available for opaque origins] ?
 
   const dom = await JSDOM.fromFile("./dist/index.html", options);
 
@@ -70,7 +76,19 @@ xtest("http://localhost:1234/index.html - localhost - scripts NOT inline - Reef?
   // will load external script tag
   // but need to run localhost at the same time as tests
 
-  const html = fs.readFileSync("http://localhost:1234/index.html");
+  ///// need index.js to not be renamed in dist to get this to work
+  //// need to use RollUp to change dist/src.234234rwer.js to be dist/index.js so that
+  ////     the 'index.js' link referenced in index.html actually resolves
+  // const html = fs.readFileSync(
+  //   path.resolve(__dirname, "../../index.html"),
+  //   "utf8"
+  // );
+  /////
+
+  ////// hacky node-fetch option
+  const localHost = await fetch("http://localhost:1234/index.html");
+  const html = await localHost.text();
+  /////
 
   const dom = new JSDOM(html, {
     url: "http://localhost:1234/",
