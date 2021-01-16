@@ -1,16 +1,19 @@
 import { writable } from "svelte/store";
 
 function createGlobalStore() {
-  const { subscribe, set, update } = writable({ settingsExpanded: true });
+  const defaultData = {
+    settingsExpanded: true,
+  };
+
+  const { subscribe, set, update } = writable(defaultData);
 
   return {
     subscribe,
-    updateData: function (key, content) {
-      update(function (data) {
+    updateData: (key, content) =>
+      update((data) => {
         data[key] = content;
-      });
-    },
-    setData: (content) => set({ key: content }),
+        return data;
+      }),
   };
 }
 
