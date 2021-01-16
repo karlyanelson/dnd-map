@@ -2,7 +2,11 @@ import { writable } from "svelte/store";
 
 function createGlobalStore() {
   const defaultData = {
+    map: null,
     settingsExpanded: true,
+    pieceSize: 24,
+    zoom: 100,
+    characters: [],
   };
 
   const { subscribe, set, update } = writable(defaultData);
