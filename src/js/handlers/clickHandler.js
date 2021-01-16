@@ -1,5 +1,4 @@
 import DATA_STORE from "../globals/store";
-
 import addCharacter from "../utils/addCharacter";
 import removeCharacter from "../utils/removeCharacter";
 import zoomMap from "../utils/zoomMap";
@@ -11,11 +10,11 @@ export default function clickHandler(event) {
 
   let buttonTarget = event.target.closest("button");
 
-  if (buttonTarget.matches("[data-toggle-settings]")) {
-    DATA_STORE.data.settingsExpanded = DATA_STORE.data.settingsExpanded
-      ? false
-      : true;
-  }
+  // if (buttonTarget.matches("[data-toggle-settings]")) {
+  //   DATA_STORE.data.settingsExpanded = DATA_STORE.data.settingsExpanded
+  //     ? false
+  //     : true;
+  // }
 
   if (buttonTarget.matches("[data-toggle-character]")) {
     var characterContainer = buttonTarget.closest(".characterListItem");

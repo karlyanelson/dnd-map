@@ -7,9 +7,9 @@ export default function renderHandler() {
   _.characterCount.textContent = DATA_STORE.data.characters.length;
   _.mapSrcLabel.textContent = DATA_STORE.data.map ? "Change Map" : "Upload Map";
 
-  DATA_STORE.data.settingsExpanded
-    ? _.mainControlsContent.classList.remove("collapsed")
-    : _.mainControlsContent.classList.add("collapsed");
+  // DATA_STORE.data.settingsExpanded
+  //   ? _.mainControlsContent.classList.remove("collapsed")
+  //   : _.mainControlsContent.classList.add("collapsed");
 
   DATA_STORE.data.map
     ? document.body.classList.remove("no-map")

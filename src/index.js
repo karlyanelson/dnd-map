@@ -7,7 +7,8 @@ import getDataFromStorage from "./js/utils/getDataFromStorage";
 // Components
 import CharacterList from "./js/components/CharacterList";
 import Map from "./js/components/Map";
-import ToggleSettingsBtn from "./js/components/ToggleSettingsBtn";
+// import ToggleSettingsBtn from "./js/components/ToggleSettingsBtn";
+import ToggleSettingsButton from "./js/components/ToggleSettingsButton";
 
 //Event Handlers
 import clickHandler from "./js/handlers/clickHandler";
@@ -21,9 +22,13 @@ import touchMoveHandler from "./js/handlers/touchMoveHandler";
 (function () {
   //// Inits
   getDataFromStorage(_.STORAGE_ID);
-  ToggleSettingsBtn.render();
+  // ToggleSettingsBtn.render();
   Map.render();
   CharacterList.render();
+
+  new ToggleSettingsButton({
+    target: document.querySelector("#toggleSettingsBtn"),
+  });
 
   //// Event Listeners
   document.addEventListener("render", renderHandler, false);
