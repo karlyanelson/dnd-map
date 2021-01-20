@@ -37,10 +37,7 @@ function addCharacter() {
     size: 1,
   };
 
-  const charactersArray = $globalStore.characters;
-  charactersArray.push(newCharacter);
-
-  globalStore.updateData('characters', charactersArray)
+  globalStore.addCharacter(newCharacter)
 }
 
 </script>

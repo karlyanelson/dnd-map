@@ -16,9 +16,9 @@ function createGlobalStore() {
   return {
     subscribe,
     set,
-    updateData: (key, content) =>
+    updateData: (key, value) =>
       update((data) => {
-        data[key] = content;
+        data[key] = value;
         localStorage.setItem(_.STORAGE_ID, JSON.stringify(data));
         return data;
       }),
@@ -26,6 +26,12 @@ function createGlobalStore() {
       update((data) => {
         data.characters[index][key] = value;
         localStorage.setItem(_.STORAGE_ID, JSON.stringify(data));
+        return data;
+      });
+    },
+    addCharacter: (character) => {
+      update((data) => {
+        data.characters.push(character);
         return data;
       });
     },

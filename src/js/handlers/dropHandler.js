@@ -22,11 +22,7 @@ export default function dropHandler(event, store, storeData) {
 
   const zoomRatio = storeData.zoom / 100;
 
-  // const character = $globalStore.characters[characterIndex];
-
   store.updateCharacter(characterIndex, "dragged", true);
-
-  // character.dragged = true;
 
   if (event.type === "touchend") {
     draggedElemPosX =
@@ -40,7 +36,4 @@ export default function dropHandler(event, store, storeData) {
 
   store.updateCharacter(characterIndex, "x", draggedElemPosX / zoomRatio);
   store.updateCharacter(characterIndex, "y", draggedElemPosY / zoomRatio);
-
-  // character.x = draggedElemPosX / zoomRatio;
-  // character.y = draggedElemPosY / zoomRatio;
 }
