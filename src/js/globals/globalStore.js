@@ -1,3 +1,4 @@
+import * as _ from "./variables";
 import { writable } from "svelte/store";
 
 function createGlobalStore() {
@@ -16,6 +17,7 @@ function createGlobalStore() {
     updateData: (key, content) =>
       update((data) => {
         data[key] = content;
+        localStorage.setItem(_.STORAGE_ID, JSON.stringify(data));
         return data;
       }),
   };
