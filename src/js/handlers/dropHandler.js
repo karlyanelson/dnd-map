@@ -1,6 +1,4 @@
-import DATA_STORE from "../globals/store";
-
-export default function dropHandler(event) {
+export default function dropHandler(event, store, storeData) {
   let draggedElemPosX;
   let draggedElemPosY;
   let draggedElemId;
@@ -22,24 +20,27 @@ export default function dropHandler(event) {
     return;
   }
 
-  const zoomRatio = DATA_STORE.data.zoom / 100;
+  const zoomRatio = storeData.zoom / 100;
 
-  const character = DATA_STORE.data.characters[characterIndex];
+  // const character = $globalStore.characters[characterIndex];
 
-  character.dragged = true;
+  store.updateCharacter(characterIndex, "dragged", true);
+
+  // character.dragged = true;
 
   if (event.type === "touchend") {
     draggedElemPosX =
-      DATA_STORE.data.currentTouchPosX -
-      DATA_STORE.data.draggedElemMouseOffsetX;
+      storeData.currentTouchPosX - storeData.draggedElemMouseOffsetX;
     draggedElemPosY =
-      DATA_STORE.data.currentTouchPosY -
-      DATA_STORE.data.draggedElemMouseOffsetY;
+      storeData.currentTouchPosY - storeData.draggedElemMouseOffsetY;
   } else {
-    draggedElemPosX = event.pageX - DATA_STORE.data.draggedElemMouseOffsetX;
-    draggedElemPosY = event.pageY - DATA_STORE.data.draggedElemMouseOffsetY;
+    draggedElemPosX = event.pageX - storeData.draggedElemMouseOffsetX;
+    draggedElemPosY = event.pageY - storeData.draggedElemMouseOffsetY;
   }
 
-  character.x = draggedElemPosX / zoomRatio;
-  character.y = draggedElemPosY / zoomRatio;
+  store.updateCharacter(characterIndex, "x", draggedElemPosX / zoomRatio);
+  store.updateCharacter(characterIndex, "y", draggedElemPosY / zoomRatio);
+
+  // character.x = draggedElemPosX / zoomRatio;
+  // character.y = draggedElemPosY / zoomRatio;
 }
