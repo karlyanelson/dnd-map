@@ -8,13 +8,17 @@ let arrow = $globalStore.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down
 function clickHandler(event) {
   if ($globalStore.settingsExpanded === true) {
     globalStore.updateData('settingsExpanded', false);
-    console.log('globalStore', $globalStore)
+    btnText = "Show";
+    arrow = "arrow arrow-down";
     _.mainControlsContent.classList.add("collapsed");
   } else {
     globalStore.updateData('settingsExpanded', true);
+    btnText = "Hide";
+    arrow = "arrow arrow-up";
     _.mainControlsContent.classList.remove("collapsed");
   }
 }
+
 </script>
 
 <button 
@@ -25,15 +29,3 @@ function clickHandler(event) {
   <span>{btnText} Settings</span>
   <span class={`ml-2 ${arrow}`}></span>
 </button>
-
-
-<!-- <button 
-  on:click="{() => $globalStore.settingsExpanded = false}"
-  data-toggle-settings 
-  class="button-outline flex items-center justify-between" 
-  aria-expanded={$globalStore.settingsExpanded}
-  >
-  <span>{$globalStore.settingsExpanded}</span>
-  <span>{btnText} Settings</span>
-  <span class={`ml-2 ${arrow}`}></span>
-</button> -->

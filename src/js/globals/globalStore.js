@@ -14,6 +14,7 @@ function createGlobalStore() {
 
   return {
     subscribe,
+    set,
     updateData: (key, content) =>
       update((data) => {
         data[key] = content;
