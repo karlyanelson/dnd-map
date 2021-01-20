@@ -3,7 +3,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
-  purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
+  purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js", , "src/**/*.svelte"],
   theme: {
     extend: {
       borderRadius: {

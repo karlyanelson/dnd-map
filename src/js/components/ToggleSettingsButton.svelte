@@ -1,24 +1,14 @@
 <script>
 import { globalStore } from "../globals/globalStore";
-import * as _ from "../globals/variables";
 
-let btnText = $globalStore.settingsExpanded ? "Hide" : "Show";
-let arrow = $globalStore.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
+export let open = true;
+
+$: btnText = open ? "Hide" : "Show";
+$: arrow = open ? "arrow arrow-up" : "arrow arrow-down";
 
 function clickHandler(event) {
-  if ($globalStore.settingsExpanded === true) {
-    globalStore.updateData('settingsExpanded', false);
-    btnText = "Show";
-    arrow = "arrow arrow-down";
-    _.mainControlsContent.classList.add("collapsed");
-  } else {
-    globalStore.updateData('settingsExpanded', true);
-    btnText = "Hide";
-    arrow = "arrow arrow-up";
-    _.mainControlsContent.classList.remove("collapsed");
-  }
+  globalStore.updateData('settingsExpanded', !open)
 }
-
 </script>
 
 <button 

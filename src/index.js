@@ -1,59 +1,62 @@
-// Globals
-import * as _ from "./js/globals/variables";
+import App from "./js/components/App";
 
-// Utils
-import getDataFromStorage from "./js/utils/getDataFromStorage";
+const dndmap = new App({
+  target: document.querySelector("#app"),
+});
 
-// Components
-import CharacterList from "./js/components/CharacterList";
-import Map from "./js/components/Map";
-// import ToggleSettingsBtn from "./js/components/ToggleSettingsBtn";
-import ToggleSettingsButton from "./js/components/ToggleSettingsButton";
+export default dndmap;
 
-//Event Handlers
-import clickHandler from "./js/handlers/clickHandler";
-import dragEndHandler from "./js/handlers/dragEndHandler";
-import dragStartHandler from "./js/handlers/dragStartHandler";
-import dropHandler from "./js/handlers/dropHandler";
-import inputHandler from "./js/handlers/inputHandler";
-import renderHandler from "./js/handlers/renderHandler";
-import touchMoveHandler from "./js/handlers/touchMoveHandler";
+// // Globals
+// import * as _ from "./js/globals/variables";
 
-(function () {
-  //// Inits
-  getDataFromStorage(_.STORAGE_ID);
-  // ToggleSettingsBtn.render();
-  Map.render();
-  CharacterList.render();
+// // Utils
+// import getDataFromStorage from "./js/utils/getDataFromStorage";
 
-  new ToggleSettingsButton({
-    target: document.querySelector("#toggleSettingsBtn"),
-  });
+// // Components
+// import CharacterList from "./js/components/CharacterList";
+// import Map from "./js/components/Map";
+// import ToggleSettingsButton from "./js/components/ToggleSettingsButton";
 
-  //// Event Listeners
-  document.addEventListener("render", renderHandler, false);
+// //Event Handlers
+// import clickHandler from "./js/handlers/clickHandler";
+// import dragEndHandler from "./js/handlers/dragEndHandler";
+// import dragStartHandler from "./js/handlers/dragStartHandler";
+// import dropHandler from "./js/handlers/dropHandler";
+// import inputHandler from "./js/handlers/inputHandler";
+// import renderHandler from "./js/handlers/renderHandler";
+// import touchMoveHandler from "./js/handlers/touchMoveHandler";
 
-  document.addEventListener("input", inputHandler, false);
+// (function () {
+//   //// Inits
+//   getDataFromStorage(_.STORAGE_ID);
+//   // ToggleSettingsBtn.render();
+//   Map.render();
+//   CharacterList.render();
 
-  document.addEventListener("click", clickHandler, false);
+//   //// Event Listeners
+//   document.addEventListener("render", renderHandler, false);
 
-  document.addEventListener("dragstart", dragStartHandler, false);
+//   document.addEventListener("input", inputHandler, false);
 
-  document.addEventListener("touchstart", dragStartHandler, false);
+//   document.addEventListener("click", clickHandler, false);
 
-  document.addEventListener("touchmove", touchMoveHandler, false);
+//   document.addEventListener("dragstart", dragStartHandler, false);
 
-  document.addEventListener(
-    "dragover",
-    function (event) {
-      event.preventDefault();
-    },
-    false
-  );
+//   document.addEventListener("touchstart", dragStartHandler, false);
 
-  document.addEventListener("drop", dropHandler, false);
+//   document.addEventListener("touchmove", touchMoveHandler, false);
 
-  document.addEventListener("touchend", dropHandler, false);
+//   document.addEventListener(
+//     "dragover",
+//     function (event) {
+//       event.preventDefault();
+//     },
+//     false
+//   );
 
-  document.addEventListener("dragend", dragEndHandler, false);
-})();
+//   document.addEventListener("drop", dropHandler, false);
+
+//   document.addEventListener("touchend", dropHandler, false);
+
+//   document.addEventListener("dragend", dragEndHandler, false);
+// })();
