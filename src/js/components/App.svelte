@@ -8,19 +8,6 @@
 
   import getDataFromStorage from "../utils/getDataFromStorage"
 
-  // const storedData = localStorage.getItem(_.STORAGE_ID);
-  // const emptyData = {
-  //   // map: "https://i.imgur.com/KYVBIZd.jpeg",
-  //   map: null,
-  //   settingsExpanded: true,
-  //   pieceSize: 24,
-  //   zoom: 100,
-  //   characters: [],
-  // };
-  // const storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
-
-  // globalStore.set(storedDataObject)
-
   getDataFromStorage(_.STORAGE_ID, globalStore);
 
   $globalStore.map
