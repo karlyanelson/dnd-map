@@ -11,9 +11,9 @@ export default function renderHandler() {
   //   ? _.mainControlsContent.classList.remove("collapsed")
   //   : _.mainControlsContent.classList.add("collapsed");
 
-  DATA_STORE.data.map
-    ? document.body.classList.remove("no-map")
-    : document.body.classList.add("no-map");
+  // DATA_STORE.data.map
+  //   ? document.body.classList.remove("no-map")
+  //   : document.body.classList.add("no-map");
 
   localStorage.setItem(_.STORAGE_ID, JSON.stringify(DATA_STORE.data));
 }

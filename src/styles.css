@@ -138,19 +138,6 @@ textarea {
   @apply shadow-none;
 }
 
-#mainControls.collapsed {
-  @apply pt-2 pb-2;
-  bottom: inherit;
-}
-
-#mainControls.collapsed header {
-  padding: 0;
-}
-
-#mainControls.collapsed #mainControlsContent {
-  display: none;
-}
-
 .no-map {
   min-height: 100vh;
   background-image: url(./assets/img/grid.png);
@@ -184,28 +171,6 @@ textarea {
   border-bottom: var(--arrow-size) solid white;
 }
 
-.no-map-message__header {
-  font-size: 3rem;
-}
-
-.no-map-message__text {
-  font-size: 1.5rem;
-  line-height: 1.4;
-}
-
-.no-map-message__upload input {
-  width: auto;
-  margin: 0 auto;
-}
-
-.no-map-message {
-  max-width: 40rem;
-  margin: 0 auto;
-  text-align: center;
-  padding: 1rem;
-  min-height: 80vh;
-}
-
 /* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
 .screenreader-only {
   position: absolute;
@@ -224,17 +189,4 @@ textarea {
 
 .contact button {
   margin-top: 1rem;
-}
-
-@media (max-width: 640px) {
-  .map-controls {
-    top: initial;
-    right: initial;
-    bottom: 1rem;
-    left: 1rem;
-  }
-
-  .main-controls {
-    bottom: 5rem;
-  }
 }

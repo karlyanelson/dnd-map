@@ -1,6 +1,4 @@
-import DATA_STORE from "../globals/store";
-
-export default function getDataFromStorage(id) {
+export default function getDataFromStorage(id, store) {
   const storedData = localStorage.getItem(id);
   const emptyData = {
     // map: "https://i.imgur.com/KYVBIZd.jpeg",
@@ -11,5 +9,6 @@ export default function getDataFromStorage(id) {
     characters: [],
   };
   const storedDataObject = storedData ? JSON.parse(storedData) : emptyData;
-  DATA_STORE.data = storedDataObject;
+
+  store.set(storedDataObject);
 }

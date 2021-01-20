@@ -35,6 +35,7 @@ module.exports = {
       },
       inset: {
         4: "1rem",
+        20: "5rem",
       },
       margin: {
         "05": ".125rem",

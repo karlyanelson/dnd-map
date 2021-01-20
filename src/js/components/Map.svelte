@@ -15,3 +15,22 @@
     </p>
   </div>
 </div>
+
+<style>
+  .no-map-message__header {
+  font-size: 3rem;
+}
+
+.no-map-message__text {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.no-map-message {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+  min-height: 80vh;
+}
+</style>
