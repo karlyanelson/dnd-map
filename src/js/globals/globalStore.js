@@ -32,6 +32,7 @@ function createGlobalStore() {
     addCharacter: (character) => {
       update((data) => {
         data.characters.push(character);
+        localStorage.setItem(_.STORAGE_ID, JSON.stringify(data));
         return data;
       });
     },

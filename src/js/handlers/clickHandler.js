@@ -16,19 +16,19 @@ export default function clickHandler(event) {
   //     : true;
   // }
 
-  if (buttonTarget.matches("[data-toggle-character]")) {
-    var characterContainer = buttonTarget.closest(".characterListItem");
+  // if (buttonTarget.matches("[data-toggle-character]")) {
+  //   var characterContainer = buttonTarget.closest(".characterListItem");
 
-    if (characterContainer) {
-      var characterIndex = characterContainer.getAttribute("data-index");
-      var character = DATA_STORE.data.characters[characterIndex];
-      character.expanded = character.expanded ? false : true;
-    }
-  }
+  //   if (characterContainer) {
+  //     var characterIndex = characterContainer.getAttribute("data-index");
+  //     var character = DATA_STORE.data.characters[characterIndex];
+  //     character.expanded = character.expanded ? false : true;
+  //   }
+  // }
 
-  if (buttonTarget.matches("#addCharacter")) {
-    addCharacter();
-  }
+  // if (buttonTarget.matches("#addCharacter")) {
+  //   addCharacter();
+  // }
 
   if (buttonTarget.matches("[data-zoom]")) {
     zoomMap(buttonTarget.getAttribute("data-zoom"));

@@ -1,7 +1,7 @@
 <script>
-  import { globalStore } from "../globals/globalStore";
+import { globalStore } from "../globals/globalStore";
 import characterBGimg from "../utils/characterBGimg";
-  import CharacterPiece from "./CharacterPiece.svelte";
+import CharacterPiece from "./CharacterPiece.svelte";
 
 //   <div id="mapContainer" class="relative pt-2 touch-action-none">
 //   <!--  ^leave room up top for controls when zoomed out; need touch action for drag and drop to work on mobile -->
@@ -25,7 +25,7 @@ import characterBGimg from "../utils/characterBGimg";
 {/each}
 
 <style>
-  .no-map-message__header {
+  /* .no-map-message__header {
   font-size: 3rem;
 }
 
@@ -40,5 +40,5 @@ import characterBGimg from "../utils/characterBGimg";
   text-align: center;
   padding: 1rem;
   min-height: 80vh;
-}
+} */
 </style>

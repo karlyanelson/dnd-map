@@ -1,7 +1,8 @@
 export default function getDataFromStorage(id, store) {
   const storedData = localStorage.getItem(id);
+  // TODO: validate storedData before setting store to that data
+
   const emptyData = {
-    // map: "https://i.imgur.com/KYVBIZd.jpeg",
     map: null,
     settingsExpanded: true,
     pieceSize: 24,

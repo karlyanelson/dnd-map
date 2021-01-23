@@ -2,6 +2,7 @@
   import { generateRandomID } from "../utils/utils";
   import { DEFAULT_COLOR } from "../globals/variables";
   import { globalStore } from "../globals/globalStore";
+  import CharacterListItem from "./CharacterListItem";
 
 function addCharacter() {
   const numOfCharacters = ($globalStore.characters.length + 1).toString();
@@ -49,5 +50,12 @@ function addCharacter() {
     </h2>
     <button on:click={addCharacter} class="button" id="addCharacter">Add Character</button>
   </div>
-  <div id="characterList"></div>
+  <div id="characterList">
+    <ul>
+      {#each $globalStore.characters as character, index}
+        <CharacterListItem character={character} index={index} />
+      {/each}
+    </ul>
+    
+  </div>
 </section>
