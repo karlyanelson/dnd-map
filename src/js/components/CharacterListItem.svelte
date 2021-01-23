@@ -29,7 +29,11 @@ function iconList(icon) {
   }
 
 function toggleCharacterOpen(event) {
-  globalStore.updateCharacter(index, 'expanded', character.expanded ? false : true)
+  globalStore.updateCharacter(index, 'expanded', !character.expanded)
+}
+
+function removeCharacter(event) {
+  globalStore.removeCharacter(index);
 }
 
 const iconSelectorContent = `
@@ -85,7 +89,7 @@ const iconSelectorContent = `
               <input 
                 placeholder='Enter name...' type='text' 
                 character-data-type='name' 
-                value='{character.name}' 
+                bind:value={$globalStore.characters[index].name}
                 id='name-{character.id}' 
                 character-data-index='{index}'
               > 
@@ -95,7 +99,7 @@ const iconSelectorContent = `
               <input 
                 type='color' 
                 character-data-type='color' 
-                value='{charColor}' 
+                bind:value={$globalStore.characters[index].color}
                 id='color-{character.id}' 
                 character-data-index='{index}'
               > 
@@ -107,7 +111,7 @@ const iconSelectorContent = `
             <select 
               name='Icon' 
               character-data-type='icon' 
-              value='{character.icon}' 
+              bind:value={$globalStore.characters[index].icon}
               id='char-icon-{character.id}' 
               character-data-index='{index}'
             > 
@@ -121,7 +125,7 @@ const iconSelectorContent = `
               placeholder='None' 
               type='url' 
               character-data-type='image' 
-              value='{character.image}' 
+              bind:value={$globalStore.characters[index].image}
               id='char-image-{character.id}' 
               character-data-index='{index}'
             > 
@@ -133,7 +137,7 @@ const iconSelectorContent = `
               <input 
                 type='number' 
                 character-data-type='size' 
-                value='{character.size}' 
+                bind:value={$globalStore.characters[index].size}
                 id='size-{character.id}' 
                 character-data-index='{index}'
               > 
@@ -146,7 +150,7 @@ const iconSelectorContent = `
                   type='number' 
                   step='5' 
                   character-data-type='x' 
-                  value='{character.x}' 
+                  bind:value={$globalStore.characters[index].x}
                   id='posX-{character.id}' 
                   character-data-index='{index}'
                 > 
@@ -157,13 +161,13 @@ const iconSelectorContent = `
               <input 
                 type='number' 
                 character-data-type='y' 
-                value='{character.y}' 
+                bind:value={$globalStore.characters[index].y}
                 id='posY-{character.id}' 
                 character-data-index='{index}'
               > 
             </div> 
 
-            <button data-remove class='button-error' character-data-index='{index}'>Remove</button> 
+            <button on:click={removeCharacter} data-remove class='button-error' character-data-index='{index}'>Remove</button> 
           </div> 
 
         </fieldset> 

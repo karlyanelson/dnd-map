@@ -36,6 +36,13 @@ function createGlobalStore() {
         return data;
       });
     },
+    removeCharacter: (index) => {
+      update((data) => {
+        data.characters.splice(index, 1);
+        localStorage.setItem(_.STORAGE_ID, JSON.stringify(data));
+        return data;
+      });
+    },
   };
 }
 
