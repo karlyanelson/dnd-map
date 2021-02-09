@@ -5,7 +5,7 @@ import characterBGimg from "../utils/characterBGimg";
 import { globalStore } from "../globals/globalStore";
 
 export let character;
-export let index
+export let index;
 
 $:charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
@@ -18,6 +18,7 @@ $:arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 $:btnCharName = character.name ? character.name : "<em>Untitled</em>";
 
 $:charBGImg = characterBGimg(character);
+
 
 function iconList(icon) {
     let selection = icon === character.icon ? "selected" : "";
