@@ -6,7 +6,7 @@
   // Components
   import MainControls from "./MainControls";
   import MapControls from "./MapControls";
-  import Map from "./Map";
+  import MapWithPieces from "./MapWithPieces";
 
   // Utils
   import getDataFromStorage from "../utils/getDataFromStorage"
@@ -52,5 +52,5 @@
 
 <MainControls />
 <MapControls />
-<Map />
+<MapWithPieces />
 
