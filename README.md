@@ -10,7 +10,7 @@ Everything is saved locally to your browser.
 
 ## Colophon
 
-Built just using Vanilla JS and [Reef](https://reefjs.com/).
+Built using [Svelte](https://svelte.dev/).
 
 Bundled using [Parcel](https://parceljs.org/)
 
