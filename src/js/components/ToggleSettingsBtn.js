@@ -7,16 +7,11 @@ const ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
     var btnText = props.settingsExpanded ? "Hide" : "Show";
     var arrow = props.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
 
-    return (
-      '<button data-toggle-settings class="button-outline flex items-center justify-between" aria-expanded="' +
-      props.settingsExpanded +
-      '">' +
-      "<span>" +
-      btnText +
-      ' Settings</span><span class="ml-2 ' +
-      arrow +
-      '"></span></button>'
-    );
+    return `
+      <button data-toggle-settings class="button-outline flex items-center justify-between" aria-expanded=${props.settingsExpanded}">
+        <span>${btnText} Settings</span>
+        <span class="ml-2 ${arrow}"></span>
+      </button>`;
   },
 });
 
