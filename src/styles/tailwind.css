@@ -1,0 +1,192 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+:root {
+	--arrow-size: 0.4rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*:focus {
+	@apply outline-custom;
+}
+
+button:focus {
+	@apply outline-custom;
+}
+
+a {
+	text-decoration: underline;
+}
+
+body {
+	@apply bg-black text-white;
+}
+
+body,
+button,
+textarea,
+input,
+select {
+	@apply font-dnd;
+}
+
+button,
+input,
+label,
+textarea,
+select {
+	@apply text-sm;
+	line-height: normal;
+}
+textarea,
+input,
+select {
+	@apply rounded border-2 border-black text-ink p-1 w-full;
+}
+
+label,
+input,
+select {
+	@apply block;
+}
+
+label {
+	@apply mt-1 mb-2 ml-0;
+}
+
+fieldset {
+	@apply m-0 p-0;
+}
+
+img {
+	@apply max-w-none;
+}
+
+a {
+	@apply text-white;
+}
+
+h1,
+h2 {
+	@apply font-normal;
+}
+
+h1 {
+	@apply text-2xl m-0;
+}
+
+h2 {
+	@apply text-xl my-2;
+}
+
+.touch-action-none {
+	touch-action: none;
+}
+
+.button {
+	@apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded font-semibold tracking-wide;
+}
+
+.button:active {
+	@apply shadow-none;
+}
+
+.button:focus {
+	@apply outline-custom;
+	outline-offset: -2px;
+}
+
+.button-outline {
+	@apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded font-semibold tracking-wide;
+}
+
+.button-error {
+	@apply text-error bg-transparent inline-block border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
+}
+
+input[type='number'] {
+	@apply max-w-14;
+}
+
+input[type='color'] {
+	border: none;
+	padding: 0;
+	height: 1.75rem;
+	width: 3rem;
+}
+
+input[type='file'] {
+	color: white;
+	padding: 0;
+}
+
+textarea {
+	@apply w-full min-w-full min-h-40;
+}
+
+[type='file']:focus + label {
+	@apply outline-custom;
+}
+
+[type='file']:active + label {
+	@apply shadow-none;
+}
+
+.no-map {
+	min-height: 100vh;
+	background-image: url(./assets/img/grid.png);
+}
+
+.content-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* since flex gap isn't well supported yet */
+.content-row > *:not(:first-child) {
+	@apply ml-2;
+}
+
+.arrow {
+	width: 0;
+	height: 0;
+}
+
+.arrow-down {
+	border-left: var(--arrow-size) solid transparent;
+	border-right: var(--arrow-size) solid transparent;
+	border-top: var(--arrow-size) solid white;
+}
+
+.arrow-up {
+	border-left: var(--arrow-size) solid transparent;
+	border-right: var(--arrow-size) solid transparent;
+	border-bottom: var(--arrow-size) solid white;
+}
+
+/* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
+.screenreader-only {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.contact a {
+	text-align: center;
+	display: inline-block;
+	margin: 2rem;
+}
+
+.contact button {
+	margin-top: 1rem;
+}

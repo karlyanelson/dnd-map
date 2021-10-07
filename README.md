@@ -1,24 +1,38 @@
-# DnD Map
+# create-svelte
 
-↗️ [Go to the Site](https://dnd-map.netlify.app/)
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
 
-## About
+## Creating a project
 
-A simple Dungeons and Dragons virtual tabletop. Upload a map and add customizable character pieces that you can drag around the map.
+If you're seeing this, you've probably already done this step. Congrats!
 
-Everything is saved locally to your browser.
+```bash
+# create a new project in the current directory
+npm init svelte@next
 
-## Colophon
+# create a new project in my-app
+npm init svelte@next my-app
+```
 
-Built using [Svelte](https://svelte.dev/).
+> Note: the `@next` is temporary
 
-Bundled using [Parcel](https://parceljs.org/)
+## Developing
 
-Character icons are from [game-icons.net](https://game-icons.net/).
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-## Feedback
+```bash
+npm run dev
 
-↗️ [Give Feedback](https://dnd-map.netlify.app/contact/) or
-↗️ [Open Github Issue](https://github.com/karlyanelson/dnd-map/issues/new)
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-Let me know if you find a bug or have any feature requests!
+## Building
+
+Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+
+```bash
+npm run build
+```
+
+> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.

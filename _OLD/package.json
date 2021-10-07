@@ -1,0 +1,32 @@
+{
+  "name": "dnd-map",
+  "version": "1.0.0",
+  "description": "↗️ [Go to the Site](https://dnd-map.netlify.app/)",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development parcel src/index.html",
+    "build": "NODE_ENV=production parcel build src/index.html",
+    "clean": "rm -rf dist && rm -rf .cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlyanelson/dnd-map.git"
+  },
+  "author": "Karly Nelson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlyanelson/dnd-map/issues"
+  },
+  "homepage": "https://github.com/karlyanelson/dnd-map#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-asset-copier": "^1.1.0",
+    "parcel-plugin-svelte": "^4.0.6",
+    "reefjs": "^7.6.2",
+    "svelte": "^3.31.2",
+    "tailwindcss": "1.9.5"
+  },
+  "dependencies": {},
+  "assetsPath": "src/assets"
+}
