@@ -16,17 +16,17 @@ function characterListItem(character, index) {
   }
 
   // Variables
-  var charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  var charExpanded = character.expanded ? true : false; // handle undefined
+  let charExpanded = character.expanded ? true : false; // handle undefined
 
-  var hidden = character.expanded ? "" : " hidden ";
+  let hidden = character.expanded ? "" : " hidden ";
 
-  var arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
+  let arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 
-  var btnCharName = character.name ? character.name : "<em>Untitled</em>";
+  let btnCharName = character.name ? character.name : "<em>Untitled</em>";
 
-  var iconSelectorContent = `
+  let iconSelectorContent = `
     <option></option>
 
     <optgroup label='Classes'>
@@ -118,7 +118,7 @@ function characterListItem(character, index) {
             > 
           </div> 
 
-          <div class='flex justify-between items-end py-1'> 
+          <div class='grid grid-cols-3 py-1 gap-2'> 
             <div> 
               <label for='size-${character.id}'>Size</label> 
               <input 
@@ -153,19 +153,40 @@ function characterListItem(character, index) {
                 character-data-index='${index}'
               > 
             </div> 
-
-            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
           </div> 
-
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
+            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate</button> 
+          </div>
         </fieldset> 
       </div> 
     </li>`;
 }
 
+const expandCollapse = `
+  <div class="py-2">
+    <button data-characters-expanded="false" class="button-outline button-small mr-2">– Collapse All</button>
+    <button data-characters-expanded="true" class="button-outline button-small">+ Expand All</button>
+  </div>
+`;
+
+const removeBtn = `
+  <div class="text-center mt-6">
+    <button id="removeAllBtn" remove-confirmed="false" class="button-danger">Remove All Characters</button>
+  </div>
+`;
 const CharacterList = new Reef("#characterList", {
   store: DATA_STORE,
   template: function (props) {
-    return "<ul>" + props.characters.map(characterListItem).join("") + "</ul>";
+    if (props.characters.length > 0) {
+      return `
+      ${expandCollapse}
+      <ul>${props.characters.map(characterListItem).join("")}</ul>
+      ${removeBtn}
+      `;
+    } else {
+      return "";
+    }
   },
 });
 

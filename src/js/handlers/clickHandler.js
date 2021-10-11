@@ -2,6 +2,8 @@ import DATA_STORE from "../globals/store";
 
 import addCharacter from "../utils/addCharacter";
 import removeCharacter from "../utils/removeCharacter";
+import removeAllCharacters from "../utils/removeAllCharacters";
+import duplicateCharacter from "../utils/duplicateCharacter";
 import zoomMap from "../utils/zoomMap";
 
 export default function clickHandler(event) {
@@ -18,11 +20,11 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-toggle-character]")) {
-    var characterContainer = buttonTarget.closest(".characterListItem");
+    let characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
-      var characterIndex = characterContainer.getAttribute("data-index");
-      var character = DATA_STORE.data.characters[characterIndex];
+      let characterIndex = characterContainer.getAttribute("data-index");
+      let character = DATA_STORE.data.characters[characterIndex];
       character.expanded = character.expanded ? false : true;
     }
   }
@@ -35,12 +37,42 @@ export default function clickHandler(event) {
     zoomMap(buttonTarget.getAttribute("data-zoom"));
   }
 
+  if (buttonTarget.matches("#removeAllBtn")) {
+    removeAllCharacters(buttonTarget, false);
+  }
+
+  if (buttonTarget.matches("#removeAllCancelBtn")) {
+    removeAllCharacters(buttonTarget, true);
+  }
+
   if (buttonTarget.matches("[data-remove]")) {
-    var characterContainer = buttonTarget.closest(".characterListItem");
+    let characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
-      var characterIndex = characterContainer.getAttribute("data-index");
+      let characterIndex = characterContainer.getAttribute("data-index");
       removeCharacter(characterIndex);
     }
+  }
+
+  if (buttonTarget.matches("[data-duplicate]")) {
+    let characterContainer = buttonTarget.closest(".characterListItem");
+
+    if (characterContainer) {
+      let characterIndex = characterContainer.getAttribute("data-index");
+      duplicateCharacter(characterIndex);
+    }
+  }
+
+  if (buttonTarget.matches("[data-characters-expanded]")) {
+    let shouldBeExpanded = buttonTarget.getAttribute(
+      "data-characters-expanded"
+    );
+
+    const expandedCharacters = DATA_STORE.data.characters.map((char) => ({
+      ...char,
+      expanded: shouldBeExpanded === "true",
+    }));
+
+    DATA_STORE.data.characters = expandedCharacters;
   }
 }
