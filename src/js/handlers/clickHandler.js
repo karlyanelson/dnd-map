@@ -62,4 +62,17 @@ export default function clickHandler(event) {
       duplicateCharacter(characterIndex);
     }
   }
+
+  if (buttonTarget.matches("[data-characters-expanded]")) {
+    let shouldBeExpanded = buttonTarget.getAttribute(
+      "data-characters-expanded"
+    );
+
+    const expandedCharacters = DATA_STORE.data.characters.map((char) => ({
+      ...char,
+      expanded: shouldBeExpanded === "true",
+    }));
+
+    DATA_STORE.data.characters = expandedCharacters;
+  }
 }
