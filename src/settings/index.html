@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Settings Only - DND Map</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A simple Dungeons and Dragons virtual tabletop. Settings-only view."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  </head>
+
+  <body>
+    <noscript
+      >You don't have Javascript enabled and this website requires Javascript to
+      run.</noscript
+    >
+    <main>
+      <div class="main-controls-content p-6 max-w-3xl mx-auto">
+        <h1>Settings</h1>
+        <section class="pt-4 pb-8 px-0 border-t border-b border-black">
+          <h2 class="flex items-center justify-between">
+            <span>Map</span>
+            <div class="ml-2">
+              <input
+                class="screenreader-only"
+                type="file"
+                id="mapSrc"
+                accept=".jpg, .jpeg, .png, .gif, .webp"
+              />
+              <label class="button" id="mapSrcLabel" for="mapSrc"
+                >Upload Map</label
+              >
+            </div>
+          </h2>
+          <div class="py-1">
+            <p class="font-sans mt-0 mb-05 text-xs italic">
+              Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
+            </p>
+            <p id="imgUploadError" hidden>
+              <span class="font-sans mt-0 mb-05 text-xs text-error"
+                >Image is too big. It must be less than 3MB.</span
+              >
+            </p>
+          </div>
+          <div class="py-1">
+            <label for="pieceSize">Characters Base Size (px)</label>
+            <input id="pieceSize" min="10" type="number" class="max-w-14" />
+          </div>
+        </section>
+        <section class="pt-4 pb-8 px-0">
+          <div class="content-row">
+            <h2 aria-live="polite" aria-atomic="true">
+              <span id="charCount" class="screenreader-only">0</span>Characters
+            </h2>
+            <button class="button" id="addCharacter">Add Character</button>
+          </div>
+          <div id="characterList"></div>
+        </section>
+      </div>
+    </main>
+
+    <script defer src="../index.js"></script>
+  </body>
+</html>

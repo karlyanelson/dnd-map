@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Map Only - DND Map</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A simple Dungeons and Dragons virtual tabletop. Map-only view."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  </head>
+
+  <body>
+    <noscript
+      >You don't have Javascript enabled and this website requires Javascript to
+      run.</noscript
+    >
+    <main>
+      <div
+        class="
+          map-controls
+          py-2
+          px-4
+          right-4
+          border-1 border-black
+          fixed
+          top-4
+          bg-ink bg-opacity-90
+          rounded-lg
+          z-50
+          content-row
+        "
+      >
+        <label class="m-0" for="mapZoom">Map Zoom</label>
+        <button class="button" data-zoom="out" aria-label="Zoom out">
+          &#8211;
+        </button>
+        <input
+          id="mapZoom"
+          step="10"
+          type="number"
+          name="Map Zoom"
+          class="max-w-14"
+        />
+        <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
+      </div>
+      <div id="mapContainer" class="relative pt-2 touch-action-none">
+        <!--  ^leave room up top for controls when zoomed out; need touch action for drag and drop to work on mobile -->
+        <div class="no-map-message">
+          <h2 class="no-map-message__header">
+            Welcome to your virtual Dungeons & Dragons tabletop!
+          </h2>
+          <p class="no-map-message__text">
+            To get started, upload a map and add your customizable characters
+            using the <a href="../settings/index.html">settings page</a> or the
+            settings panel on the <a href="/">home page</a>.
+          </p>
+          <p class="no-map-message__text">
+            Everything is saved automatically to your browser's storage.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script defer src="../index.js"></script>
+  </body>
+</html>
