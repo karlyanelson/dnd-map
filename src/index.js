@@ -26,7 +26,7 @@ import touchMoveHandler from "./js/handlers/touchMoveHandler";
   CharacterList.render();
 
   //// Event Listeners
-  document.addEventListener("render", renderHandler, false);
+  document.addEventListener("reef:render", renderHandler, false);
 
   document.addEventListener("input", inputHandler, false);
 
