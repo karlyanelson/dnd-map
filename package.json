@@ -5,8 +5,8 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development parcel src/index.html",
-    "build": "NODE_ENV=production parcel build src/index.html",
+    "dev": "NODE_ENV=development parcel src/index.html src/**/*.html",
+    "build": "NODE_ENV=production parcel build src/index.html src/**/*.html",
     "clean": "rm -rf dist && rm -rf .cache"
   },
   "repository": {
