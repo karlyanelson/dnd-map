@@ -9,7 +9,7 @@ export default function characterBGimg(character) {
   }
 
   if (character.icon) {
-    charBGimg = ` background-image: url("./img/${character.icon}/image.png"); background-size: 80%; `;
+    charBGimg = ` background-image: url("./assets/img/${character.icon}/image.png"); background-size: 80%; `;
     bgBlendMode = " background-blend-mode: lighten; ";
 
     return charBGimg + bgBlendMode;

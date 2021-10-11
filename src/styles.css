@@ -82,7 +82,7 @@ h1 {
 }
 
 h2 {
-  @apply text-xl my-2 leading-relaxed;
+  @apply text-xl my-2 leading-tight;
 }
 
 .touch-action-none {
@@ -187,6 +187,7 @@ textarea {
 
 .no-map-message__header {
   font-size: 3rem;
+  margin-bottom: 2rem;
 }
 
 .no-map-message__text {
@@ -200,8 +201,8 @@ textarea {
 }
 
 .no-map-message {
-  max-width: 40rem;
-  margin: 0 auto;
+  max-width: 50rem;
+  margin: 4rem auto 0 auto;
   text-align: center;
   padding: 1rem;
   min-height: 80vh;
