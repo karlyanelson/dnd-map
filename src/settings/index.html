@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Settings Only - DND Map</title>
+    <title>Settings - DND Map</title>
     <meta charset="UTF-8" />
     <meta
       name="description"
@@ -9,9 +9,23 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon-16x16.png"
+    />
   </head>
 
   <body>
@@ -21,10 +35,14 @@
     >
     <main>
       <div class="main-controls-content p-6 max-w-3xl mx-auto">
+        <div class="text-center">
+          <a href="/">Back to Home</a>
+        </div>
         <h1>Settings</h1>
-        <section class="pt-4 pb-8 px-0 border-t border-b border-black">
+        <section class="pt-4 pb-8 px-0 border-b border-gray">
           <h2 class="flex items-center justify-between">
             <span>Map</span>
+
             <div class="ml-2">
               <input
                 class="screenreader-only"
@@ -47,9 +65,39 @@
               >
             </p>
           </div>
-          <div class="py-1">
-            <label for="pieceSize">Characters Base Size (px)</label>
-            <input id="pieceSize" min="10" type="number" class="max-w-14" />
+          <div class="flex justify-between items-center mt-6">
+            <div class="py-1">
+              <label for="pieceSize">Characters Base Size (px)</label>
+              <input id="pieceSize" min="10" type="number" class="max-w-14" />
+            </div>
+            <a
+              href="/map"
+              target="_blank"
+              class="
+                flex
+                items-center
+                py-1
+                px-2
+                rounded
+                hover:bg-gray hover:bg-opacity-25
+              "
+            >
+              <span>View Map</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
           </div>
         </section>
         <section class="pt-4 pb-8 px-0">
@@ -64,6 +112,6 @@
       </div>
     </main>
 
-    <script defer src="../index.js"></script>
+    <script type="module" src="../index.js"></script>
   </body>
 </html>

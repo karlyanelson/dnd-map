@@ -25,7 +25,7 @@ a {
 }
 
 body {
-  @apply bg-black text-white scrolling-touch;
+  @apply bg-black text-white;
 }
 
 body,
@@ -82,7 +82,7 @@ h1 {
 }
 
 h2 {
-  @apply text-xl my-2;
+  @apply text-xl my-2 leading-relaxed;
 }
 
 .touch-action-none {
@@ -154,7 +154,7 @@ textarea {
 
 .no-map {
   min-height: 100vh;
-  background-image: url(./assets/img/grid.png);
+  background-image: url(../static/assets/img/grid.png);
 }
 
 .content-row {

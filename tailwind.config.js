@@ -1,8 +1,5 @@
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+  mode: "jit",
   purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
   theme: {
     extend: {
@@ -12,8 +9,7 @@ module.exports = {
       boxShadow: {
         button: "2px 2px 0 black",
         piece: "1px 1px 1px 2px black",
-        high:
-          "2px 4px 16px 4px rgba(0, 0, 0, .25), 2px 4px 8px 4px rgba(0, 0, 0, 0.25)",
+        high: "2px 4px 16px 4px rgba(0, 0, 0, .25), 2px 4px 8px 4px rgba(0, 0, 0, 0.25)",
       },
       colors: {
         error: "#FF8D8D",

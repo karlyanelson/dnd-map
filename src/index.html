@@ -9,9 +9,23 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
   </head>
 
   <body>
@@ -86,9 +100,9 @@
           <footer class="text-xs text-center mb-4">
             <div class="pb-6">
               <p>Manage the settings and page in different windows:</p>
-              <a href="./settings/index.html">Settings page</a>
+              <a href="./settings">Settings page</a>
               <span class="mx-1">•</span>
-              <a href="./map/index.html">Map page</a>
+              <a href="./map">Map page</a>
             </div>
 
             <p>
@@ -101,9 +115,7 @@
                 <a href="https://game-icons.net/">game-icons.net</a></span
               >
               <span class="mx-1">•</span>
-              <span class="ml-1"
-                ><a href="./contact/index.html">Give Feedback</a></span
-              >
+              <span class="ml-1"><a href="./contact">Give Feedback</a></span>
             </p>
           </footer>
         </div>
@@ -153,6 +165,13 @@
       </div>
     </main>
 
-    <script defer src="index.js"></script>
+    <script type="module" src="index.js"></script>
+
+    <!-- So Parcel will bundle these files but I don't have to have .html in my links -->
+    <div hidden>
+      <a href="./settings/index.html" hidden></a>
+      <a href="./map/index.html" hidden></a>
+      <a href="./contact/index.html" hidden></a>
+    </div>
   </body>
 </html>
