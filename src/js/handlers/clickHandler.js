@@ -2,6 +2,7 @@ import DATA_STORE from "../globals/store";
 
 import addCharacter from "../utils/addCharacter";
 import removeCharacter from "../utils/removeCharacter";
+import removeAllCharacters from "../utils/removeAllCharacters";
 import duplicateCharacter from "../utils/duplicateCharacter";
 import zoomMap from "../utils/zoomMap";
 
@@ -34,6 +35,14 @@ export default function clickHandler(event) {
 
   if (buttonTarget.matches("[data-zoom]")) {
     zoomMap(buttonTarget.getAttribute("data-zoom"));
+  }
+
+  if (buttonTarget.matches("#removeAllBtn")) {
+    removeAllCharacters(buttonTarget, false);
+  }
+
+  if (buttonTarget.matches("#removeAllCancelBtn")) {
+    removeAllCharacters(buttonTarget, true);
   }
 
   if (buttonTarget.matches("[data-remove]")) {

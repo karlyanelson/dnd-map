@@ -163,10 +163,18 @@ function characterListItem(character, index) {
     </li>`;
 }
 
+const removeBtn = `
+  <div class="text-center mt-6">
+    <button id="removeAllBtn" remove-confirmed="false" class="button-danger">Remove All Characters</button>
+  </div>
+`;
 const CharacterList = new Reef("#characterList", {
   store: DATA_STORE,
   template: function (props) {
-    return "<ul>" + props.characters.map(characterListItem).join("") + "</ul>";
+    return `
+    <ul>${props.characters.map(characterListItem).join("")}</ul>
+    ${props.characters.length > 0 ? removeBtn : ""}
+    `;
   },
 });
 
