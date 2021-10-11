@@ -56,6 +56,7 @@
           <h1>D&D Map</h1>
           <span class="ml-2" id="toggleSettingsBtn"></span>
         </header>
+
         <div id="mainControlsContent" class="main-controls-content">
           <section class="pt-4 pb-8 px-0 border-t border-b border-black">
             <h2 class="flex items-center justify-between">
@@ -97,25 +98,59 @@
             </div>
             <div id="characterList"></div>
           </section>
+          <section class="pb-6 text-sm text-center">
+            <p class="mb-2">View the settings and map in different windows:</p>
+            <a
+              href="./settings"
+              target="_blank"
+              class="inline-flex items-center mr-2"
+            >
+              <span>Settings</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-1 h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
+            <a href="./map" target="_blank" class="inline-flex items-center">
+              <span>Map</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-1 h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
+          </section>
           <footer class="text-xs text-center mb-4">
-            <div class="pb-6 text-sm">
-              <p>Manage the settings and map in different windows:</p>
-              <a href="./settings" target="_blank">Settings</a>
-              <span class="mx-1">•</span>
-              <a href="./map" target="_blank">Map</a>
-            </div>
-
             <p>
               Made by <a href="https://karlynelson.com/">Karly Nelson</a> using
               <a href="https://reefjs.com/">ReefJS</a>
             </p>
-            <p>
-              <span class="mr-1"
+            <p class="my-2">
+              <span
                 >Icons from
                 <a href="https://game-icons.net/">game-icons.net</a></span
               >
               <span class="mx-1">•</span>
-              <span class="ml-1"><a href="./contact">Give Feedback</a></span>
+              <span><a href="./contact">Give Feedback</a></span>
             </p>
           </footer>
         </div>
@@ -135,7 +170,7 @@
           content-row
         "
       >
-        <label class="m-0" for="mapZoom">Map Zoom</label>
+        <label class="m-0" for="mapZoom">Zoom</label>
         <button class="button" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
