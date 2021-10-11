@@ -22,7 +22,21 @@
     <main>
       <div
         id="mainControls"
-        class="main-controls fixed bottom-4 left-4 top-4 py-2 px-4 border-1 border-black bg-ink bg-opacity-90 rounded-lg z-50 overflow-y-auto w-80"
+        class="
+          main-controls
+          fixed
+          bottom-4
+          left-4
+          top-4
+          py-2
+          px-4
+          border-1 border-black
+          bg-ink bg-opacity-90
+          rounded-lg
+          z-50
+          overflow-y-auto
+          w-80
+        "
       >
         <header class="pb-2 flex items-center justify-between">
           <h1>D&D Map</h1>
@@ -56,12 +70,12 @@
             </div>
             <div class="py-1">
               <label for="pieceSize">Characters Base Size (px)</label>
-              <input id="pieceSize" min="10" type="number" />
+              <input id="pieceSize" min="10" type="number" class="max-w-14" />
             </div>
           </section>
           <section class="pt-4 pb-8 px-0">
             <div class="content-row">
-              <h2 aria-live="polite">
+              <h2 aria-live="polite" aria-atomic="true">
                 <span id="charCount" class="screenreader-only">0</span
                 >Characters
               </h2>
@@ -88,13 +102,31 @@
         </div>
       </div>
       <div
-        class="map-controls py-2 px-4 right-4 border-1 border-black fixed top-4 bg-ink bg-opacity-90 rounded-lg z-50 content-row"
+        class="
+          map-controls
+          py-2
+          px-4
+          right-4
+          border-1 border-black
+          fixed
+          top-4
+          bg-ink bg-opacity-90
+          rounded-lg
+          z-50
+          content-row
+        "
       >
         <label class="m-0" for="mapZoom">Map Zoom</label>
         <button class="button" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
-        <input id="mapZoom" step="10" type="number" name="Map Zoom" />
+        <input
+          id="mapZoom"
+          step="10"
+          type="number"
+          name="Map Zoom"
+          class="max-w-14"
+        />
         <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
       </div>
       <div id="mapContainer" class="relative pt-2 touch-action-none">

@@ -110,10 +110,6 @@ h2 {
   @apply text-error bg-transparent inline-block border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
 }
 
-input[type="number"] {
-  @apply max-w-14;
-}
-
 input[type="color"] {
   border: none;
   padding: 0;

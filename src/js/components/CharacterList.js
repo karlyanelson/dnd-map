@@ -118,7 +118,7 @@ function characterListItem(character, index) {
             > 
           </div> 
 
-          <div class='flex justify-between items-end py-1'> 
+          <div class='grid grid-cols-3 py-1 gap-2'> 
             <div> 
               <label for='size-${character.id}'>Size</label> 
               <input 
@@ -153,10 +153,11 @@ function characterListItem(character, index) {
                 character-data-index='${index}'
               > 
             </div> 
-
-            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
           </div> 
-
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
+            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate</button> 
+          </div>
         </fieldset> 
       </div> 
     </li>`;

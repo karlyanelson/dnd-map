@@ -2,7 +2,7 @@ import { generateRandomID } from "./utils";
 import { DEFAULT_COLOR } from "../globals/variables";
 import DATA_STORE from "../globals/store";
 
-export default function addCharacter() {
+export default function addCharacter(characterProps = {}) {
   const numOfCharacters = (DATA_STORE.data.characters.length + 1).toString();
 
   const zoomRatio = DATA_STORE.data.zoom / 100;
@@ -20,13 +20,13 @@ export default function addCharacter() {
     DATA_STORE.data.pieceSize / 2 +
     randomNumberY;
 
-  var newCharacter = {
+  let newCharacter = {
     id: generateRandomID(),
-    name: "Character " + numOfCharacters,
-    color: DEFAULT_COLOR,
-    image: "",
-    icon: "",
-    background: "color", // options are: 'color', 'image', 'icon'
+    name: characterProps.name || "Character " + numOfCharacters,
+    color: characterProps.color || DEFAULT_COLOR,
+    image: characterProps.image || "",
+    icon: characterProps.icon || "",
+    background: characterProps.background || "color", // options are: 'color', 'image', 'icon'
     dragged: false,
     expanded: true,
     areaOfEffect: false,

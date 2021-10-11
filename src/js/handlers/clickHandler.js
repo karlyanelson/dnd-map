@@ -2,6 +2,7 @@ import DATA_STORE from "../globals/store";
 
 import addCharacter from "../utils/addCharacter";
 import removeCharacter from "../utils/removeCharacter";
+import duplicateCharacter from "../utils/duplicateCharacter";
 import zoomMap from "../utils/zoomMap";
 
 export default function clickHandler(event) {
@@ -41,6 +42,15 @@ export default function clickHandler(event) {
     if (characterContainer) {
       let characterIndex = characterContainer.getAttribute("data-index");
       removeCharacter(characterIndex);
+    }
+  }
+
+  if (buttonTarget.matches("[data-duplicate]")) {
+    let characterContainer = buttonTarget.closest(".characterListItem");
+
+    if (characterContainer) {
+      let characterIndex = characterContainer.getAttribute("data-index");
+      duplicateCharacter(characterIndex);
     }
   }
 }
