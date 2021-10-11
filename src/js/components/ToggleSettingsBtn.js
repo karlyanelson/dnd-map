@@ -4,8 +4,8 @@ import DATA_STORE from "../globals/store";
 const ToggleSettingsBtn = new Reef("#toggleSettingsBtn", {
   store: DATA_STORE,
   template: function (props) {
-    var btnText = props.settingsExpanded ? "Hide" : "Show";
-    var arrow = props.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
+    let btnText = props.settingsExpanded ? "Hide" : "Show";
+    let arrow = props.settingsExpanded ? "arrow arrow-up" : "arrow arrow-down";
 
     return `
       <button data-toggle-settings class="button-outline flex items-center justify-between" aria-expanded=${props.settingsExpanded}">

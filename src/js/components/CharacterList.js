@@ -16,17 +16,17 @@ function characterListItem(character, index) {
   }
 
   // Variables
-  var charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  var charExpanded = character.expanded ? true : false; // handle undefined
+  let charExpanded = character.expanded ? true : false; // handle undefined
 
-  var hidden = character.expanded ? "" : " hidden ";
+  let hidden = character.expanded ? "" : " hidden ";
 
-  var arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
+  let arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 
-  var btnCharName = character.name ? character.name : "<em>Untitled</em>";
+  let btnCharName = character.name ? character.name : "<em>Untitled</em>";
 
-  var iconSelectorContent = `
+  let iconSelectorContent = `
     <option></option>
 
     <optgroup label='Classes'>

@@ -1,6 +1,6 @@
 export default function characterBGimg(character) {
-  var charBGimg = "";
-  var bgBlendMode = "";
+  let charBGimg = "";
+  let bgBlendMode = "";
 
   if (character.image) {
     charBGimg = ` background-image: url("${character.image}"); background-size: cover; `;

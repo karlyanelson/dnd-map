@@ -18,8 +18,8 @@ export default function inputHandler(event) {
     event.target.matches("[character-data-type]") &&
     event.target.hasAttribute("character-data-index")
   ) {
-    var characterIndex = event.target.getAttribute("character-data-index");
-    var characterDataType = event.target.getAttribute("character-data-type");
+    let characterIndex = event.target.getAttribute("character-data-index");
+    let characterDataType = event.target.getAttribute("character-data-type");
     DATA_STORE.data.characters[characterIndex][characterDataType] =
       event.target.value;
   }

@@ -3,16 +3,16 @@ import DATA_STORE from "../globals/store";
 import characterBGimg from "../utils/characterBGimg";
 
 function characterPiece(character, index) {
-  var zoomPercent = DATA_STORE.data.zoom / 100;
+  let zoomPercent = DATA_STORE.data.zoom / 100;
 
-  var characterSize = DATA_STORE.data.pieceSize * zoomPercent * character.size;
+  let characterSize = DATA_STORE.data.pieceSize * zoomPercent * character.size;
 
-  var characterPosX = character.x * zoomPercent;
-  var characterPosY = character.y * zoomPercent;
+  let characterPosX = character.x * zoomPercent;
+  let characterPosY = character.y * zoomPercent;
 
-  var charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  var charName = character.name ? character.name : "<em>Untitled</em>";
+  let charName = character.name ? character.name : "<em>Untitled</em>";
 
   return `
     <div 
@@ -40,7 +40,7 @@ function characterPiece(character, index) {
 const Map = new Reef("#mapContainer", {
   store: DATA_STORE,
   template: function (props) {
-    var noMap = `
+    let noMap = `
       <div class='no-map-message'> 
         <h2 class='no-map-message__header'>Welcome to your virtual Dungeons & Dragons tabletop!</h2> 
         <p class='no-map-message__text'>To get started, upload a map and add your customizable characters using the settings panel on the left.</p> <p class='no-map-message__text'>Everything is saved automatically to your browser's storage.</p> 

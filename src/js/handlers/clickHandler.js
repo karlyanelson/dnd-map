@@ -18,11 +18,11 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-toggle-character]")) {
-    var characterContainer = buttonTarget.closest(".characterListItem");
+    let characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
-      var characterIndex = characterContainer.getAttribute("data-index");
-      var character = DATA_STORE.data.characters[characterIndex];
+      let characterIndex = characterContainer.getAttribute("data-index");
+      let character = DATA_STORE.data.characters[characterIndex];
       character.expanded = character.expanded ? false : true;
     }
   }
@@ -36,10 +36,10 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-remove]")) {
-    var characterContainer = buttonTarget.closest(".characterListItem");
+    let characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
-      var characterIndex = characterContainer.getAttribute("data-index");
+      let characterIndex = characterContainer.getAttribute("data-index");
       removeCharacter(characterIndex);
     }
   }
