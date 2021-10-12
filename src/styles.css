@@ -93,6 +93,13 @@ h2 {
   @apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded font-semibold tracking-wide;
 }
 
+.button:hover,
+.button-outline:hover,
+.button-error:hover,
+.button-danger:hover {
+  @apply shadow-button-hover;
+}
+
 .button:active {
   @apply shadow-none;
 }
@@ -108,7 +115,7 @@ h2 {
 
 .button-error,
 .button-danger {
-  @apply text-error bg-transparent inline-block border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
+  @apply text-error bg-transparent inline-block shadow-button border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
 }
 
 .button-small {
