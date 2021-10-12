@@ -90,7 +90,7 @@ h2 {
 }
 
 .button {
-  @apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded font-semibold tracking-wide;
+  @apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded tracking-wide;
 }
 
 .button:hover,
@@ -110,12 +110,13 @@ h2 {
 }
 
 .button-outline {
-  @apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded font-semibold tracking-wide;
+  @apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded tracking-wide;
+}
 }
 
 .button-error,
 .button-danger {
-  @apply text-error bg-transparent inline-block shadow-button border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
+  @apply text-error bg-error bg-opacity-15 inline-block shadow-button border-2 border-error py-1 px-2 rounded tracking-wide;
 }
 
 .button-small {

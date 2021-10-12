@@ -23,6 +23,7 @@ module.exports = {
       },
       fontFamily: {
         dnd: [
+          "Ubuntu",
           "Gill Sans",
           "Helvetica Neue",
           "Helvetica",
