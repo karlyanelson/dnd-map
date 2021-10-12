@@ -20,7 +20,7 @@ function characterListItem(character, index) {
 
   const charAreaOfEffectColor = character.areaOfEffectColor
     ? character.areaOfEffectColor
-    : "#ffffff";
+    : _.DEFAULT_COLOR;
 
   const charExpanded = character.expanded ? true : false; // handle undefined
 
@@ -49,10 +49,10 @@ function characterListItem(character, index) {
   // Template Content
   return `
     <li 
-      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-ink ${
+      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-white dark:bg-ink ${
         charExpanded
           ? "shadow-high relative z-10 border-gray"
-          : "shadow-button border-black"
+          : "shadow-button dark:border-black border-gray"
       }' 
       data-id='${character.id}' 
       data-index='${index}'
@@ -60,8 +60,10 @@ function characterListItem(character, index) {
       <button data-toggle-character 
         aria-expanded=${charExpanded} 
         class='${
-          charExpanded ? "" : "hover:shadow-high hover:bg-ink"
-        } p-2 w-full text-white text-left text-base break-all flex items-center justify-between'> 
+          charExpanded
+            ? ""
+            : "hover:shadow-high dark:hover:bg-ink bg-light-gray dark:bg-transparent"
+        } p-2 w-full dark:text-white text-left text-base break-all flex items-center justify-between'> 
         <span 
           class='inline-block rounded-circle h-6 w-6 border border-black bg-no-repeat bg-center bg-cover flex-none' 
           style='background-color: ${charColor}; ${characterBGimg(character)}'
@@ -203,8 +205,8 @@ function characterListItem(character, index) {
             </fieldset> 
           </div> 
           <div class="grid grid-cols-2 gap-2 mt-6 pt-6 border-t border-gray">
-            <button data-remove class='button-error' character-data-index='${index}'>Remove <span class='screenreader-only'>${btnCharName}</span></button> 
-            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate <span class='screenreader-only'>${btnCharName}</span></button> 
+            <button data-remove class='button-error button-small' character-data-index='${index}'>Remove <span class='screenreader-only'>${btnCharName}</span></button> 
+            <button data-duplicate class='button-outline button-small' character-data-index='${index}'>Duplicate <span class='screenreader-only'>${btnCharName}</span></button> 
           </div>
         </fieldset> 
       </div> 
@@ -220,7 +222,7 @@ const expandCollapse = `
 
 const removeBtn = `
   <div class="text-center mt-6">
-    <button id="removeAllBtn" remove-confirmed="false" class="button-danger">Remove All Characters</button>
+    <button id="removeAllBtn" remove-confirmed="false" class="button-danger button-small">Remove All Characters</button>
   </div>
 `;
 const CharacterList = new Reef("#characterList", {

@@ -31,7 +31,7 @@ export default function addCharacter(characterProps = {}) {
     expanded: true,
     areaOfEffect: characterProps.areaOfEffect || false,
     areaOfEffectRadius: characterProps.areaOfEffectRadius || 1,
-    areaOfEffectColor: characterProps.areaOfEffectColor || "#ffffff",
+    areaOfEffectColor: characterProps.areaOfEffectColor || DEFAULT_COLOR,
     x: posX,
     y: posY,
     size: 1,

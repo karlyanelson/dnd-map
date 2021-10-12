@@ -51,8 +51,11 @@
           top-4
           py-2
           px-4
-          border-1 border-black
-          bg-ink bg-opacity-90
+          border border-black
+          bg-white
+          dark:bg-ink
+          bg-opacity-90
+          dark:bg-opacity-95
           rounded-lg
           z-50
           overflow-y-auto
@@ -85,7 +88,7 @@
                 Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
               </p>
               <p id="imgUploadError" hidden>
-                <span class="font-sans mt-0 mb-05 text-xs text-error"
+                <span class="font-sans mt-0 mb-05 text-xs dark:text-error"
                   >Image is too big. It must be less than 3MB.</span
                 >
               </p>
@@ -168,17 +171,19 @@
           py-2
           px-4
           right-4
-          border-1 border-black
+          border border-black
           fixed
           top-4
-          bg-ink bg-opacity-90
+          dark:bg-ink
+          bg-white bg-opacity-90
+          dark:bg-opacity-95
           rounded-lg
           z-50
           content-row
         "
       >
         <label class="m-0" for="mapZoom">Zoom</label>
-        <button class="button" data-zoom="out" aria-label="Zoom out">
+        <button class="button-outline" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
         <input
@@ -188,7 +193,9 @@
           name="Map Zoom"
           class="max-w-14"
         />
-        <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
+        <button class="button-outline" data-zoom="in" aria-label="Zoom in">
+          +
+        </button>
       </div>
       <div id="mapContainer" class="relative pt-2 touch-action-none">
         <!--  ^leave room up top for controls when zoomed out; need touch action for drag and drop to work on mobile -->

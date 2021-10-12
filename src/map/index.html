@@ -50,14 +50,16 @@
           border-1 border-black
           fixed
           top-4
-          bg-ink bg-opacity-90
+          dark:bg-ink
+          bg-white bg-opacity-90
+          dark:bg-opacity-95
           rounded-lg
           z-50
           content-row
         "
       >
         <label class="m-0" for="mapZoom">Zoom</label>
-        <button class="button" data-zoom="out" aria-label="Zoom out">
+        <button class="button-outline" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
         <input
@@ -67,7 +69,9 @@
           name="Map Zoom"
           class="max-w-14"
         />
-        <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
+        <button class="button-outline" data-zoom="in" aria-label="Zoom in">
+          +
+        </button>
 
         <a href="./settings" target="_blank" class="inline-flex items-center">
           <span>Settings</span>

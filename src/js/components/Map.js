@@ -21,7 +21,7 @@ function characterPiece(character, index) {
 
   const charAreaOfEffectColor = character.areaOfEffectColor
     ? character.areaOfEffectColor
-    : "#ffffff";
+    : _.DEFAULT_COLOR;
 
   const charAreaOfEffect = character.areaOfEffect
     ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px ${charAreaOfEffectColor}75; `

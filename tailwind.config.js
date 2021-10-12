@@ -1,5 +1,6 @@
 module.exports = {
   mode: "jit",
+  darkMode: "media",
   purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
   theme: {
     extend: {
@@ -14,9 +15,10 @@ module.exports = {
       },
       colors: {
         error: "#FF8D8D",
+        "error-dark": "#e53f3e",
         ink: "#333333",
-        "ink-dark": "#212121",
         gray: "#808080",
+        "light-gray": "#f2f2f2",
       },
       cursor: {
         grab: "grab",
