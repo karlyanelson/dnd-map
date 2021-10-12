@@ -112,11 +112,19 @@ h2 {
 .button-outline {
   @apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded tracking-wide;
 }
+
+.button-outline:hover {
+  @apply bg-opacity-40;
 }
 
 .button-error,
 .button-danger {
-  @apply text-error bg-error bg-opacity-15 inline-block shadow-button border-2 border-error py-1 px-2 rounded tracking-wide;
+  @apply text-error bg-error bg-opacity-5 inline-block shadow-button border-2 border-error py-1 px-2 rounded tracking-wide;
+}
+
+.button-error:hover,
+.button-danger:hover {
+  @apply bg-opacity-15;
 }
 
 .button-small {

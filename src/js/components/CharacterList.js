@@ -185,6 +185,7 @@ function characterListItem(character, index) {
                     value='${character.areaOfEffectRadius}' 
                     id='areaOfEffectRadius-${character.id}' 
                     character-data-index='${index}'
+                    class="max-w-14"
                   > 
                 </div>
 
