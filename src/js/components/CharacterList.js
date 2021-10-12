@@ -159,47 +159,51 @@ function characterListItem(character, index) {
             </div> 
           </div> 
 
-          <fieldset class="mt-4 pt-4 border-t"> 
-            <legend>Area of Effect</legend>
-            <div class="flex items-center space-x-6">
-              <div>
-                <label for='areaOfEffect-${character.id}'>Enabled</label> 
-                <input 
-                  type='checkbox' 
-                  character-data-type='areaOfEffect' 
-                  reef-checked='${character.areaOfEffect}' 
-                  id='areaOfEffect-${character.id}' 
-                  character-data-index='${index}'
-                  class="inline-block w-auto"
-                > 
-              </div>
-              <div>
-                <label for='areaOfEffectRadius-${character.id}'>Radius</label> 
-                <input 
-                  type='number' 
-                  step='1' 
-                  character-data-type='areaOfEffectRadius' 
-                  value='${character.areaOfEffectRadius}' 
-                  id='areaOfEffectRadius-${character.id}' 
-                  character-data-index='${index}'
-                > 
-              </div>
+          <div class="mt-6 pt-4 border-t border-gray">
+            <fieldset> 
+              <legend>Area of Effect</legend>
+              <div class="flex items-center space-x-6">
+                <div>
+                  <label for='areaOfEffect-${character.id}'>Enabled</label> 
+                  <input 
+                    type='checkbox' 
+                    character-data-type='areaOfEffect' 
+                    reef-checked='${character.areaOfEffect}' 
+                    id='areaOfEffect-${character.id}' 
+                    character-data-index='${index}'
+                    class="inline-block w-auto"
+                  > 
+                </div>
+                <div>
+                  <label for='areaOfEffectRadius-${
+                    character.id
+                  }'>Radius</label> 
+                  <input 
+                    type='number' 
+                    step='1' 
+                    character-data-type='areaOfEffectRadius' 
+                    value='${character.areaOfEffectRadius}' 
+                    id='areaOfEffectRadius-${character.id}' 
+                    character-data-index='${index}'
+                  > 
+                </div>
 
-              <div>
-                <label for='areaOfEffectColor-${character.id}'>Color</label> 
-                <input 
-                  type='color' 
-                  character-data-type='areaOfEffectColor' 
-                  value='${charAreaOfEffectColor}' 
-                  id='areaOfEffectColor-${character.id}' 
-                  character-data-index='${index}'
-                > 
+                <div>
+                  <label for='areaOfEffectColor-${character.id}'>Color</label> 
+                  <input 
+                    type='color' 
+                    character-data-type='areaOfEffectColor' 
+                    value='${charAreaOfEffectColor}' 
+                    id='areaOfEffectColor-${character.id}' 
+                    character-data-index='${index}'
+                  > 
+                </div>
               </div>
-            </div>
-          </fieldset> 
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
-            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate</button> 
+            </fieldset> 
+          </div> 
+          <div class="grid grid-cols-2 gap-2 mt-6 pt-6 border-t border-gray">
+            <button data-remove class='button-error' character-data-index='${index}'>Remove <span class='screenreader-only'>${btnCharName}</span></button> 
+            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate <span class='screenreader-only'>${btnCharName}</span></button> 
           </div>
         </fieldset> 
       </div> 

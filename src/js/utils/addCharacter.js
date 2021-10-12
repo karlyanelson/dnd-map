@@ -29,9 +29,9 @@ export default function addCharacter(characterProps = {}) {
     background: characterProps.background || "color", // options are: 'color', 'image', 'icon'
     dragged: false,
     expanded: true,
-    areaOfEffect: false,
-    areaOfEffectRadius: 1,
-    areaOfEffectColor: "#ffffff",
+    areaOfEffect: characterProps.areaOfEffect || false,
+    areaOfEffectRadius: characterProps.areaOfEffectRadius || 1,
+    areaOfEffectColor: characterProps.areaOfEffectColor || "#ffffff",
     x: posX,
     y: posY,
     size: 1,
