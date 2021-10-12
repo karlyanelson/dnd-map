@@ -3,16 +3,25 @@ import DATA_STORE from "../globals/store";
 import characterBGimg from "../utils/characterBGimg";
 
 function characterPiece(character, index) {
-  let zoomPercent = DATA_STORE.data.zoom / 100;
+  const zoomPercent = DATA_STORE.data.zoom / 100;
 
-  let characterSize = DATA_STORE.data.pieceSize * zoomPercent * character.size;
+  const characterSize =
+    DATA_STORE.data.pieceSize * zoomPercent * character.size;
 
-  let characterPosX = character.x * zoomPercent;
-  let characterPosY = character.y * zoomPercent;
+  const characterPosX = character.x * zoomPercent;
+  const characterPosY = character.y * zoomPercent;
 
-  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  const charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  let charName = character.name ? character.name : "<em>Untitled</em>";
+  const charName = character.name ? character.name : "<em>Untitled</em>";
+
+  const charAreaOfEffectRadius = character.areaOfEffectRadius
+    ? character.areaOfEffectRadius * characterSize
+    : 1 * characterSize;
+
+  const charAreaOfEffect = character.areaOfEffect
+    ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px rgba(255, 255, 255, .65); `
+    : "";
 
   return `
     <div 
@@ -24,7 +33,7 @@ function characterPiece(character, index) {
     > 
     <div 
       class='bg-no-repeat bg-center rounded-full shadow-piece' 
-      style='height:${characterSize}px; width:${characterSize}px; background-color:${charColor}; ${characterBGimg(
+      style='height:${characterSize}px; width:${characterSize}px;  ${charAreaOfEffect} background-color:${charColor}; ${characterBGimg(
     character
   )}'
     ></div> 

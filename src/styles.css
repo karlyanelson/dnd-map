@@ -45,7 +45,7 @@ select {
   line-height: normal;
 }
 textarea,
-input,
+input:not([type="checkbox"]),
 select {
   @apply rounded border-2 border-black text-ink p-1 w-full;
 }

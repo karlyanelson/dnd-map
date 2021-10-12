@@ -20,7 +20,15 @@ export default function inputHandler(event) {
   ) {
     let characterIndex = event.target.getAttribute("character-data-index");
     let characterDataType = event.target.getAttribute("character-data-type");
+
+    let valueToStore = event.target.value;
+
+    if (characterDataType === "areaOfEffect") {
+      valueToStore =
+        !DATA_STORE.data.characters[characterIndex][characterDataType];
+    }
+
     DATA_STORE.data.characters[characterIndex][characterDataType] =
-      event.target.value;
+      valueToStore;
   }
 }

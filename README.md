@@ -46,3 +46,7 @@ Build for production:
 ```
 npm run build
 ```
+
+### Notes
+
+If you get a `SyntaxError: Cannot use import statement outside a module` error, you're probably using a version of Node that's too old
