@@ -31,6 +31,7 @@ export default function addCharacter(characterProps = {}) {
     expanded: true,
     areaOfEffect: false,
     areaOfEffectRadius: 1,
+    areaOfEffectColor: "#ffffff",
     x: posX,
     y: posY,
     size: 1,

@@ -16,17 +16,21 @@ function characterListItem(character, index) {
   }
 
   // Variables
-  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  const charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  let charExpanded = character.expanded ? true : false; // handle undefined
+  const charAreaOfEffectColor = character.areaOfEffectColor
+    ? character.areaOfEffectColor
+    : "#ffffff";
 
-  let hidden = character.expanded ? "" : " hidden ";
+  const charExpanded = character.expanded ? true : false; // handle undefined
 
-  let arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
+  const hidden = character.expanded ? "" : " hidden ";
 
-  let btnCharName = character.name ? character.name : "<em>Untitled</em>";
+  const arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 
-  let iconSelectorContent = `
+  const btnCharName = character.name ? character.name : "<em>Untitled</em>";
+
+  const iconSelectorContent = `
     <option></option>
 
     <optgroup label='Classes'>
@@ -158,10 +162,8 @@ function characterListItem(character, index) {
           <fieldset class="mt-4 pt-4 border-t"> 
             <legend>Area of Effect</legend>
             <div class="flex items-center space-x-6">
-              <div class="flex items-center">
-                <label class="mr-2" for='areaOfEffect-${
-                  character.id
-                }'>Enabled</label> 
+              <div>
+                <label for='areaOfEffect-${character.id}'>Enabled</label> 
                 <input 
                   type='checkbox' 
                   character-data-type='areaOfEffect' 
@@ -171,16 +173,25 @@ function characterListItem(character, index) {
                   class="inline-block w-auto"
                 > 
               </div>
-              <div class="flex items-center">
-                <label class="mr-2" for='areaOfEffectRadius-${
-                  character.id
-                }'>Radius</label> 
+              <div>
+                <label for='areaOfEffectRadius-${character.id}'>Radius</label> 
                 <input 
                   type='number' 
                   step='1' 
                   character-data-type='areaOfEffectRadius' 
                   value='${character.areaOfEffectRadius}' 
                   id='areaOfEffectRadius-${character.id}' 
+                  character-data-index='${index}'
+                > 
+              </div>
+
+              <div>
+                <label for='areaOfEffectColor-${character.id}'>Color</label> 
+                <input 
+                  type='color' 
+                  character-data-type='areaOfEffectColor' 
+                  value='${charAreaOfEffectColor}' 
+                  id='areaOfEffectColor-${character.id}' 
                   character-data-index='${index}'
                 > 
               </div>

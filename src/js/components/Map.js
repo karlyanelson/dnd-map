@@ -19,8 +19,12 @@ function characterPiece(character, index) {
     ? character.areaOfEffectRadius * characterSize
     : 1 * characterSize;
 
+  const charAreaOfEffectColor = character.areaOfEffectColor
+    ? character.areaOfEffectColor
+    : "#ffffff";
+
   const charAreaOfEffect = character.areaOfEffect
-    ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px rgba(255, 255, 255, .65); `
+    ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px ${charAreaOfEffectColor}75; `
     : "";
 
   return `
