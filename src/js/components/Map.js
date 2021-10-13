@@ -58,7 +58,7 @@ const Map = new Reef("#mapContainer", {
       <div class='no-map-message'> 
         <h2 class='no-map-message__header'>Welcome to your virtual Dungeons & Dragons tabletop!</h2> 
         <p class='no-map-message__text'>
-          To get started, upload a map and add your customizable characters using the <a href="../settings/index.html">settings page</a> or the settings panel on the <a href="/">home page</a>.
+          To get started, upload a map and add your customizable characters using the settings panel on the <a href="/">home page</a> or using the <a href="/settings" target="_blank">settings page</a>.
         </p> 
         <p class='no-map-message__text mt-6'>Everything is saved automatically to your browser's storage.</p> 
       </div>
