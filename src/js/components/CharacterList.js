@@ -49,10 +49,10 @@ function characterListItem(character, index) {
   // Template Content
   return `
     <li 
-      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-white dark:bg-ink ${
+      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-white dark:bg-ink  ${
         charExpanded
-          ? "shadow-high relative z-10 border-gray"
-          : "shadow-button dark:border-black border-gray"
+          ? "shadow-high relative z-10 dark:border-light-gray border-black border-1"
+          : "shadow-button border-gray"
       }' 
       data-id='${character.id}' 
       data-index='${index}'
@@ -62,8 +62,8 @@ function characterListItem(character, index) {
         class='${
           charExpanded
             ? ""
-            : "hover:shadow-high dark:hover:bg-ink bg-light-gray dark:bg-transparent"
-        } p-2 w-full dark:text-white text-left text-base break-all flex items-center justify-between'> 
+            : "hover:shadow-high dark:hover:bg-ink bg-white dark:bg-transparent"
+        } p-2 w-full dark:text-white text-left text-base break-all flex items-center justify-between rounded'> 
         <span 
           class='inline-block rounded-circle h-6 w-6 border border-black bg-no-repeat bg-center bg-cover flex-none' 
           style='background-color: ${charColor}; ${characterBGimg(character)}'

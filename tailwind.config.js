@@ -9,9 +9,12 @@ module.exports = {
       },
       boxShadow: {
         button: "2px 2px 0 black",
-        "button-hover": "2px 2px 0 black, 2px 2px 6px 0 black",
+        "button-current": "2px 2px 0 currentColor",
+        "button-hover":
+          "2px 2px 0 rgba(0,0,0,.5), 2px 2px 6px 0 rgba(0,0,0,.5)",
         piece: "1px 1px 1px 2px black",
         high: "2px 4px 16px 4px rgba(0, 0, 0, .25), 2px 4px 8px 4px rgba(0, 0, 0, 0.25)",
+        soft: "2px 4px 16px 4px rgba(0, 0, 0, .05), 2px 4px 8px 4px rgba(0, 0, 0, 0.1)",
       },
       colors: {
         error: "#FF8D8D",
