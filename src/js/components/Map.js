@@ -1,6 +1,7 @@
 import Reef from "reefjs";
 import DATA_STORE from "../globals/store";
 import characterBGimg from "../utils/characterBGimg";
+import { DEFAULT_COLOR } from "../globals/variables";
 
 function characterPiece(character, index) {
   const zoomPercent = DATA_STORE.data.zoom / 100;
@@ -11,7 +12,7 @@ function characterPiece(character, index) {
   const characterPosX = character.x * zoomPercent;
   const characterPosY = character.y * zoomPercent;
 
-  const charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  const charColor = character.color ? character.color : DEFAULT_COLOR;
 
   const charName = character.name ? character.name : "<em>Untitled</em>";
 
@@ -21,7 +22,7 @@ function characterPiece(character, index) {
 
   const charAreaOfEffectColor = character.areaOfEffectColor
     ? character.areaOfEffectColor
-    : _.DEFAULT_COLOR;
+    : DEFAULT_COLOR;
 
   const charAreaOfEffect = character.areaOfEffect
     ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px ${charAreaOfEffectColor}75; `
