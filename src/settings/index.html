@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Settings - DND Map</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="A simple Dungeons and Dragons virtual tabletop. Settings-only view."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon-16x16.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="grid-bg">
+    <noscript
+      >You don't have Javascript enabled and this website requires Javascript to
+      run.</noscript
+    >
+    <main class="pb-8">
+      <div class="text-center my-8">
+        <a href="/">Back to Home</a>
+      </div>
+      <div
+        class="
+          main-controls-content
+          px-8
+          pt-8
+          mt-4
+          max-w-2xl
+          mx-auto
+          bg-white
+          dark:bg-ink
+          bg-opacity-50
+          dark:bg-opacity-25
+          shadow-high
+        "
+      >
+        <h1>Settings</h1>
+        <section class="pt-4 pb-8 px-0 border-b border-gray">
+          <h2 class="flex items-center justify-between">
+            <span>Map</span>
+
+            <div class="ml-2">
+              <input
+                class="screenreader-only"
+                type="file"
+                id="mapSrc"
+                accept=".jpg, .jpeg, .png, .gif, .webp"
+              />
+              <label class="button" id="mapSrcLabel" for="mapSrc"
+                >Upload Map</label
+              >
+            </div>
+          </h2>
+          <div class="py-1">
+            <p class="font-sans mt-0 mb-05 text-xs italic">
+              Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
+            </p>
+            <p id="imgUploadError" hidden>
+              <span class="font-sans mt-0 mb-05 text-xs text-error"
+                >Image is too big. It must be less than 3MB.</span
+              >
+            </p>
+          </div>
+          <div class="flex justify-between items-center mt-6">
+            <div class="py-1">
+              <label for="pieceSize">Character Base Size (px)</label>
+              <input id="pieceSize" min="10" type="number" class="max-w-14" />
+            </div>
+            <a href="/map" target="_blank" class="flex items-center">
+              <span>View Map</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
+          </div>
+        </section>
+        <section class="pt-4 pb-8 px-0">
+          <div class="content-row">
+            <h2 aria-live="polite" aria-atomic="true">
+              <span id="charCount" class="screenreader-only">0</span>Characters
+            </h2>
+            <button class="button" id="addCharacter">Add Character</button>
+          </div>
+          <div id="characterList"></div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="../index.js"></script>
+  </body>
+</html>

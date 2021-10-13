@@ -51,4 +51,10 @@ import touchMoveHandler from "./js/handlers/touchMoveHandler";
   document.addEventListener("touchend", dropHandler, false);
 
   document.addEventListener("dragend", dragEndHandler, false);
+
+  window.addEventListener("storage", () => {
+    // When local storage changes in a different tab (ie: the settings page)
+    // refresh any other open dnd map tabs (ie: the map page)
+    getDataFromStorage(_.STORAGE_ID);
+  });
 })();

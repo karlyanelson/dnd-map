@@ -16,17 +16,21 @@ function characterListItem(character, index) {
   }
 
   // Variables
-  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  const charColor = character.color ? character.color : _.DEFAULT_COLOR;
 
-  let charExpanded = character.expanded ? true : false; // handle undefined
+  const charAreaOfEffectColor = character.areaOfEffectColor
+    ? character.areaOfEffectColor
+    : _.DEFAULT_COLOR;
 
-  let hidden = character.expanded ? "" : " hidden ";
+  const charExpanded = character.expanded ? true : false; // handle undefined
 
-  let arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
+  const hidden = character.expanded ? "" : " hidden ";
 
-  let btnCharName = character.name ? character.name : "<em>Untitled</em>";
+  const arrow = character.expanded ? " arrow arrow-up " : " arrow arrow-down ";
 
-  let iconSelectorContent = `
+  const btnCharName = character.name ? character.name : "<em>Untitled</em>";
+
+  const iconSelectorContent = `
     <option></option>
 
     <optgroup label='Classes'>
@@ -45,10 +49,10 @@ function characterListItem(character, index) {
   // Template Content
   return `
     <li 
-      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-ink ${
+      class='characterListItem border rounded my-3 transition-all duration-300 ease-in-out bg-white dark:bg-ink ${
         charExpanded
           ? "shadow-high relative z-10 border-gray"
-          : "shadow-button border-black"
+          : "shadow-button dark:border-black border-gray"
       }' 
       data-id='${character.id}' 
       data-index='${index}'
@@ -56,8 +60,10 @@ function characterListItem(character, index) {
       <button data-toggle-character 
         aria-expanded=${charExpanded} 
         class='${
-          charExpanded ? "" : "hover:shadow-high hover:bg-ink"
-        } p-2 w-full text-white text-left text-base break-all flex items-center justify-between'> 
+          charExpanded
+            ? ""
+            : "hover:shadow-high dark:hover:bg-ink bg-light-gray dark:bg-transparent"
+        } p-2 w-full dark:text-white text-left text-base break-all flex items-center justify-between'> 
         <span 
           class='inline-block rounded-circle h-6 w-6 border border-black bg-no-repeat bg-center bg-cover flex-none' 
           style='background-color: ${charColor}; ${characterBGimg(character)}'
@@ -154,9 +160,53 @@ function characterListItem(character, index) {
               > 
             </div> 
           </div> 
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <button data-remove class='button-error' character-data-index='${index}'>Remove</button> 
-            <button data-duplicate class='button-outline' character-data-index='${index}'>Duplicate</button> 
+
+          <div class="mt-6 pt-4 border-t border-gray">
+            <fieldset> 
+              <legend>Area of Effect</legend>
+              <div class="flex items-center space-x-6">
+                <div>
+                  <label for='areaOfEffect-${character.id}'>Enabled</label> 
+                  <input 
+                    type='checkbox' 
+                    character-data-type='areaOfEffect' 
+                    reef-checked='${character.areaOfEffect}' 
+                    id='areaOfEffect-${character.id}' 
+                    character-data-index='${index}'
+                    class="inline-block w-auto"
+                  > 
+                </div>
+                <div>
+                  <label for='areaOfEffectRadius-${
+                    character.id
+                  }'>Radius</label> 
+                  <input 
+                    type='number' 
+                    step='1' 
+                    character-data-type='areaOfEffectRadius' 
+                    value='${character.areaOfEffectRadius}' 
+                    id='areaOfEffectRadius-${character.id}' 
+                    character-data-index='${index}'
+                    class="max-w-14"
+                  > 
+                </div>
+
+                <div>
+                  <label for='areaOfEffectColor-${character.id}'>Color</label> 
+                  <input 
+                    type='color' 
+                    character-data-type='areaOfEffectColor' 
+                    value='${charAreaOfEffectColor}' 
+                    id='areaOfEffectColor-${character.id}' 
+                    character-data-index='${index}'
+                  > 
+                </div>
+              </div>
+            </fieldset> 
+          </div> 
+          <div class="grid grid-cols-2 gap-2 mt-6 pt-6 border-t border-gray">
+            <button data-remove class='button-error button-small' character-data-index='${index}'>Remove <span class='screenreader-only'>${btnCharName}</span></button> 
+            <button data-duplicate class='button-outline button-small' character-data-index='${index}'>Duplicate <span class='screenreader-only'>${btnCharName}</span></button> 
           </div>
         </fieldset> 
       </div> 
@@ -172,7 +222,7 @@ const expandCollapse = `
 
 const removeBtn = `
   <div class="text-center mt-6">
-    <button id="removeAllBtn" remove-confirmed="false" class="button-danger">Remove All Characters</button>
+    <button id="removeAllBtn" remove-confirmed="false" class="button-danger button-small">Remove All Characters</button>
   </div>
 `;
 const CharacterList = new Reef("#characterList", {

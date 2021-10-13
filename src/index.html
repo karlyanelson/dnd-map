@@ -9,9 +9,30 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -30,8 +51,11 @@
           top-4
           py-2
           px-4
-          border-1 border-black
-          bg-ink bg-opacity-90
+          border border-black
+          bg-white
+          dark:bg-ink
+          bg-opacity-90
+          dark:bg-opacity-95
           rounded-lg
           z-50
           overflow-y-auto
@@ -42,6 +66,7 @@
           <h1>D&D Map</h1>
           <span class="ml-2" id="toggleSettingsBtn"></span>
         </header>
+
         <div id="mainControlsContent" class="main-controls-content">
           <section class="pt-4 pb-8 px-0 border-t border-b border-black">
             <h2 class="flex items-center justify-between">
@@ -63,13 +88,13 @@
                 Must be .jpg, .jpeg, .png, .gif, or .webp. Cannot exceed 3MB.
               </p>
               <p id="imgUploadError" hidden>
-                <span class="font-sans mt-0 mb-05 text-xs text-error"
+                <span class="font-sans mt-0 mb-05 text-xs dark:text-error"
                   >Image is too big. It must be less than 3MB.</span
                 >
               </p>
             </div>
             <div class="py-1">
-              <label for="pieceSize">Characters Base Size (px)</label>
+              <label for="pieceSize">Character Base Size (px)</label>
               <input id="pieceSize" min="10" type="number" class="max-w-14" />
             </div>
           </section>
@@ -83,20 +108,59 @@
             </div>
             <div id="characterList"></div>
           </section>
+          <section class="pb-6 text-sm text-center">
+            <p class="mb-2">View the settings and map in different windows:</p>
+            <a
+              href="./settings"
+              target="_blank"
+              class="inline-flex items-center mr-2"
+            >
+              <span>Settings</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-1 h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
+            <a href="./map" target="_blank" class="inline-flex items-center">
+              <span>Map</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-1 h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
+          </section>
           <footer class="text-xs text-center mb-4">
             <p>
               Made by <a href="https://karlynelson.com/">Karly Nelson</a> using
               <a href="https://reefjs.com/">ReefJS</a>
             </p>
-            <p>
-              <span class="mr-1"
+            <p class="my-2">
+              <span
                 >Icons from
                 <a href="https://game-icons.net/">game-icons.net</a></span
               >
               <span class="mx-1">•</span>
-              <span class="ml-1"
-                ><a href="./contact/index.html">Give Feedback</a></span
-              >
+              <span><a href="./contact">Give Feedback</a></span>
             </p>
           </footer>
         </div>
@@ -107,17 +171,19 @@
           py-2
           px-4
           right-4
-          border-1 border-black
+          border border-black
           fixed
           top-4
-          bg-ink bg-opacity-90
+          dark:bg-ink
+          bg-white bg-opacity-90
+          dark:bg-opacity-95
           rounded-lg
           z-50
           content-row
         "
       >
-        <label class="m-0" for="mapZoom">Map Zoom</label>
-        <button class="button" data-zoom="out" aria-label="Zoom out">
+        <label class="m-0" for="mapZoom">Zoom</label>
+        <button class="button-outline" data-zoom="out" aria-label="Zoom out">
           &#8211;
         </button>
         <input
@@ -127,7 +193,9 @@
           name="Map Zoom"
           class="max-w-14"
         />
-        <button class="button" data-zoom="in" aria-label="Zoom in">+</button>
+        <button class="button-outline" data-zoom="in" aria-label="Zoom in">
+          +
+        </button>
       </div>
       <div id="mapContainer" class="relative pt-2 touch-action-none">
         <!--  ^leave room up top for controls when zoomed out; need touch action for drag and drop to work on mobile -->
@@ -146,6 +214,6 @@
       </div>
     </main>
 
-    <script defer src="index.js"></script>
+    <script type="module" src="index.js"></script>
   </body>
 </html>

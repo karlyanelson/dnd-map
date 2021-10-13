@@ -25,7 +25,7 @@ a {
 }
 
 body {
-  @apply bg-black text-white scrolling-touch;
+  @apply dark:bg-black dark:text-white text-ink;
 }
 
 body,
@@ -45,9 +45,9 @@ select {
   line-height: normal;
 }
 textarea,
-input,
+input:not([type="checkbox"]),
 select {
-  @apply rounded border-2 border-black text-ink p-1 w-full;
+  @apply rounded border-2 dark:border-black border-gray text-ink p-1 w-full;
 }
 
 label,
@@ -69,7 +69,7 @@ img {
 }
 
 a {
-  @apply text-white;
+  @apply dark:text-white text-black py-1 px-2 rounded hover:bg-gray hover:bg-opacity-25;
 }
 
 h1,
@@ -82,7 +82,7 @@ h1 {
 }
 
 h2 {
-  @apply text-xl my-2;
+  @apply text-xl my-2 leading-tight;
 }
 
 .touch-action-none {
@@ -90,7 +90,14 @@ h2 {
 }
 
 .button {
-  @apply text-ink bg-white inline-block shadow-button border-2 border-black py-1 px-2 rounded font-semibold tracking-wide;
+  @apply dark:text-ink dark:bg-white bg-ink text-white inline-block shadow-button border-2 border-black py-1 px-2 rounded tracking-wide;
+}
+
+.button:hover,
+.button-outline:hover,
+.button-error:hover,
+.button-danger:hover {
+  @apply shadow-button-hover;
 }
 
 .button:active {
@@ -103,12 +110,21 @@ h2 {
 }
 
 .button-outline {
-  @apply text-white bg-gray bg-opacity-15 shadow-button border-2 border-gray py-1 px-2 rounded font-semibold tracking-wide;
+  @apply dark:text-white text-ink dark:bg-gray dark:bg-opacity-15 shadow-button border-2 border-ink dark:border-gray py-1 px-2 rounded tracking-wide;
+}
+
+.button-outline:hover {
+  @apply bg-opacity-40;
 }
 
 .button-error,
 .button-danger {
-  @apply text-error bg-transparent inline-block border-2 border-error py-1 px-2 rounded font-semibold tracking-wide;
+  @apply dark:text-error dark:bg-error dark:border-error text-error-dark bg-error-dark border-error-dark dark:bg-opacity-10 bg-opacity-5 inline-block shadow-button border-2 py-1 px-2 rounded tracking-wide;
+}
+
+.button-error:hover,
+.button-danger:hover {
+  @apply bg-opacity-15;
 }
 
 .button-small {
@@ -152,11 +168,6 @@ textarea {
   display: none;
 }
 
-.no-map {
-  min-height: 100vh;
-  background-image: url(./assets/img/grid.png);
-}
-
 .content-row {
   display: flex;
   align-items: center;
@@ -176,17 +187,18 @@ textarea {
 .arrow-down {
   border-left: var(--arrow-size) solid transparent;
   border-right: var(--arrow-size) solid transparent;
-  border-top: var(--arrow-size) solid white;
+  border-top: var(--arrow-size) solid black;
 }
 
 .arrow-up {
   border-left: var(--arrow-size) solid transparent;
   border-right: var(--arrow-size) solid transparent;
-  border-bottom: var(--arrow-size) solid white;
+  border-bottom: var(--arrow-size) solid black;
 }
 
 .no-map-message__header {
   font-size: 3rem;
+  margin-bottom: 2rem;
 }
 
 .no-map-message__text {
@@ -200,8 +212,8 @@ textarea {
 }
 
 .no-map-message {
-  max-width: 40rem;
-  margin: 0 auto;
+  max-width: 50rem;
+  margin: 4rem auto 0 auto;
   text-align: center;
   padding: 1rem;
   min-height: 80vh;
@@ -225,6 +237,27 @@ textarea {
 
 .contact button {
   margin-top: 1rem;
+}
+
+.no-map,
+.grid-bg {
+  min-height: 100vh;
+  background-image: url(../static/assets/img/grid-light.png);
+}
+
+@media (prefers-color-scheme: dark) {
+  .no-map,
+  .grid-bg {
+    background-image: url(../static/assets/img/grid.png);
+  }
+
+  .arrow-down {
+    border-top: var(--arrow-size) solid white;
+  }
+
+  .arrow-up {
+    border-bottom: var(--arrow-size) solid white;
+  }
 }
 
 @media (max-width: 640px) {

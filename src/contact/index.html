@@ -9,18 +9,39 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../styles.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon-16x16.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="no-map contact">
     <main>
       <div class="max-w-lg mx-auto">
         <div class="text-center">
-          <a href="/">Go back to the map</a>
+          <a href="/">Back to Home</a>
         </div>
         <h1>D&D Map Feedback</h1>
-        <p>
+        <p class="my-4">
           Thanks for using D&D Map! Let me know if you find a bug or have any
           feature requests.
         </p>
@@ -38,7 +59,9 @@
             <textarea name="feedback" id="feedback" required></textarea>
           </div>
           <div class="py-1">
-            <button class="w-full" type="submit">Send Feedback</button>
+            <button class="w-full button-outline" type="submit">
+              Send Feedback
+            </button>
           </div>
         </form>
       </div>

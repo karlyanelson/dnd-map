@@ -1,18 +1,32 @@
 import Reef from "reefjs";
 import DATA_STORE from "../globals/store";
 import characterBGimg from "../utils/characterBGimg";
+import { DEFAULT_COLOR } from "../globals/variables";
 
 function characterPiece(character, index) {
-  let zoomPercent = DATA_STORE.data.zoom / 100;
+  const zoomPercent = DATA_STORE.data.zoom / 100;
 
-  let characterSize = DATA_STORE.data.pieceSize * zoomPercent * character.size;
+  const characterSize =
+    DATA_STORE.data.pieceSize * zoomPercent * character.size;
 
-  let characterPosX = character.x * zoomPercent;
-  let characterPosY = character.y * zoomPercent;
+  const characterPosX = character.x * zoomPercent;
+  const characterPosY = character.y * zoomPercent;
 
-  let charColor = character.color ? character.color : _.DEFAULT_COLOR;
+  const charColor = character.color ? character.color : DEFAULT_COLOR;
 
-  let charName = character.name ? character.name : "<em>Untitled</em>";
+  const charName = character.name ? character.name : "<em>Untitled</em>";
+
+  const charAreaOfEffectRadius = character.areaOfEffectRadius
+    ? character.areaOfEffectRadius * characterSize
+    : 1 * characterSize;
+
+  const charAreaOfEffectColor = character.areaOfEffectColor
+    ? character.areaOfEffectColor
+    : DEFAULT_COLOR;
+
+  const charAreaOfEffect = character.areaOfEffect
+    ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px ${charAreaOfEffectColor}75; `
+    : "";
 
   return `
     <div 
@@ -24,7 +38,7 @@ function characterPiece(character, index) {
     > 
     <div 
       class='bg-no-repeat bg-center rounded-full shadow-piece' 
-      style='height:${characterSize}px; width:${characterSize}px; background-color:${charColor}; ${characterBGimg(
+      style='height:${characterSize}px; width:${characterSize}px;  ${charAreaOfEffect} background-color:${charColor}; ${characterBGimg(
     character
   )}'
     ></div> 
@@ -43,7 +57,10 @@ const Map = new Reef("#mapContainer", {
     let noMap = `
       <div class='no-map-message'> 
         <h2 class='no-map-message__header'>Welcome to your virtual Dungeons & Dragons tabletop!</h2> 
-        <p class='no-map-message__text'>To get started, upload a map and add your customizable characters using the settings panel on the left.</p> <p class='no-map-message__text'>Everything is saved automatically to your browser's storage.</p> 
+        <p class='no-map-message__text'>
+          To get started, upload a map and add your customizable characters using the <a href="../settings/index.html">settings page</a> or the settings panel on the <a href="/">home page</a>.
+        </p> 
+        <p class='no-map-message__text mt-6'>Everything is saved automatically to your browser's storage.</p> 
       </div>
       `;
     return (

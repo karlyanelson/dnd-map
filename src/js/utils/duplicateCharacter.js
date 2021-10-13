@@ -10,6 +10,9 @@ export default function duplicateCharacter(characterIndex) {
       image: characterToDuplicate.image,
       icon: characterToDuplicate.icon,
       background: characterToDuplicate.background,
+      areaOfEffect: characterToDuplicate.areaOfEffect,
+      areaOfEffectRadius: characterToDuplicate.areaOfEffectRadius,
+      areaOfEffectColor: characterToDuplicate.areaOfEffectColor,
     });
   }
 }
