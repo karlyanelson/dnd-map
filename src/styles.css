@@ -94,9 +94,7 @@ h2 {
 }
 
 .button:hover,
-.button-outline:hover,
-.button-error:hover,
-.button-danger:hover {
+.button-outline:hover {
   @apply shadow-button-hover;
 }
 
@@ -124,7 +122,7 @@ h2 {
 
 .button-error:hover,
 .button-danger:hover {
-  @apply bg-opacity-5 dark:bg-opacity-15 bg-error;
+  @apply dark:bg-opacity-15 dark:bg-error shadow-button-hover-current dark:shadow-button-hover;
 }
 
 .button-small {

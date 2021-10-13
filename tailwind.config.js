@@ -9,9 +9,11 @@ module.exports = {
       },
       boxShadow: {
         button: "2px 2px 0 black",
-        "button-current": "2px 2px 0 currentColor",
         "button-hover":
           "2px 2px 0 rgba(0,0,0,.5), 2px 2px 6px 0 rgba(0,0,0,.5)",
+        "button-current": "2px 2px 0 currentColor",
+        "button-hover-current":
+          "2px 2px 0 currentColor, 2px 2px 6px 0 currentColor",
         piece: "1px 1px 1px 2px black",
         high: "2px 4px 16px 4px rgba(0, 0, 0, .25), 2px 4px 8px 4px rgba(0, 0, 0, 0.25)",
         soft: "2px 4px 16px 4px rgba(0, 0, 0, .05), 2px 4px 8px 4px rgba(0, 0, 0, 0.1)",
