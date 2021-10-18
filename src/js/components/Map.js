@@ -54,7 +54,6 @@ function characterPiece(character, index) {
 const Map = new Reef("#mapContainer", {
   store: DATA_STORE,
   template: function (props) {
-    console.log(window.location.pathname);
     let noMapInstructions = `To get started, upload a map and add your customizable characters using the settings panel on the left.`;
 
     if (window.location.pathname === "/map") {
