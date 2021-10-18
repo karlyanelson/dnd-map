@@ -31,7 +31,7 @@ export default function characterPiece(character, index) {
 
   return `
     <button 
-      class='piece-container text-center inline-flex p-4 flex-col items-center cursor-grab hover:cursor-grab' 
+      class='piece-container text-center inline-flex p-0 flex-col items-center cursor-grab rounded-full hover:cursor-grab' 
       id='${character.id}' 
       data-character-piece
       data-index='${index}' 
@@ -48,8 +48,8 @@ export default function characterPiece(character, index) {
     character
   )}'
       ></div> 
-      <span class='piece-label p-05 mt-1 bg-white bg-opacity-90 text-xs rounded tracking-wide text-black truncate max-w-20' style='top:${
-        characterSize * 1.15
+      <span class='piece-label p-05 mt-1 bg-white bg-opacity-90 text-xs rounded tracking-wide text-black truncate max-w-20 absolute' style='top:${
+        characterSize + 4
       }px;'> 
         ${charName} 
       </span> 
