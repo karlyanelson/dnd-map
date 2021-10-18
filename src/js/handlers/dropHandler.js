@@ -26,7 +26,7 @@ export default function dropHandler(event) {
 
   const character = DATA_STORE.data.characters[characterIndex];
 
-  character.dragged = true;
+  character.dragged = false;
 
   if (event.type === "touchend") {
     draggedElemPosX =

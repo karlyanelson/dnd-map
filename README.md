@@ -8,6 +8,14 @@ A simple Dungeons and Dragons virtual tabletop. Upload a map and add customizabl
 
 Everything is saved locally to your browser.
 
+## Keyboard shortcuts
+
+Click character pieces to select them and press the arrow keys to move them around and scroll the window at the same time.
+
+If you want to move the character pieces without scrolling the window, hold down "Shift" and use the arrow keys.
+
+Press ESC to deselect all character pieces, or click off.
+
 ## Colophon
 
 Built using Vanilla JS and [Reef](https://reefjs.com/).

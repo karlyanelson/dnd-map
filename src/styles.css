@@ -217,16 +217,6 @@ textarea {
   min-height: 80vh;
 }
 
-/* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
-.screenreader-only {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
 .contact a {
   text-align: center;
   display: inline-block;
@@ -241,6 +231,28 @@ textarea {
 .grid-bg {
   min-height: 100vh;
   background-image: url(../static/assets/img/grid-light.png);
+}
+
+/* For Accessibility - see https://webaim.org/techniques/css/invisiblecontent/ */
+.screenreader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-to-content-link {
+  @apply p-2 z-50 bg-white border-black text-black dark:bg-black dark:border-white dark:text-white;
+  left: 50%;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(20%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -273,4 +285,10 @@ textarea {
 
 .outline-custom {
   outline: 1px auto #0961e4;
+}
+
+/* dotted: ["3px dotted white", "4px"], */
+
+.outline-dotted {
+  outline: 3px dotted white;
 }

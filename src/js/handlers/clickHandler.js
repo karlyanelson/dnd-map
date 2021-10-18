@@ -8,10 +8,11 @@ import zoomMap from "../utils/zoomMap";
 
 export default function clickHandler(event) {
   if (!event.target.closest("button")) {
+    DATA_STORE.data.characters.forEach((char) => (char.selected = false));
     return;
   }
 
-  let buttonTarget = event.target.closest("button");
+  const buttonTarget = event.target.closest("button");
 
   if (buttonTarget.matches("[data-toggle-settings]")) {
     DATA_STORE.data.settingsExpanded = DATA_STORE.data.settingsExpanded
@@ -20,13 +21,23 @@ export default function clickHandler(event) {
   }
 
   if (buttonTarget.matches("[data-toggle-character]")) {
-    let characterContainer = buttonTarget.closest(".characterListItem");
+    const characterContainer = buttonTarget.closest(".characterListItem");
 
     if (characterContainer) {
-      let characterIndex = characterContainer.getAttribute("data-index");
+      const characterIndex = characterContainer.getAttribute("data-index");
       let character = DATA_STORE.data.characters[characterIndex];
       character.expanded = character.expanded ? false : true;
     }
+  }
+
+  if (buttonTarget.matches("[data-character-piece]")) {
+    const characterIndex = buttonTarget.getAttribute("data-index");
+    let character = DATA_STORE.data.characters[characterIndex];
+    character.selected = character.selected ? false : true;
+  }
+
+  if (!buttonTarget.matches("[data-character-piece]")) {
+    DATA_STORE.data.characters.forEach((char) => (char.selected = false));
   }
 
   if (buttonTarget.matches("#addCharacter")) {
