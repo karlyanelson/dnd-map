@@ -94,9 +94,7 @@ h2 {
 }
 
 .button:hover,
-.button-outline:hover,
-.button-error:hover,
-.button-danger:hover {
+.button-outline:hover {
   @apply shadow-button-hover;
 }
 
@@ -110,7 +108,7 @@ h2 {
 }
 
 .button-outline {
-  @apply dark:text-white text-ink dark:bg-gray dark:bg-opacity-15 shadow-button border-2 border-ink dark:border-gray py-1 px-2 rounded tracking-wide;
+  @apply dark:text-white text-ink dark:bg-gray bg-white dark:bg-opacity-15 shadow-button border-2 border-ink dark:border-gray py-1 px-2 rounded tracking-wide;
 }
 
 .button-outline:hover {
@@ -119,12 +117,12 @@ h2 {
 
 .button-error,
 .button-danger {
-  @apply dark:text-error dark:bg-error dark:border-error text-error-dark bg-error-dark border-error-dark dark:bg-opacity-10 bg-opacity-5 inline-block shadow-button border-2 py-1 px-2 rounded tracking-wide;
+  @apply dark:text-error dark:bg-error dark:border-error dark:bg-opacity-10 dark:shadow-button text-error-dark bg-white border-error-dark inline-block shadow-button-current border-2 py-1 px-2 rounded tracking-wide;
 }
 
 .button-error:hover,
 .button-danger:hover {
-  @apply bg-opacity-15;
+  @apply dark:bg-opacity-15 dark:bg-error shadow-button-hover-current dark:shadow-button-hover;
 }
 
 .button-small {
@@ -212,7 +210,7 @@ textarea {
 }
 
 .no-map-message {
-  max-width: 50rem;
+  max-width: 48rem;
   margin: 4rem auto 0 auto;
   text-align: center;
   padding: 1rem;

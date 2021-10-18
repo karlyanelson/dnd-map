@@ -16,7 +16,7 @@ export default function removeAllCharacters(buttonTarget, cancel) {
       let warning = document.createElement("p");
       warning.textContent = "Are you sure you want to remove all characters?";
       warning.setAttribute("role", "alert");
-      warning.classList = "mb-2";
+      warning.classList = "mb-4 dark:text-error text-error-dark";
       warning.id = "removeAllWarning";
 
       let cancelBtn = document.createElement("button");

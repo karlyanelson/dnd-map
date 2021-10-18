@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development parcel src/index.html src/**/*.html",
+    "start": "npm run dev",
     "build": "NODE_ENV=production parcel build src/index.html src/**/*.html",
     "clean": "rm -rf dist && rm -rf .cache"
   },
@@ -20,11 +21,11 @@
   },
   "homepage": "https://github.com/karlyanelson/dnd-map#readme",
   "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-rc.0",
-    "parcel": "^2.0.0-rc.0",
+    "@parcel/transformer-image": "^2.0.0",
+    "parcel": "^2.0.0",
     "parcel-reporter-static-files-copy": "^1.3.0",
     "reefjs": "^10.0.0",
-    "tailwindcss": "^2.2.16"
+    "tailwindcss": "^2.2.17"
   },
   "dependencies": {
     "autoprefixer": "^10.3.7",
