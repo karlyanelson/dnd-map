@@ -3,6 +3,7 @@ import characterBGimg from "../utils/characterBGimg";
 import { DEFAULT_COLOR } from "../globals/variables";
 
 export default function characterPiece(character, index) {
+  console.log("characterPiece called");
   const zoomPercent = DATA_STORE.data.zoom / 100;
 
   const characterSize =

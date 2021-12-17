@@ -292,3 +292,10 @@ textarea {
 .outline-dotted {
   outline: 3px dotted white;
 }
+
+/* Selectables */
+#s-rectBox {
+  position: absolute;
+  z-index: 1090;
+  border: 2px dashed #cbd3e3;
+}

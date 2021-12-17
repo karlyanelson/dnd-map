@@ -1,5 +1,6 @@
 // Globals
 import * as _ from "./js/globals/variables";
+import DATA_STORE from "./js/globals/store";
 
 // Utils
 import getDataFromStorage from "./js/utils/getDataFromStorage";
@@ -9,7 +10,7 @@ import CharacterList from "./js/components/CharacterList";
 import Map from "./js/components/Map";
 import ToggleSettingsBtn from "./js/components/ToggleSettingsBtn";
 
-//Event Handlers
+// Event Handlers
 import clickHandler from "./js/handlers/clickHandler";
 import dragEndHandler from "./js/handlers/dragEndHandler";
 import dragStartHandler from "./js/handlers/dragStartHandler";
@@ -19,12 +20,32 @@ import renderHandler from "./js/handlers/renderHandler";
 import touchMoveHandler from "./js/handlers/touchMoveHandler";
 import keydownHandler from "./js/handlers/keydownHandler";
 
+// Libraries
+import Selectables from "./js/utils/selectables";
+
 (function () {
   //// Inits
   getDataFromStorage(_.STORAGE_ID);
   ToggleSettingsBtn.render();
   Map.render();
   CharacterList.render();
+
+  new Selectables({
+    zone: "#mapContainer",
+    elements: "button",
+    enabled: true,
+    onSelect: function (element) {
+      const characterIndex = element.getAttribute("data-index");
+
+      console.log({ characterIndex });
+
+      let character = DATA_STORE.data.characters[characterIndex];
+
+      character.selected = character.selected ? false : true;
+
+      console.log("character.selected", character.selected);
+    },
+  });
 
   //// Event Listeners
   document.addEventListener("reef:render", renderHandler, false);
