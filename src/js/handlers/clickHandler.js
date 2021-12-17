@@ -33,6 +33,7 @@ export default function clickHandler(event) {
   if (buttonTarget.matches("[data-character-piece]")) {
     const characterIndex = buttonTarget.getAttribute("data-index");
     let character = DATA_STORE.data.characters[characterIndex];
+
     character.selected = character.selected ? false : true;
   }
 
