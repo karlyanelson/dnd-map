@@ -15,6 +15,8 @@ module.exports = {
         piece: "1px 1px 1px 2px black",
         high: "2px 4px 16px 4px rgba(0, 0, 0, .25), 2px 4px 8px 4px rgba(0, 0, 0, 0.25)",
         soft: "2px 4px 16px 4px rgba(0, 0, 0, .05), 2px 4px 8px 4px rgba(0, 0, 0, 0.1)",
+        "high-dark":
+          "2px 4px 16px 4px rgba(0, 0, 0, .75), 2px 4px 16px 8px rgba(0, 0, 0, 0.25)",
       },
       colors: {
         error: "#FF8D8D",

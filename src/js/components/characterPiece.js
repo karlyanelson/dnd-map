@@ -27,25 +27,32 @@ export default function characterPiece(character, index) {
     ? ` box-shadow: 1px 1px 1px 2px black, 0px 0px 0px ${charAreaOfEffectRadius}px ${charAreaOfEffectColor}75; `
     : "";
 
+  const charSelected = character.selected || false;
+
   return `
-    <div 
-      class='piece text-center inline-flex p-4 flex-col items-center cursor-grab hover:cursor-grab' draggable='true' id='${
-        character.id
-      }' 
+    <button 
+      class='piece-container text-center inline-flex p-0 flex-col items-center cursor-grab rounded-full hover:cursor-grab' 
+      id='${character.id}' 
+      data-character-piece
       data-index='${index}' 
+      draggable='true' 
+      aria-grabbed='${character.dragged || charSelected}'
+      aria-dropeffect='${character.dragged || charSelected ? "move" : "none"}'
       style='position:absolute; top: ${characterPosY}px; left: ${characterPosX}px;'
     > 
-    <div 
-      class='bg-no-repeat bg-center rounded-full shadow-piece' 
-      style='height:${characterSize}px; width:${characterSize}px;  ${charAreaOfEffect} background-color:${charColor}; ${characterBGimg(
+      <div 
+        class='bg-no-repeat bg-center rounded-full ${
+          charSelected ? "outline-dotted shadow-high-dark" : "shadow-piece"
+        }' 
+        style='height:${characterSize}px; width:${characterSize}px;  ${charAreaOfEffect} background-color:${charColor}; ${characterBGimg(
     character
   )}'
-    ></div> 
-    <span class='piece-label p-05 mt-1 bg-white bg-opacity-90 text-xs rounded tracking-wide text-black truncate max-w-20' style='top:${
-      characterSize * 1.15
-    }px;'> 
-      ${charName} 
-    </span> 
-    </div>
+      ></div> 
+      <span class='piece-label p-05 mt-1 bg-white bg-opacity-90 text-xs rounded tracking-wide text-black truncate max-w-20 absolute' style='top:${
+        characterSize + 4
+      }px;'> 
+        ${charName} 
+      </span> 
+    </button>
     `;
 }

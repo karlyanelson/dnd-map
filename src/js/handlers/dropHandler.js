@@ -26,7 +26,7 @@ export default function dropHandler(event) {
 
   const character = DATA_STORE.data.characters[characterIndex];
 
-  character.dragged = true;
+  character.dragged = false;
 
   if (event.type === "touchend") {
     draggedElemPosX =
@@ -38,6 +38,20 @@ export default function dropHandler(event) {
   } else {
     draggedElemPosX = event.pageX - DATA_STORE.data.draggedElemMouseOffsetX;
     draggedElemPosY = event.pageY - DATA_STORE.data.draggedElemMouseOffsetY;
+  }
+
+  const xDiff = draggedElemPosX - character.x;
+  const yDiff = draggedElemPosY - character.y;
+
+  const charactersSelected = DATA_STORE.data.characters.filter(
+    (character) => character.selected
+  );
+
+  if (charactersSelected.length > 0) {
+    charactersSelected.forEach((selectedCharacter) => {
+      selectedCharacter.x = (selectedCharacter.x + xDiff) / zoomRatio;
+      selectedCharacter.y = (selectedCharacter.y + yDiff) / zoomRatio;
+    });
   }
 
   character.x = draggedElemPosX / zoomRatio;

@@ -17,6 +17,7 @@ import dropHandler from "./js/handlers/dropHandler";
 import inputHandler from "./js/handlers/inputHandler";
 import renderHandler from "./js/handlers/renderHandler";
 import touchMoveHandler from "./js/handlers/touchMoveHandler";
+import keydownHandler from "./js/handlers/keydownHandler";
 
 (function () {
   //// Inits
@@ -51,6 +52,8 @@ import touchMoveHandler from "./js/handlers/touchMoveHandler";
   document.addEventListener("touchend", dropHandler, false);
 
   document.addEventListener("dragend", dragEndHandler, false);
+
+  document.addEventListener("keydown", keydownHandler, false);
 
   window.addEventListener("storage", () => {
     // When local storage changes in a different tab (ie: the settings page)

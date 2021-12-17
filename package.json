@@ -4,9 +4,9 @@
   "description": "↗️ [Go to the Site](https://dnd-map.netlify.app/)",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel src/index.html src/**/*.html",
+    "dev": "NODE_ENV=development parcel src/index.html src/**/*.html",
     "start": "npm run dev",
-    "build": "parcel build src/index.html src/**/*.html",
+    "build": "NODE_ENV=production parcel build src/index.html src/**/*.html",
     "clean": "rm -rf dist && rm -rf .parcel-cache"
   },
   "repository": {
