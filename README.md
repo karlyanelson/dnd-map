@@ -10,7 +10,7 @@ Everything is saved locally to your browser.
 
 ## Keyboard shortcuts
 
-Click character pieces to select them and press the arrow keys to move them around and scroll the window at the same time.
+Click character pieces (or tab to them and press Space or Enter) to select them and press the arrow keys to move them around and scroll the window at the same time.
 
 If you want to move the character pieces without scrolling the window, hold down "Shift" and use the arrow keys.
 
@@ -46,7 +46,7 @@ npm install
 Run locally:
 
 ```
-npm run dev
+npm run start
 ```
 
 Build for production:
