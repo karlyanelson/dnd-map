@@ -270,3 +270,7 @@ textarea {
     bottom: 5rem;
   }
 }
+
+.outline-custom {
+  outline: 1px auto #0961e4;
+}

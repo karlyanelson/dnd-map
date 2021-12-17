@@ -1,7 +1,5 @@
 module.exports = {
-  mode: "jit",
-  darkMode: "media",
-  purge: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
+  content: ["src/**/*.html", "src/**/*.css", "src/**/*.js"],
   theme: {
     extend: {
       borderRadius: {
@@ -56,9 +54,6 @@ module.exports = {
         15: ".15",
         90: ".9",
       },
-      outline: {
-        custom: "1px auto #0961E4",
-      },
       padding: {
         "05": "0.125rem",
       },
@@ -66,9 +61,6 @@ module.exports = {
         80: "20rem",
       },
     },
-  },
-  variants: {
-    cursor: ["responsive", "hover", "focus"],
   },
   plugins: [],
 };
