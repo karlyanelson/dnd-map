@@ -2,6 +2,8 @@
 
 ↗️ [Go to the Site](https://dnd-map.netlify.app/)
 
+[Roadmap](https://github.com/karlyanelson/dnd-map/projects/1)
+
 ## About
 
 A simple Dungeons and Dragons virtual tabletop. Upload a map and add customizable character pieces that you can drag around the map.
